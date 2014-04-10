@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Colectivos.iml" filepath="$PROJECT_DIR$/Colectivos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Colectivos/Colectivos-Colectivos.iml" filepath="$PROJECT_DIR$/Colectivos/Colectivos-Colectivos.iml" />
+    </modules>
+  </component>
+</project>
+
