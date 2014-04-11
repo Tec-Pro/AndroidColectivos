@@ -26,6 +26,7 @@ public class SeleccionLineas extends Activity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    private Recorrido recorrido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +43,39 @@ public class SeleccionLineas extends Activity {
         expListView.setOnChildClickListener(new OnChildClickListener() {
 
             public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
-                final String selectedHijo = (String) listAdapter.getChild(groupPosition, childPosition);
-                final String selectedGroup = (String) listAdapter.getGroup(groupPosition);
-                Toast.makeText(getBaseContext(),selectedGroup+" - "+ selectedHijo, Toast.LENGTH_LONG).show();
-
+                lanzarMapa(groupPosition,childPosition);
                 return true;
             }
         });
+
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
+        recorrido= new Recorrido();
+
     }
 
+
+    public void lanzarMapa(int grupo, int hijo){
+        final String selectedHijo = (String) listAdapter.getChild(grupo, hijo);
+        final String selectedGroup = (String) listAdapter.getGroup(grupo);
+        Toast.makeText(getBaseContext(),selectedGroup+" - "+ selectedHijo, Toast.LENGTH_LONG).show();
+        switch (grupo){
+            case 6:
+                switch (hijo){
+                    case 3:
+                        Intent i = new Intent(this,Mapa.class);
+                        i.putExtra("recorrido",recorrido.getRecorrido5());
+                        i.putExtra("paradas", recorrido.getParadaslinea5());
+                        startActivity(i);
+                        break;
+                }
+                break;
+
+        }
+    }
     /*
      * Preparing the list data
      */
@@ -202,23 +222,23 @@ public class SeleccionLineas extends Activity {
         listDataChild.put(listDataHeader.get(2), linea2Verde); // Header, Child data
         listDataChild.put(listDataHeader.get(3), linea2Rojo); // Header, Child data
         listDataChild.put(listDataHeader.get(4), linea3); // Header, Child data
-        listDataChild.put(listDataHeader.get(4), linea4); // Header, Child data
-        listDataChild.put(listDataHeader.get(5), linea5); // Header, Child data
-        listDataChild.put(listDataHeader.get(6), linea6); // Header, Child data
-        listDataChild.put(listDataHeader.get(7), linea7); // Header, Child data
-        listDataChild.put(listDataHeader.get(8), linea8Verde); // Header, Child data
-        listDataChild.put(listDataHeader.get(9), linea8Rojo); // Header, Child data
-        listDataChild.put(listDataHeader.get(10), linea9Verde); // Header, Child data
-        listDataChild.put(listDataHeader.get(11), linea9Rojo); // Header, Child data
-        listDataChild.put(listDataHeader.get(12), linea10); // Header, Child data
-        listDataChild.put(listDataHeader.get(13), linea11); // Header, Child data
-        listDataChild.put(listDataHeader.get(14), linea12); // Header, Child data
-        listDataChild.put(listDataHeader.get(15), linea13); // Header, Child data
-        listDataChild.put(listDataHeader.get(16), linea14); // Header, Child data
-        listDataChild.put(listDataHeader.get(17), linea15); // Header, Child data
-        listDataChild.put(listDataHeader.get(18), linea16); // Header, Child data
-        listDataChild.put(listDataHeader.get(19), linea17); // Header, Child data
-        listDataChild.put(listDataHeader.get(20), linea18); // Header, Child data
+        listDataChild.put(listDataHeader.get(5), linea4); // Header, Child data
+        listDataChild.put(listDataHeader.get(6), linea5); // Header, Child data
+        listDataChild.put(listDataHeader.get(7), linea6); // Header, Child data
+        listDataChild.put(listDataHeader.get(8), linea7); // Header, Child data
+        listDataChild.put(listDataHeader.get(9), linea8Verde); // Header, Child data
+        listDataChild.put(listDataHeader.get(10), linea8Rojo); // Header, Child data
+        listDataChild.put(listDataHeader.get(11), linea9Verde); // Header, Child data
+        listDataChild.put(listDataHeader.get(12), linea9Rojo); // Header, Child data
+        listDataChild.put(listDataHeader.get(13), linea10); // Header, Child data
+        listDataChild.put(listDataHeader.get(14), linea11); // Header, Child data
+        listDataChild.put(listDataHeader.get(15), linea12); // Header, Child data
+        listDataChild.put(listDataHeader.get(16), linea13); // Header, Child data
+        listDataChild.put(listDataHeader.get(17), linea14); // Header, Child data
+        listDataChild.put(listDataHeader.get(18), linea15); // Header, Child data
+        listDataChild.put(listDataHeader.get(19), linea16); // Header, Child data
+        listDataChild.put(listDataHeader.get(20), linea17); // Header, Child data
+        listDataChild.put(listDataHeader.get(21), linea18); // Header, Child data
 
     }
 

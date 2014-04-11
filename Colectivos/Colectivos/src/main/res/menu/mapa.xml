@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Mostrar Paradas"
+        android:id="@+id/accion_mostrar_parada"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:orderInCategory="95"
+        android:showAsAction="never|withText"/>
+    <item android:title="Ocultar Paradas"
+        android:id="@+id/accion_ocultar_parada"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:orderInCategory="95"
+        android:showAsAction="never|withText"/>
+</menu>
