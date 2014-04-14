@@ -15,51 +15,50 @@ import java.util.List;
 
 public class VistaHorarios extends ActionBarActivity {
 
+    private Bundle extras;
+    private String[] times;
+    String[]busStops;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.horarios);
-        List<String> busStops = new ArrayList<String>(5);
-        busStops.add("p1");
-        busStops.add("p2");
-        busStops.add("p3");
-        busStops.add("p4");
-        busStops.add("p5");
-        List<List<String>> times = new ArrayList<List<String>>();
 
-        for(int i=0;i<=9;i++){
-            List<String> a = new ArrayList<String>(9);
-            for(int j=0;j<=9;j++){
 
-                a.add(i + ","+ j+"");
-            }
-            times.add(a);
-        }
+        extras = getIntent().getExtras();
+        busStops = extras.getStringArray("header");
+
+        times = extras.getStringArray("timeTable");
+
 
         refreshGrid(times,busStops);
 
     }
 
-    public void refreshGrid(List<List<String>> timeTable, List<String> busStops){
+    public void refreshGrid(String[] timeTable, String[] busStops){
 
         setHeaders(busStops);
         TableLayout tl_head1 = (TableLayout)findViewById(R.id.tl_head);
         TableLayout tl_child1 = (TableLayout)findViewById(R.id.tl_child);
 
         String headcol1="";
-        TableRow tr[]= new TableRow[40];
+        TableRow tr[]= new TableRow[2000];
         TextView tv[] = new TextView[1000];
-        for(int i=0; i <timeTable.size(); i++)
+        //int j=0;
+        //int i;
+        int k = 0;
+
+        for(int i=0; i<timeTable.length/busStops.length;i++ )
         {
 
             tr[i]=new TableRow(this);
 
 
-            for(int j=0; j<busStops.size(); j++)
+            for( int j=0; j<busStops.length; j++)
             {
                 tv[j]=new TextView(this);
                 tv[j].setId(j);
-                tv[j].setText(timeTable.get(i).get(j));
+                tv[j].setText(timeTable[k]);
                 tv[j].setWidth(190);
                 tv[j].setHeight(60);
                 tv[j].setGravity(Gravity.CENTER);
@@ -70,6 +69,7 @@ public class VistaHorarios extends ActionBarActivity {
                     headcol1=tv[j].getText().toString();
                 }
                 tr[i].addView(tv[j]);
+                k++;
             }
 
             tl_child1.addView(tr[i]);
@@ -80,15 +80,15 @@ public class VistaHorarios extends ActionBarActivity {
         tl_head1.addView(trhead);
     }
 
-    private void setHeaders(List<String> headers ){
+    private void setHeaders(String[] headers ){
         int i = 0;
         for (int id : new int[] {R.id.col1, R.id.col2, R.id.col3, R.id.col4, R.id.col5, R.id.col6,R.id.col7,R.id.col8}) {
             TextView header = (TextView) findViewById(id);
-            if(headers.size() > i){
-                header.setText(headers.get(i));
+            if( i>=headers.length){
+                header.setVisibility(View.GONE);
             }
             else{
-                header.setVisibility(View.GONE);
+                header.setText(headers[i]);
             }
             i++;
         }

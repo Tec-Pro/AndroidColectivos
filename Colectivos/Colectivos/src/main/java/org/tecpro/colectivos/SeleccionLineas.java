@@ -3,6 +3,7 @@ package org.tecpro.colectivos;
 /**
  * Created by nico on 10/04/14.
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ public class SeleccionLineas extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     private Recorrido recorrido;
+    private Horarios horarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,11 @@ public class SeleccionLineas extends Activity {
 
             public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
                 lanzarMapa(groupPosition,childPosition);
+                lanzarHorarios(groupPosition, childPosition);
                 return true;
             }
         });
+
 
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -54,6 +58,7 @@ public class SeleccionLineas extends Activity {
         // setting list adapter
         expListView.setAdapter(listAdapter);
         recorrido= new Recorrido();
+        horarios = new Horarios();
 
     }
 
@@ -69,6 +74,25 @@ public class SeleccionLineas extends Activity {
                         Intent i = new Intent(this,Mapa.class);
                         i.putExtra("recorrido",recorrido.getRecorrido5());
                         i.putExtra("paradas", recorrido.getParadaslinea5());
+                        startActivity(i);
+                        break;
+                }
+                break;
+
+        }
+    }
+
+    public void lanzarHorarios(int grupo, int hijo){
+        final String selectedHijo = (String) listAdapter.getChild(grupo, hijo);
+        final String selectedGroup = (String) listAdapter.getGroup(grupo);
+        Toast.makeText(getBaseContext(),selectedGroup+" - "+ selectedHijo, Toast.LENGTH_LONG).show();
+        switch (grupo){
+            case 0:
+                switch (hijo){
+                    case 0:
+                        Intent i = new Intent(this,VistaHorarios.class);
+                        i.putExtra("header",horarios.getHeader1verde());
+                        i.putExtra("timeTable",horarios.getTimeTable1verde());
                         startActivity(i);
                         break;
                 }
