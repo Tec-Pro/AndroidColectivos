@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +41,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition,boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
 
@@ -53,7 +53,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
-
         txtListChild.setText(childText);
         return convertView;
     }
@@ -93,6 +92,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+        if(lblListHeader.getText().toString().contains(" verde")){
+            lblListHeader.setTextColor(Color.rgb(2,150,27));
+        }else {
+            if (lblListHeader.getText().toString().contains(" rojo")) {
+                lblListHeader.setTextColor(Color.RED);
+            } else {
+                lblListHeader.setTextColor(Color.BLACK);
+            }
+        }
+
 
         return convertView;
     }

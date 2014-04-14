@@ -122,7 +122,7 @@ public class SeleccionLineas extends Activity {
         listDataHeader.add("Linea 9 verde");
         listDataHeader.add("Linea 9 rojo");
         listDataHeader.add("Linea 10");
-        listDataHeader.add("Linea 1");
+        listDataHeader.add("Linea 11");
         listDataHeader.add("Linea 12");
         listDataHeader.add("Linea 13");
         listDataHeader.add("Linea 14");
@@ -135,112 +135,112 @@ public class SeleccionLineas extends Activity {
 
         // Adding child data
         List<String> linea1Verde = new ArrayList<String>();
-        linea1Verde.add("Horario lunes a viernes");
-        linea1Verde.add("Horarios especiales");
-        linea1Verde.add("Horarios sábados, domingos y feriados ");
-        linea1Verde.add("Recorrido");
+        linea1Verde.add("   lunes a viernes");
+        linea1Verde.add("   Especiales");
+        linea1Verde.add("   Sábados, domingos y feriados ");
+        linea1Verde.add("   Recorrido");
 
         List<String> linea1Rojo = new ArrayList<String>();
-        linea1Rojo.add("Horario lunes a viernes");
-        linea1Rojo.add("Horarios especiales");
-        linea1Rojo.add("Horarios sábados, domingos y feriados ");
-        linea1Rojo.add("Recorrido");
+        linea1Rojo.add("   Lunes a viernes");
+        linea1Rojo.add("   Especiales");
+        linea1Rojo.add("   Sábados, domingos y feriados ");
+        linea1Rojo.add("   Recorrido");
 
         List<String> linea2Verde = new ArrayList<String>();
-        linea2Verde.add("Horario lunes a viernes");
-        linea2Verde.add("Horarios");
-        linea2Verde.add("Horarios sábados, domingos y feriados ");
-        linea2Verde.add("Recorrido");
+        linea2Verde.add("   Lunes a viernes");
+        linea2Verde.add("   Especiales");
+        linea2Verde.add("   Sábados, domingos y feriados ");
+        linea2Verde.add("   Recorrido");
 
         List<String> linea2Rojo = new ArrayList<String>();
-        linea2Rojo.add("Horario lunes a viernes");
-        linea2Rojo.add("Horarios sábados, domingos y feriados ");
-        linea2Rojo.add("Recorrido");
+        linea2Rojo.add("   Lunes a viernes");
+        linea2Rojo.add("   Sábados, domingos y feriados ");
+        linea2Rojo.add("   Recorrido");
 
         List<String> linea3 = new ArrayList<String>();
-        linea3.add("Horario lunes a domingo");
-        linea3.add("Horarios especiales");
-        linea3.add("Recorrido");
+        linea3.add("   Lunes a domingo");
+        linea3.add("   Especiales");
+        linea3.add("   Recorrido");
 
         List<String> linea4 = new ArrayList<String>();
-        linea4.add("Horario lunes a domingo");
-        linea4.add("Recorrido");
+        linea4.add("   Lunes a domingo");
+        linea4.add("   Recorrido");
 
         List<String> linea5 = new ArrayList<String>();
-        linea5.add("Horario de lunes a viernes");
-        linea5.add("Horarios especiales");
-        linea5.add("Horarios sábados, domingos y feriados");
-        linea5.add("Recorrido");
+        linea5.add("   Lunes a viernes");
+        linea5.add("   Especiales");
+        linea5.add("   Sábados, domingos y feriados");
+        linea5.add("   Recorrido");
 
         List<String> linea6 = new ArrayList<String>();
-        linea6.add("Horario lunes a domingo");
-        linea6.add("Horarios especiales");
-        linea6.add("Recorrido");
+        linea6.add("   Lunes a domingo");
+        linea6.add("   Especiales");
+        linea6.add("   Recorrido");
 
         List<String> linea7 = new ArrayList<String>();
-        linea7.add("Horario lunes a viernes");
-        linea7.add("Horarios sábados, domingos y feriados");
-        linea7.add("Recorrido");
+        linea7.add("   Lunes a viernes");
+        linea7.add("   Sábados, domingos y feriados");
+        linea7.add("   Recorrido");
 
         List<String> linea8Verde = new ArrayList<String>();
-        linea8Verde.add("Horario lunes a viernes");
-        linea8Verde.add("Horarios sábados");
-        linea8Verde.add("Recorrido");
+        linea8Verde.add("   Lunes a viernes");
+        linea8Verde.add("   Sábados");
+        linea8Verde.add("   Recorrido");
 
         List<String> linea8Rojo = new ArrayList<String>();
-        linea8Rojo.add("Horario lunes a viernes");
-        linea8Rojo.add("Horarios sábados");
-        linea8Rojo.add("Horarios Domingos y feriados");
-        linea8Rojo.add("Recorrido");
+        linea8Rojo.add("   Lunes a viernes");
+        linea8Rojo.add("   Sábados");
+        linea8Rojo.add("   Domingos y feriados");
+        linea8Rojo.add("   Recorrido");
 
         List<String> linea9Verde = new ArrayList<String>();
-        linea9Verde.add("Horario lunes a domingo");
-        linea9Verde.add("Recorrido");
+        linea9Verde.add("   Lunes a domingo");
+        linea9Verde.add("   Recorrido");
 
         List<String> linea9Rojo = new ArrayList<String>();
-        linea9Rojo.add("Horario lunes a domingo");
-        linea9Rojo.add("Recorrido");
+        linea9Rojo.add("   Lunes a domingo");
+        linea9Rojo.add("   Recorrido");
 
         List<String> linea10 = new ArrayList<String>();
-        linea10.add("Horario lunes a domingo");
-        linea10.add("Recorrido");
+        linea10.add("   Lunes a domingo");
+        linea10.add("   Recorrido");
 
         List<String> linea11 = new ArrayList<String>();
-        linea11.add("Horario lunes a domingo");
-        linea11.add("Recorrido");
+        linea11.add("   Lunes a domingo");
+        linea11.add("   Recorrido");
 
         List<String> linea12 = new ArrayList<String>();
-        linea12.add("Horario lunes a viernes");
-        linea12.add("Horario sábados");
-        linea12.add("Horario domingos y feriados");
-        linea12.add("Recorrido");
+        linea12.add("   Lunes a viernes");
+        linea12.add("   Sábados");
+        linea12.add("   Domingos y feriados");
+        linea12.add("   Recorrido");
 
         List<String> linea13 = new ArrayList<String>();
-        linea13.add("Horario lunes a viernes");
-        linea13.add("Horarios sábados, domingos y feriados");
-        linea13.add("Recorrido");
+        linea13.add("   Lunes a viernes");
+        linea13.add("   Sábados, domingos y feriados");
+        linea13.add("   Recorrido");
 
         List<String> linea14 = new ArrayList<String>();
-        linea14.add("Horario lunes a domingo");
-        linea14.add("Recorrido");
+        linea14.add("   Lunes a domingo");
+        linea14.add("   Recorrido");
 
         List<String> linea15 = new ArrayList<String>();
-        linea15.add("Horario lunes a domingo");
-        linea15.add("Recorrido");
+        linea15.add("   Lunes a domingo");
+        linea15.add("   Recorrido");
 
         List<String> linea16 = new ArrayList<String>();
-        linea16.add("Horario lunes a domingo");
-        linea16.add("Recorrido");
+        linea16.add("   Lunes a domingo");
+        linea16.add("   Recorrido");
 
         List<String> linea17 = new ArrayList<String>();
-        linea17.add("Horario lunes a domingo");
-        linea17.add("Recorrido");
+        linea17.add("   Lunes a domingo");
+        linea17.add("   Recorrido");
 
         List<String> linea18 = new ArrayList<String>();
-        linea18.add("Horario de lunes a viernes");
-        linea18.add("Horarios especiales");
-        linea18.add("Horarios sábados, domingos y feriados");
-        linea18.add("Recorrido");
+        linea18.add("   Lunes a viernes");
+        linea18.add("   Especiales");
+        linea18.add("   Sábados, domingos y feriados");
+        linea18.add("   Recorrido");
         listDataChild.put(listDataHeader.get(0), linea1Verde); // Header, Child data
         listDataChild.put(listDataHeader.get(1), linea1Rojo); // Header, Child data
         listDataChild.put(listDataHeader.get(2), linea2Verde); // Header, Child data

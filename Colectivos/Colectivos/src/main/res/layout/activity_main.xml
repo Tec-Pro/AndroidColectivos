@@ -1,16 +1,67 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="org.tecpro.colectivos.MainActivity">
+
+    android:orientation="vertical"
+
+    android:gravity="center"
+
+    android:padding="30dp"
+
+    tools:context=".MainActivity"
+    style="@style/AppTheme">
 
     <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-</RelativeLayout>
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:text="@string/app_name"
+
+        android:gravity="center"
+
+        android:textSize="25sp "
+
+        android:layout_marginBottom="20dp"/>
+
+    <Button android:id="@+id/horarios"
+
+        android:layout_height="wrap_content"
+
+        android:layout_width="match_parent"
+
+        android:text="@string/horarios"
+        android:onClick="lanzarSeleccionLineas" />
+
+    <Button android:id="@+id/recorridos"
+
+        android:layout_height="wrap_content"
+
+        android:layout_width="match_parent"
+
+        android:text="@string/recorridos"/>
+
+    <Button android:id="@+id/acercaDe"
+
+        android:layout_height="wrap_content"
+
+        android:layout_width="match_parent"
+
+        android:text="@string/acercaDe"
+        android:onClick="lanzarAcercaDe" />
+
+    <Button android:id="@+id/salir"
+
+        android:layout_height="wrap_content"
+
+        android:layout_width="match_parent"
+
+        android:text="@string/salir"/>
+
+</LinearLayout>

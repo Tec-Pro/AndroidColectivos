@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Colectivos Río Cuarto</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="acercaDe">Acerca de</string>
+    <string name="horarios">Horarios</string>
+    <string name="recorridos">Recorridos</string>
+    <string name="salir">Salir</string>
 </resources>

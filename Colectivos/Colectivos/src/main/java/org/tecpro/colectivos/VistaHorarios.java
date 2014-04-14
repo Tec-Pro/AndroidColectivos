@@ -1,5 +1,6 @@
 package org.tecpro.colectivos;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -52,7 +53,9 @@ public class VistaHorarios extends ActionBarActivity {
         {
 
             tr[i]=new TableRow(this);
-
+            /*if(i%2==0){
+                tr[i].setBackgroundColor(Color.RED);
+            }*/
 
             for( int j=0; j<busStops.length; j++)
             {
@@ -76,6 +79,7 @@ public class VistaHorarios extends ActionBarActivity {
         }
 
         TableRow trhead= new TableRow(this);
+
 
         tl_head1.addView(trhead);
     }
