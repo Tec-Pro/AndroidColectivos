@@ -1,0 +1,468 @@
+	 
+		"Golf Club (G.Club)", 64.389313,-33.113152
+		 
+	 
+		"Villa Dalcar (V.DALC)",64.36921700000001,-33.103783
+		 
+	 
+		"Cementerio (Cemen)",64.372559,-33.118729
+		 
+	 
+	 
+		"Plaza Gral Roca (PLAZA)",64.34903,-33.123779
+		 
+	 
+	 
+		"Andino",64.33923299999999,-33.130733
+		 
+	 
+	 
+		"IPV Alberdi (IPV Alb)",64.322945,-33.141018
+		 
+	 
+	 
+		"Terminal de Omnibus",64.35189800000001,-33.115555
+		 
+	 
+	 
+		"Universidad Nacion Rio Cuarto (UNRC)",64.300529,-33.109787
+		 
+	 
+	 
+		"Hospital Central (H.CENT)"
+			,-64.35244776075992
+			<latitude>-33.15141497680101</latitude>
+			<altitude>0</altitude>
+
+						
+	 
+	 
+		"Plaza Gral Paz (MORE)",-64.35018261557359,-33.1398853402162
+ 
+	 
+	 
+		"Rotonda Seminario (R.SEM
+)"
+		 
+		
+			,-64.32195005455495
+			<latitude>-33.09319264236839</latitude>
+	 
+	 
+		"EMOS (EMOS)"
+		 
+		
+			,-64.34830151881712
+			<latitude>-33.12239153404615</latitude>
+			<altitude>0</altitude>
+			<heading>0.001844943434276801</heading>
+			
+			<range>788.4493691604602</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_emos
+		 
+			64.3476974815285,-33.12169873232469
+		 
+	 
+	 
+		"EPEC (EPEC)"
+		 
+		
+			,-64.34698011466031
+			<latitude>-33.12479558123295</latitude>
+			<altitude>0</altitude>
+			<heading>0.001122872759827312</heading>
+			
+			<range>320.6855784739921</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_epec
+		 
+			64.34692314280157,-33.12488653788277
+		 
+	 
+	 
+		"Ser. Penitenciario CBA (CARC)"
+		 
+		
+			,-64.35554165614462
+			<latitude>-33.14393689419939</latitude>
+			<altitude>0</altitude>
+			<heading>0.005803519187681907</heading>
+			
+			<range>937.1461111744186</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_police2
+		 
+			64.35633198194708,-33.1443939125817
+		 
+	 
+	 
+		"Parque Sarmiento (PARQUE)"
+		 
+		
+			,-64.33072555541945
+			<latitude>-33.10395051647134</latitude>
+			<altitude>0</altitude>
+			<heading>-0.007757234579377303</heading>
+			
+			<range>2250.118648730356</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_urbanpark
+		 
+			64.33494200553741,-33.10433757233691
+		 
+	 
+	 
+		"Tanque de Agua (Tanqu)"
+		 
+		
+			,-64.36200391766028
+			<latitude>-33.12013222557013</latitude>
+			<altitude>0</altitude>
+			<heading>0.009332072638758397</heading>
+			
+			<range>655.2388563559797</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_emos
+		 
+			64.36247654169243,-33.12012302558603
+		 
+	 
+	 
+		"Berrio las Quintas (L.QUIN)"
+		 
+		
+			,-64.37384841050739
+			<latitude>-33.0951388216106</latitude>
+			<altitude>0</altitude>
+			<heading>0.01355675997592316</heading>
+			
+			<range>726.6806323761151</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		4111
+		 
+			64.37420339975922,-33.09499341458839
+		 
+	 
+	 
+		"Pileton Municipal (PILET)"
+		 
+		
+			,-64.34854139832223
+			<latitude>-33.10988937654008</latitude>
+			<altitude>0</altitude>
+			<heading>-0.0002616374647926862</heading>
+			
+			<range>469.2630708044964</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		4110
+		 
+			64.3492168014641,-33.10968701839872
+		 
+	 
+	 
+		"Clinicaa del Sud (CLINICA)"
+		 
+		
+			,-64.35231576190209
+			<latitude>-33.12988101277959</latitude>
+			<altitude>0</altitude>
+			<heading>0.001798079389286408</heading>
+			
+			<range>582.725017410072</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		411
+		 
+			64.35144290889765,-33.12918528513572
+		 
+	 
+	 
+		"IPV Fenix (I.P.V)"
+		 
+		
+			,-64.34188339056131
+			<latitude>-33.14787111103097</latitude>
+			<altitude>0</altitude>
+			<heading>-0.001665612537168016</heading>
+			
+			<range>710.2692850021882</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_apartment-3
+		 
+			64.34134785940793,-33.14812495401104
+		 
+	 
+	 
+		"Estacion Ser. YPF
+(E.GAS)"
+		 
+		
+			,-64.33090881047635
+			<latitude>-33.11466294911621</latitude>
+			<altitude>0</altitude>
+			<heading>-0.007661085445164122</heading>
+			
+			<range>268.1957772569905</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_gas
+		 
+			64.33123956133967,-33.11441967634188
+		 
+	 
+	 
+		"Hipodromo Rio Cuarto
+(HIPOD)"
+		 
+		
+			,-64.37086284067985
+			<latitude>-33.13052929877215</latitude>
+			<altitude>0</altitude>
+			<heading>0.01417188048536404</heading>
+			
+			<range>664.4252661579455</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_hipo
+		 
+			64.37157744406879,-33.13047053779788
+		 
+	 
+	 
+		"Acordeon
+(ACOR)"
+		 
+		
+			,-64.32568869915731
+			<latitude>-33.11772565385341</latitude>
+			<altitude>0</altitude>
+			<heading>-0.01051442733910643</heading>
+			
+			<range>808.0277338509562</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_acordeon
+		 
+			64.32643175763582,-33.11824696556737
+		 
+	 
+	 
+		"Ex Alvear Cinema
+(CINEMA)"
+		 
+		
+			,-64.35037720024775
+			<latitude>-33.1238891060337</latitude>
+			<altitude>0</altitude>
+			<heading>0.002975565960924403</heading>
+			
+			<range>373.9666697564774</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_cinema
+		 
+			64.35038133650251,-33.12355312965526
+		 
+	 
+	 
+		"Ex Tiro Federal (TIRO FE)"
+		 
+		
+			,-64.36461935091053
+			<latitude>-33.13734537637137</latitude>
+			<altitude>0</altitude>
+			<heading>0.01076049858857813</heading>
+			
+			<range>510.2062912594111</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_tf
+		 
+			64.36522389424309,-33.13745172389513
+		 
+	 
+	 
+		"Mercado de Abasto
+(M.ABA)"
+		 
+		
+			,-64.35230134434399
+			<latitude>-33.09313711554192</latitude>
+			<altitude>0</altitude>
+			<heading>0.004038598334802684</heading>
+			
+			<range>1200.446228980105</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_abasto
+		 
+			64.35310145122168,-33.09278513317934
+		 
+	 
+	 
+		"Ex cancha Comunicaciones
+(COMUN)"
+		 
+		
+			,-64.3633767912058
+			<latitude>-33.14062138955507</latitude>
+			<altitude>0</altitude>
+			<heading>0.01008060108907533</heading>
+			
+			<range>654.9623516354923</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_foot
+		 
+			64.36299837203917,-33.14101456025625
+		 
+	 
+	 
+		"Barrio Yapeyu
+(YAPEYU)"
+		 
+		
+			,-64.32443893865468
+			<latitude>-33.14717436619087</latitude>
+			<altitude>0</altitude>
+			<heading>-0.01119560266802132</heading>
+			
+			<range>621.1001594807856</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_home
+		 
+			64.32485676126426,-33.14633840454126
+		 
+	 
+	 
+		"Barrio Pizarro (400 Viviendas)
+(400 VIV)"
+		 
+		
+			,-64.36770593227044
+			<latitude>-33.1485393492755</latitude>
+			<altitude>0</altitude>
+			<heading>0.01246154829379451</heading>
+			
+			<range>602.7075440764927</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_home
+		 
+			64.36868608308181,-33.14804856914116
+		 
+	 
+	 
+		"Barrio Fenic (FENIC)"
+		 
+		
+			,-64.32583755969931
+			<latitude>-33.11419697080162</latitude>
+			<altitude>0</altitude>
+			<heading>0.06318446174072315</heading>
+			
+			<range>502.9652996747786</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_home
+		 
+			64.32664895295311,-33.11453065296558
+		 
+	 
+	 
+		"Supermercado WallMarc
+(WOLM)"
+		 
+		
+			,-64.38194911275468
+			<latitude>-33.13044821530409</latitude>
+			<altitude>0</altitude>
+			<heading>0.09384574890057869</heading>
+			
+			<range>672.063077679219</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_super
+		 
+			64.3831369821968,-33.13067791075865
+		 
+	 
+	 
+		"Hospital San antonio de Padua (H.S.A.PA)"
+		 
+		
+			,-64.35473244239182
+			<latitude>-33.11011415277208</latitude>
+			<altitude>0</altitude>
+			<heading>0.02962519885291258</heading>
+			
+			<range>527.2238216415161</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_hospital0
+		 
+			64.35562046425237,-33.10957281592252
+		 
+	 
+	 
+		"Barrio 320 Viviendas
+(320 VIV.)"
+		 
+		
+			,-64.34126661375129
+			<latitude>-33.12084847113703</latitude>
+			<altitude>0</altitude>
+			<heading>-0.001991956231396542</heading>
+			
+			<range>751.4347476583235</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_apartment-3
+		 
+			64.34105839498619,-33.12112398163524
+		 
+	 
+	 
+		"Barrio Universidad
+(BARRIO UNI.)"
+		 
+		
+			,-64.30564291201158
+			<latitude>-33.10810270499248</latitude>
+			<altitude>0</altitude>
+			<heading>-0.02145636509012761</heading>
+			
+			<range>638.6947906500949</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_apartment-3
+		 
+			64.30605306560783,-33.10751382156087
+		 
+	 
+	 
+		"Estacion de Servicios Wittouck"
+		 
+		
+			,-64.33742290909332
+			<latitude>-33.0821866968473</latitude>
+			<altitude>0</altitude>
+			<heading>-0.004102560518280468</heading>
+			
+			<range>1250.165927566412</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_gas
+		 
+			64.33989280779667,-33.08116953514168
+		 

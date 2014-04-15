@@ -45,8 +45,8 @@ public class SeleccionLineas extends Activity {
         expListView.setOnChildClickListener(new OnChildClickListener() {
 
             public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
-                lanzarMapa(groupPosition,childPosition);
-                lanzarHorarios(groupPosition, childPosition);
+                lanzar(groupPosition,childPosition);
+                //lanzarHorarios(groupPosition, childPosition);
                 return true;
             }
         });
@@ -63,14 +63,76 @@ public class SeleccionLineas extends Activity {
     }
 
 
-    public void lanzarMapa(int grupo, int hijo){
+    public void lanzar(int grupo, int hijo){
         final String selectedHijo = (String) listAdapter.getChild(grupo, hijo);
         final String selectedGroup = (String) listAdapter.getGroup(grupo);
         Toast.makeText(getBaseContext(),selectedGroup+" - "+ selectedHijo, Toast.LENGTH_LONG).show();
+        Intent IntentHorario;
+        Intent IntentMapa;
         switch (grupo){
-            case 6:
+            case 0: //1 verde
                 switch (hijo){
-                    case 3:
+                    case 0: //lunes-viernes
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader1verde());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable1verde());
+                        startActivity(IntentHorario);
+                        break;
+                    case 3://recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido1Verde());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 1: //1 rojo
+                switch (hijo){
+                    case 3: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido1Rojo());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 2://2 verde
+                switch (hijo){
+                    case 3://recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido2Verde());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 3://2 rojo
+                switch (hijo){
+                    case 2: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido2Verde());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 4: //3
+                switch (hijo){
+                    case 2: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido3());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 5: //4
+                switch (hijo){
+                    case 1: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido4());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 6: //5
+                switch (hijo){
+                    case 3: //recorrido
                         Intent i = new Intent(this,Mapa.class);
                         i.putExtra("recorrido",recorrido.getRecorrido5());
                         i.putExtra("paradas", recorrido.getParadaslinea5());
@@ -78,28 +140,148 @@ public class SeleccionLineas extends Activity {
                         break;
                 }
                 break;
-
-        }
-    }
-
-    public void lanzarHorarios(int grupo, int hijo){
-        final String selectedHijo = (String) listAdapter.getChild(grupo, hijo);
-        final String selectedGroup = (String) listAdapter.getGroup(grupo);
-        Toast.makeText(getBaseContext(),selectedGroup+" - "+ selectedHijo, Toast.LENGTH_LONG).show();
-        switch (grupo){
-            case 0:
+            case 7: //6
                 switch (hijo){
-                    case 0:
-                        Intent i = new Intent(this,VistaHorarios.class);
-                        i.putExtra("header",horarios.getHeader1verde());
-                        i.putExtra("timeTable",horarios.getTimeTable1verde());
-                        startActivity(i);
+                    case 2: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido6());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 8: //7
+                switch (hijo){
+                    case 2: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido7());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 9: //8 verde
+                switch (hijo){
+                    case 2: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido8Verde());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 10://8 rojo
+                switch (hijo){
+                    case 3: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido8Rojo());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 11: //9 verde
+                switch (hijo){
+                    case 1: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido9Verde());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 12: //9 rojo
+                switch (hijo){
+                    case 1: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido9Rojo());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 13: //10
+                switch (hijo){
+                    case 1://reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido10());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 14://11
+                switch (hijo){
+                    case 1: //reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido11());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 15://12
+                switch (hijo){
+                    case 3: //recorrido
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido12());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 16://13
+                switch (hijo){
+                    case 2://reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido13());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 17://14
+                switch (hijo){
+                    case 1: //reco:
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido14());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 18://15
+                switch (hijo){
+                    case 1:
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido15());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 19: //16
+                switch (hijo){
+                    case 1:
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido16());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 20://17
+                switch (hijo){
+                    case 1:
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido17());
+                        startActivity(IntentMapa);
+                        break;
+                }
+                break;
+            case 21://18
+                switch (hijo){
+                    case 3://reco
+                        IntentMapa = new Intent(this,Mapa.class);
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido18());
+                        startActivity(IntentMapa);
                         break;
                 }
                 break;
 
+
+
         }
     }
+
+
     /*
      * Preparing the list data
      */

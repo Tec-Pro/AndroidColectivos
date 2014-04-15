@@ -87,12 +87,16 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         switch (id){
             case R.id.accion_mostrar_parada:
                 double[] paradas = extras.getDoubleArray("paradas");
-                i = 0;
-                while (i < paradas.length - 1) {
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(coord(paradas[i], paradas[i + 1]));
-                    mapa.addMarker(markerOptions);
-                    i = i + 2;
+                if(paradas!=null) {
+                    if(paradas.length % 2==0) {
+                        i = 0;
+                        while (i < paradas.length - 1) {
+                            MarkerOptions markerOptions = new MarkerOptions();
+                            markerOptions.position(coord(paradas[i], paradas[i + 1]));
+                            mapa.addMarker(markerOptions);
+                            i = i + 2;
+                        }
+                    }
                 }
                 break;
 
@@ -106,7 +110,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                     i = i + 2;
                 }
                 a.color(Color.BLUE);
-                a.width(5);
+                a.width(2);
                 mapa.addPolyline(a);
                 break;
 
