@@ -12,111 +12,111 @@
 
         <TableLayout
             android:id="@+id/tl_head"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TableRow
                 android:id="@+id/tr_head"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
                 <TextView
                     android:id="@+id/col1"
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col2"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
 
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col3"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
 
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col4"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
 
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col5"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col6"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col7"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
                 <TextView
                     android:id="@+id/col8"
 
                     android:textColor="@android:color/black"
                     android:layout_margin="1dp"
 
-                    android:width="90dp"
-                    android:height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:background="#ffcccccc"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:width="90dp" />
 
             </TableRow>
         </TableLayout>

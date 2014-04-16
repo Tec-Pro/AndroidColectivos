@@ -3,6 +3,8 @@ package org.tecpro.colectivos;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +16,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.security.AccessController.getContext;
+
 public class VistaHorarios extends ActionBarActivity {
 
     private Bundle extras;
     private String[] times;
     String[]busStops;
+    private int width;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +36,10 @@ public class VistaHorarios extends ActionBarActivity {
         busStops = extras.getStringArray("header");
 
         times = extras.getStringArray("timeTable");
-
-
+        String title= extras.getString("title");
+        setTitle(title);
+        Display display = getWindowManager().getDefaultDisplay();
+        width = display.getWidth();
         refreshGrid(times,busStops);
 
     }
@@ -62,8 +70,8 @@ public class VistaHorarios extends ActionBarActivity {
                 tv[j]=new TextView(this);
                 tv[j].setId(j);
                 tv[j].setText(timeTable[k]);
-                tv[j].setWidth(190);
-                tv[j].setHeight(60);
+                tv[j].setWidth(dpToPx(90));
+                tv[j].setHeight(dpToPx(30));
                 tv[j].setGravity(Gravity.CENTER);
 
                 if(headcol1.length() < tv[j].getText().length())
@@ -85,6 +93,7 @@ public class VistaHorarios extends ActionBarActivity {
     }
 
     private void setHeaders(String[] headers ){
+
         int i = 0;
         for (int id : new int[] {R.id.col1, R.id.col2, R.id.col3, R.id.col4, R.id.col5, R.id.col6,R.id.col7,R.id.col8}) {
             TextView header = (TextView) findViewById(id);
@@ -93,6 +102,8 @@ public class VistaHorarios extends ActionBarActivity {
             }
             else{
                 header.setText(headers[i]);
+                //header.setWidth(width/headers.length);
+
             }
             i++;
         }
@@ -120,4 +131,9 @@ public class VistaHorarios extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int dpToPx(int dp)
+    {
+        float density = getApplicationContext().getResources().getDisplayMetrics().density;
+        return Math.round((float)dp * density);
+    }
 }
