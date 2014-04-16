@@ -3,8 +3,7 @@
 
     <string name="app_name">Colectivos Río Cuarto</string>
     <string name="acercaDe">Acerca de</string>
-    <string name="horarios">Urbano</string>
-    <string name="recorridos">Interurbano</string>
-    <string name="salir">Media Distancia</string>
+    <string name="horarios">Horarios</string>
+    <string name="recorridos">Recorridos</string>
+    <string name="salir">Salir</string>
 </resources>
-

@@ -3,23 +3,16 @@ package org.tecpro.colectivos;
 /**
  * Created by nico on 10/04/14.
  */
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ListView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SeleccionLineas extends Activity {
 
@@ -291,6 +284,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 13: //10
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader10());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable10());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1://reco
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido10());
@@ -301,6 +301,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 14://11
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader11());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable11());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1: //reco
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido11());
@@ -345,6 +352,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 17://14
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader14());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable14());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1: //reco:
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido14());
@@ -355,6 +369,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 18://15
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader15());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable15());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1:
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido15());
@@ -365,6 +386,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 19: //16
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader16());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable16());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1:
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido16());
@@ -375,6 +403,13 @@ public class SeleccionLineas extends Activity {
                 break;
             case 20://17
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader17());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable17());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 1:
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido17());
@@ -385,6 +420,27 @@ public class SeleccionLineas extends Activity {
                 break;
             case 21://18
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader18());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable18());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 1: //especiales
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader18());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable18Esp());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 2: //Fin
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader18());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable18Fin());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 3://reco
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido18());
