@@ -46,7 +46,8 @@
 
         android:layout_width="match_parent"
 
-        android:text="@string/recorridos"/>
+        android:text="@string/recorridos"
+        android:onClick="lanzarSeleccionInterUrb" />
 
     <Button android:id="@+id/salir"
 
@@ -54,7 +55,8 @@
 
         android:layout_width="match_parent"
 
-        android:text="@string/salir"/>
+        android:text="@string/salir"
+        android:onClick="lanzarSeleccionMediaDist" />
 
     <Button android:id="@+id/acercaDe"
 

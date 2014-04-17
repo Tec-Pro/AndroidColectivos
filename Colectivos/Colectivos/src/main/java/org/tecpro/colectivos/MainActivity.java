@@ -24,6 +24,14 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+    public void lanzarSeleccionInterUrb(View view){
+        Intent i = new Intent(this,SeleccionLineasInterUrb.class);
+        startActivity(i);
+    }
 
+    public void lanzarSeleccionMediaDist(View view){
+        Intent i = new Intent(this,SeleccionLineasMediaDist.class);
+        startActivity(i);
+    }
 
 }
