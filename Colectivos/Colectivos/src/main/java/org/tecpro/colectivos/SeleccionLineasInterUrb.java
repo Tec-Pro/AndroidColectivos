@@ -85,9 +85,27 @@ public class SeleccionLineasInterUrb extends Activity {
                 break;
             case 2: //Río cuarto-Holmberg
                 switch (hijo){
-                    case 0://recorrido
-
-                            break;
+                    case 0: //lunes-viernes
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmberg());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 1: //sabados
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmbergSab());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 2: //Feriados y domingos
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmbergDom());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                 }
                 break;
 
