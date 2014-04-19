@@ -318,6 +318,27 @@ public class SeleccionLineas extends Activity {
                 break;
             case 15://12
                 switch (hijo){
+                    case 0:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader12());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable12());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 1:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader12());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable12Sab());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+                    case 2:
+                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader12());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable12Dom());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
                     case 3: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido12());
