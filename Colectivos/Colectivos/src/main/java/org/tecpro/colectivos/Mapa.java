@@ -1,21 +1,21 @@
 package org.tecpro.colectivos;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import javax.xml.datatype.Duration;
 
 /**
  * Created by nico on 09/04/14.
@@ -86,7 +86,9 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         int i=0;
         switch (id){
             case R.id.accion_mostrar_parada:
-                double[] paradas = extras.getDoubleArray("paradas");
+
+                Toast.makeText(getApplicationContext(), "¡PRÓXIMAMENTE!", Toast.LENGTH_SHORT).show();
+                /*double[] paradas = extras.getDoubleArray("paradas");
                 if(paradas!=null) {
                     if(paradas.length % 2==0) {
                         i = 0;
@@ -97,11 +99,12 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                             i = i + 2;
                         }
                     }
-                }
+                }*/
                 break;
 
             case R.id.accion_ocultar_parada:
-                mapa.clear();
+                Toast.makeText(getApplicationContext(), "¡PRÓXIMAMENTE!", Toast.LENGTH_SHORT).show();
+                /*mapa.clear();
                 PolylineOptions a = new PolylineOptions();
                 double[] recorrido = extras.getDoubleArray("recorrido");
                 i = 0;
@@ -111,7 +114,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                 }
                 a.color(Color.BLUE);
                 a.width(2);
-                mapa.addPolyline(a);
+                mapa.addPolyline(a);*/
                 break;
 
         }

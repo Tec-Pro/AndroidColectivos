@@ -3,8 +3,6 @@ package org.tecpro.colectivos;
 /**
  * Created by nico on 10/04/14.
  */
-import java.util.HashMap;
-import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 

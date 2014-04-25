@@ -1259,4 +1259,96 @@ public class Horarios {
     public String[] getTimeTableRioCuartoHolmbergDom() { return timeTableRioCuartoHolmbergDom; }
 
 
+
+    private int cantBondi6= 1;
+    private int cantBondi6Esp= 1;
+    private int cantBondi7= 1;
+    private int cantBondi7Fin= 1;
+    private int cantBondi8V= 1; //bardaso, le pongo 1
+    private int cantBondi8VFin= 1; //bardaso, le pongo 1
+    private int cantBondi8R= 3;
+    private int cantBondi8RSab= 3;
+    private int cantBondi8RDom= 2;
+    private int cantBondi9V= 2;
+    private int cantBondi9R= 2;
+    private int cantBondi10= 1;
+    private int cantBondi11= 1;
+    private int cantBondi12= 2;
+    private int cantBondi12Sab= 2;
+    private int cantBondi12Dom= 1;
+    private int cantBondi13= 4;
+    private int cantBondi13Fin= 2;
+
+    public int getCantBondi6() {
+        return cantBondi6;
+    }
+
+    public int getCantBondi6Esp() {
+        return cantBondi6Esp;
+    }
+
+    public int getCantBondi7() {
+        return cantBondi7;
+    }
+
+    public int getCantBondi7Fin() {
+        return cantBondi7Fin;
+    }
+
+    public int getCantBondi8V() {
+        return cantBondi8V;
+    }
+
+    public int getCantBondi8VFin() {
+        return cantBondi8VFin;
+    }
+
+    public int getCantBondi8R() {
+        return cantBondi8R;
+    }
+
+    public int getCantBondi8RDom() {
+        return cantBondi8RDom;
+    }
+
+    public int getCantBondi8RSab() {
+        return cantBondi8RSab;
+    }
+
+    public int getCantBondi9V() {
+        return cantBondi9V;
+    }
+
+    public int getCantBondi9R() {
+        return cantBondi9R;
+    }
+
+    public int getCantBondi11() {
+        return cantBondi11;
+    }
+
+    public int getCantBondi10() {
+        return cantBondi10;
+    }
+
+    public int getCantBondi12() {
+        return cantBondi12;
+    }
+
+    public int getCantBondi12Sab() {
+        return cantBondi12Sab;
+    }
+
+    public int getCantBondi12Dom() {
+        return cantBondi12Dom;
+    }
+
+    public int getCantBondi13() {
+        return cantBondi13;
+    }
+
+    public int getCantBondi13Fin() {
+        return cantBondi13Fin;
+    }
+
 }

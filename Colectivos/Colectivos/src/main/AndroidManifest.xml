@@ -31,6 +31,10 @@
          <activity android:name="org.tecpro.colectivos.SeleccionLineas"
              android:label="Urbano"
              />
+        <activity android:name="org.tecpro.colectivos.ViewInfo"
+            android:label="Información adicional"
+            android:theme="@style/Theme.AppCompat.Light.DialogWhenLarge"
+            />
          <activity android:name="org.tecpro.colectivos.SeleccionLineasInterUrb"
              android:label="Interurbano"
              />
@@ -38,7 +42,7 @@
              android:label="Media Dístancia"
              />
 
-         <activity android:name="org.tecpro.colectivos.VistaHorarios"
+         <activity android:name=".VistaHoriarios"
              android:label="Horario"
              />
          <activity android:name="org.tecpro.colectivos.AcercaDe"

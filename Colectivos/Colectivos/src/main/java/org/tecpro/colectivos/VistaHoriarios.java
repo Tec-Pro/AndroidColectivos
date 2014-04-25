@@ -1,9 +1,10 @@
 package org.tecpro.colectivos;
 
+
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,17 +14,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.security.AccessController.getContext;
-
-public class VistaHorarios extends ActionBarActivity {
+public class VistaHoriarios extends ActionBarActivity {
 
     private Bundle extras;
     private String[] times;
     String[]busStops;
+    private String title;
+    private String infor;
+    int cantBondis;
     private int width;
+    private boolean distingo= true;
 
 
     @Override
@@ -36,19 +36,22 @@ public class VistaHorarios extends ActionBarActivity {
         busStops = extras.getStringArray("header");
 
         times = extras.getStringArray("timeTable");
-        String title= extras.getString("title");
+        cantBondis = extras.getInt("cantBondis",1);
+        title= extras.getString("title");
+        infor= extras.getString("info");
         setTitle(title);
         Display display = getWindowManager().getDefaultDisplay();
         width = display.getWidth();
-        refreshGrid(times,busStops);
+        refreshGrid(times,busStops,cantBondis);
 
     }
 
-    public void refreshGrid(String[] timeTable, String[] busStops){
+    public void refreshGrid(String[] timeTable, String[] busStops, int cantBondis){
 
         setHeaders(busStops);
         TableLayout tl_head1 = (TableLayout)findViewById(R.id.tl_head);
         TableLayout tl_child1 = (TableLayout)findViewById(R.id.tl_child);
+        tl_child1.removeAllViews();
 
         String headcol1="";
         TableRow tr[]= new TableRow[2000];
@@ -56,14 +59,34 @@ public class VistaHorarios extends ActionBarActivity {
         //int j=0;
         //int i;
         int k = 0;
-
+        int aux=1;
         for(int i=0; i<timeTable.length/busStops.length;i++ )
         {
 
-            tr[i]=new TableRow(this);
-            /*if(i%2==0){
-                tr[i].setBackgroundColor(Color.RED);
-            }*/
+            tr[i] = new TableRow(this);
+
+            if(distingo) {
+                if (aux > cantBondis) {
+                    aux = 1;
+                }
+                if (aux == 2) {
+                    tr[i].setBackgroundColor(Color.rgb(193, 241, 193));
+                }
+                if (aux == 1) {
+                    tr[i].setBackgroundColor(Color.TRANSPARENT);
+                }
+                if (aux == 3) {
+                    tr[i].setBackgroundColor(Color.rgb(193, 241, 217));
+                }
+                if (aux == 4) {
+                    tr[i].setBackgroundColor(Color.rgb(193, 217, 241));
+                }
+                aux++;
+            }
+            else{
+                tr[i].setBackgroundColor(Color.TRANSPARENT);
+            }
+
 
             for( int j=0; j<busStops.length; j++)
             {
@@ -125,8 +148,16 @@ public class VistaHorarios extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.info) {
+                Intent i = new Intent(this,ViewInfo.class);
+                i.putExtra("title",title);
+                i.putExtra("info",infor);
+                startActivity(i);
+        }
+        if(id==R.id.distingir){
+            distingo= !distingo;
+            refreshGrid(times,busStops,cantBondis);
+
         }
         return super.onOptionsItemSelected(item);
     }

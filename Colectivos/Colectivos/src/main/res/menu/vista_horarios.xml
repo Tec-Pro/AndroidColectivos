@@ -8,4 +8,9 @@
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/distingir"
+        android:title="Distinguir Colectivos"
+        android:icon="@android:drawable/ic_menu_view"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|collapseActionView" />
 </menu>

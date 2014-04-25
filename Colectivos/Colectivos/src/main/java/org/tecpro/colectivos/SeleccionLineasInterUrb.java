@@ -68,7 +68,7 @@ public class SeleccionLineasInterUrb extends Activity {
             case 0: //UNRC-HIGUeras
                 switch (hijo){
                     case 0: //lunes-viernes
-                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
                         IntentHorario.putExtra("header",horarios.getHeaderUnrcHig());
                         IntentHorario.putExtra("timeTable",horarios.getTimeTableUnrcHig());
                         IntentHorario.putExtra("title",title);
@@ -86,21 +86,21 @@ public class SeleccionLineasInterUrb extends Activity {
             case 2: //Río cuarto-Holmberg
                 switch (hijo){
                     case 0: //lunes-viernes
-                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
                         IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
                         IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmberg());
                         IntentHorario.putExtra("title",title);
                         startActivity(IntentHorario);
                         break;
                     case 1: //sabados
-                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
                         IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
                         IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmbergSab());
                         IntentHorario.putExtra("title",title);
                         startActivity(IntentHorario);
                         break;
                     case 2: //Feriados y domingos
-                        IntentHorario = new Intent(this,VistaHorarios.class);
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
                         IntentHorario.putExtra("header",horarios.getHeaderRioCuartoHolmberg());
                         IntentHorario.putExtra("timeTable",horarios.getTimeTableRioCuartoHolmbergDom());
                         IntentHorario.putExtra("title",title);
