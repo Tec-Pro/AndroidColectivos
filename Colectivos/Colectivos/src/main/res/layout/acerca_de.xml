@@ -163,7 +163,8 @@
                 android:text="www.facebook.com/TecProSoftware"
                 android:id="@+id/url"
                 android:layout_gravity="bottom"
-                android:gravity="center" />
+                android:gravity="center"
+                android:onClick="pgWeb" />
         </LinearLayout>*/
 
 

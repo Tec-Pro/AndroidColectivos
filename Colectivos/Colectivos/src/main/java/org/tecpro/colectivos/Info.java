@@ -9,13 +9,13 @@ public class Info   {
     private String Info17 = "Plaza: Plaza General Julio Argentino Roca\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"S.P.Padula: San antonio de Padua";
     private String Info15 = "C.Salud: Echeverría 300-398\n\n"+"EPEC: Vélez Sarsfield 170\n\n"+"PARQU: Parque Sarmiento, Av Marcelo T. de Alvear 900\n\n"+"WITTO: Estacion de Servicios Wittouck, Ruta Nacional 36\n\n"+"Plaza: Plaza General Julio Argentino Roca";
     private String Info14="Domingos y Feriados sale 6:55 Catedral\n\n"+
-    "H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"WOLM:Supermercado WallMarc, Juan B. Justo 2052\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"H.S.A.PA: Hospital San Antonio de Padua";
+    "H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"WOLM: Supermercado Walmart, Juan B. Justo 2052\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"H.S.A.PA: Hospital San Antonio de Padua";
     private  String Info13="Plaza: Plaza General Julio Argentino Roca\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"Comun: Comunicaciones, Ex cancha Correo, Gerónimo del Barco esquina Ordoñez\n\n"+"Cement: Cementerio\n\n"+"ACORD: Barrio El Acordeón";
     private String Info12=
             "Lunes a Sabados:\n\n" +
             "Rotonda: 05:30." +
             "Plaza: 05:40\n\n" +
-            "H. Central: 05:50\n\n+" +
+            "H. Central: 05:50\n\n" +
             "Gomar: 05:55\n\n" +
             "Woito: 06:00\n\n"+
             "Plaza: 06:20\n\n" +
@@ -24,7 +24,7 @@ public class Info   {
             "Domingos y Feriados:\n\n"+
             "Rotonda: 05:30\n\n" +
             "Plaza: 05:40\n\n" +
-            "H. Central: 05:50\n\n+" +
+            "H. Central: 05:50\n\n" +
              "Gomar: 05:55\n\n"+
             "\n\n"+
             "EPEC: Vélez Sarsfield 170\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299";
@@ -37,11 +37,11 @@ public class Info   {
     private String Info7="CINEMA:Ex Alvear Cinema, Alvear 700-800\n\n"+"Pilet: Pileton Municipal, Rio Grande Esquina Rio Segundo\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Comun: Comunicaciones, Ex cancha Correo, Gerónimo del Barco esquina Ordoñez\n\n"+"TIRO FED: Ex Tiro Federal, Maipú esquina Comandante Martín Quenon";
     private String Info6="EPEC: Vélez Sarsfield 170\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"ACORD: Barrio El Acordeón";
     private String Info5="Plaza: Plaza General Julio Argentino Roca\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"Comun: Comunicaciones, Ex cancha Correo, Gerónimo del Barco esquina Ordoñez\n\n"+"Hipódromo: Av Pres. Perón Oeste Esquina Roque Sáenz Pena\n\n"+"E:GAS: Estacion de Servicio YPF, Doctor Francisco Muñiz esquina Fray Quirico Porreca \n\n";
-    private String Info4="Plaza: Plaza General Julio Argentino Roca\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"Pilet: Pileton Municipal, Rio Grande Esquina Rio Segundo";
-    private String Info3="EPEC: Vélez Sarsfield 170\n\n"+"PARQU: Parque Sarmiento, Av Marcelo T. de Alvear 900\n\n"+"L.Quin: Barrio Las Quintas"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Clinica: Clinica del Sud, Echeverria Esquina AV. Italia";
+    private String Info4="Plaza: Plaza General Julio Argentino Roca\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"Pilet: Piletón Municipal, Río Grande Esquina Río Segundo";
+    private String Info3="EPEC: Vélez Sarsfield 170\n\n"+"PARQU: Parque Sarmiento, Av Marcelo T. de Alvear 900\n\n"+"L.Quin: Barrio Las Quintas\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Clinica: Clinica del Sud, Echeverria Esquina AV. Italia";
     private String Info2R="MORET: Av Amadeo Sabattini 2200\n\n"+"EPEC: Vélez Sarsfield 170\n\n"+"PARQU: Parque Sarmiento, Av Marcelo T. de Alvear 900\n\n"+"R.SEM: Rotonda del Seminario, Av Marcelo T. de Alvear 2000\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"CARC: Carcel, Av Amadeo Sabattini 2600-2700\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299\n\n"+"L.Feri: Barrio Las Ferias";
     private String Info2V="MORET: Av Amadeo Sabattini 2200\n\n"+"EPEC: Vélez Sarsfield 170\n\n"+"PARQU: Parque Sarmiento, Av Marcelo T. de Alvear 900\n\n"+"R.SEM: Rotonda del Seminario, Av Marcelo T. de Alvear 2000\n\n"+"UNRC: Universidad Nacional, Ruta Nacional 36 KM 601\n\n"+"CARC: Carcel, Av Amadeo Sabattini 2600-2700\n\n"+"H.Cent: Hospital Central,General Mosconi 201-299";
-    private String Info1R="Golf: Villa Golf Club\n\nx"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Bº Peyrano: Barrio Peyrano\n\n"+"Tanque: Tanque de Agua, Av San Martín esquina Ingeniero Dinkeldein\n\n"+"Cement: Cementerio";
+    private String Info1R="Golf: Villa Golf Club\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Bº Peyrano: Barrio Peyrano\n\n"+"Tanque: Tanque de Agua, Av San Martín esquina Ingeniero Dinkeldein\n\n"+"Cement: Cementerio";
     private String Info1V="Va. Dalcar: Barrio Villa Dalcar\n\n"+"Plaza: Plaza General Julio Argentino Roca\n\n"+"Bº Peyrano: Barrio Peyrano\n\n"+"Tanque: Tanque de Agua, Av San Martín esquina Ingeniero Dinkeldein\n\n"+"Cement: Cementerio";
     private String Info16="320 Viv: Barrio 320 Viviendas.";
 
