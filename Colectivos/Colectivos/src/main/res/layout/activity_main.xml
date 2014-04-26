@@ -23,10 +23,13 @@
         android:id="@+id/scrollView"
         android:layout_gravity="center_horizontal" >
 
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:id="@+id/LinearMain" >
+
 
             <TextView
 
@@ -38,7 +41,7 @@
 
                 android:gravity="center"
 
-                android:textSize="25dp "
+                android:textSize="25dp"
 
                 android:layout_marginBottom="20dp"/>
 
@@ -80,13 +83,20 @@
                 android:drawableLeft="@drawable/facebookicon"
                 android:textColor="@android:color/white"
                 android:onClick="pgWeb" />
-        </LinearLayout>
-    </ScrollView>
 
-    <!-- <com.google.android.gms.ads.AdView android:id="@+id/adView"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         ads:adUnitId="134956637827"
-         ads:adSize="BANNER"/> */ -->
+
+           <!-- <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adUnitId="ca-app-pub-1344220021901214/4763116885"
+                ads:adSize="SMART_BANNER"
+                android:layout_gravity="bottom"
+                ads:loadAdOnCreate="true"/> -->
+
+   </LinearLayout>
+
+</ScrollView>
+
 
  </LinearLayout>
