@@ -3,6 +3,7 @@ package org.tecpro.colectivos;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -10,10 +11,13 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.Objects;
 
 import javax.xml.datatype.Duration;
 
@@ -23,12 +27,17 @@ import javax.xml.datatype.Duration;
 public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
     private GoogleMap mapa;
     private Bundle extras;
+    private boolean mostrandoLugares=false;
+    private Recorrido lugares;
+    private String title;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa);
         extras = getIntent().getExtras();
+        title= extras.getString("title");
+        this.setTitle("Recorrido linea "+title);
         mapa = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa)).getMap();
         mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -54,7 +63,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         a.color(Color.BLUE);
         a.width(2);
         mapa.addPolyline(a);
-
+        lugares= new Recorrido();
 
     }
 
@@ -116,6 +125,42 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                 a.width(2);
                 mapa.addPolyline(a);*/
                 break;
+            case R.id.mostrar_lugares:
+                if(mostrandoLugares) {
+                    item.setTitle("Mostrar lugares");
+                    mostrandoLugares=!mostrandoLugares;
+                    mapa.clear();
+                    PolylineOptions a = new PolylineOptions();
+                    double[] recorrido = extras.getDoubleArray("recorrido");
+                    i = 0;
+                    while (i < recorrido.length - 1) {
+                        a.add(coord(recorrido[i], recorrido[i + 1]));
+                        i = i + 2;
+                    }
+                    a.color(Color.BLUE);
+                    a.width(2);
+                    mapa.addPolyline(a);                }
+                else{
+                    item.setTitle("Ocultar lugares");
+                    mostrandoLugares=!mostrandoLugares;
+                    Object[] marcasLugares = lugares.getLugares();
+                    if(marcasLugares!=null) {
+                        if(marcasLugares.length % 3==0) {
+                            i = 0;
+                            while (i < marcasLugares.length - 2) {
+                                MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(coord((Double)marcasLugares[i+1], (Double)marcasLugares[i + 2]));
+                                markerOptions.title((String) marcasLugares[i]);
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+                                mapa.addMarker(markerOptions);
+                                i = i + 3;
+                            }
+                    }
+                }
+                }
+
+
+
 
         }
         return super.onOptionsItemSelected(item);

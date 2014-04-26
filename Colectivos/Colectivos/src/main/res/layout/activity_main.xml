@@ -17,46 +17,71 @@
     tools:context=".MainActivity"
     style="@style/AppTheme">
 
-    <TextView
-
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal" >
 
-        android:layout_height="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        android:text="@string/app_name"
+            <TextView
 
-        android:gravity="center"
+                android:layout_width="match_parent"
 
-        android:textSize="25sp "
+                android:layout_height="wrap_content"
 
-        android:layout_marginBottom="20dp"/>
+                android:text="@string/app_name"
 
-    <Button android:id="@+id/horarios"
+                android:gravity="center"
 
-        android:layout_height="wrap_content"
+                android:textSize="25dp "
 
-        android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"/>
 
-        android:text="@string/horarios"
-        android:onClick="lanzarSeleccionLineas" />
+            <Button android:id="@+id/horarios"
 
-    <Button android:id="@+id/recorridos"
+                android:layout_height="wrap_content"
 
-        android:layout_height="wrap_content"
+                android:layout_width="match_parent"
 
-        android:layout_width="match_parent"
+                android:text="@string/horarios"
+                android:onClick="lanzarSeleccionLineas" />
 
-        android:text="@string/recorridos"
-        android:onClick="lanzarSeleccionInterUrb" />
+            <Button android:id="@+id/recorridos"
 
-    <Button android:id="@+id/acercaDe"
+                android:layout_height="wrap_content"
 
-        android:layout_height="wrap_content"
+                android:layout_width="match_parent"
 
-        android:layout_width="match_parent"
+                android:text="@string/recorridos"
+                android:onClick="lanzarSeleccionInterUrb" />
 
-        android:text="@string/acercaDe"
-        android:onClick="lanzarAcercaDe" />
+            <Button android:id="@+id/acercaDe"
+
+                android:layout_height="wrap_content"
+
+                android:layout_width="match_parent"
+
+                android:text="@string/acercaDe"
+                android:onClick="lanzarAcercaDe" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡SEGUINOS!"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="#3a589b"
+                android:drawableLeft="@drawable/facebookicon"
+                android:textColor="@android:color/white"
+                android:onClick="pgWeb" />
+        </LinearLayout>
+    </ScrollView>
 
     <!-- <com.google.android.gms.ads.AdView android:id="@+id/adView"
          android:layout_width="wrap_content"

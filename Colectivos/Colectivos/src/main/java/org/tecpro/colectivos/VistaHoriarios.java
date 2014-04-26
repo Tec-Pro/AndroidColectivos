@@ -49,6 +49,9 @@ public class VistaHoriarios extends ActionBarActivity {
     public void refreshGrid(String[] timeTable, String[] busStops, int cantBondis){
 
         setHeaders(busStops);
+        if(busStops[0].equals("Termi")){
+            setHeadersRioHigueras(busStops);
+        }
         TableLayout tl_head1 = (TableLayout)findViewById(R.id.tl_head);
         TableLayout tl_child1 = (TableLayout)findViewById(R.id.tl_child);
         tl_child1.removeAllViews();
@@ -125,6 +128,36 @@ public class VistaHoriarios extends ActionBarActivity {
             }
             else{
                 header.setText(headers[i]);
+                //header.setWidth(width/headers.length);
+
+            }
+            i++;
+        }
+
+    }
+
+    private void setHeadersRioHigueras(String[] headers ){
+
+        int i = 0;
+        for (int id : new int[] {R.id.col1, R.id.col2, R.id.col3, R.id.col4, R.id.col5, R.id.col6,R.id.col7,R.id.col8}) {
+            TextView header = (TextView) findViewById(id);
+            if( i>=headers.length){
+                header.setVisibility(View.GONE);
+            }
+            else{
+                header.setText(headers[i]);
+                if(i==0 || i==1 || i==4 || i==5){
+                    header.setBackgroundColor(Color.WHITE);
+                }
+                else{
+                    header.setBackgroundColor(Color.GRAY);
+                }
+                if(i%2 == 0){
+                    header.setGravity(Gravity.RIGHT);
+                }
+                else{
+                    header.setGravity(Gravity.LEFT);
+                }
                 //header.setWidth(width/headers.length);
 
             }

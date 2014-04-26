@@ -26,6 +26,66 @@ public class Horarios {
         return c;
     }
 
+    public String[] getTimeTableRioHigueras() {
+        return timeTableRioHigueras;
+    }
+
+    public String[] getBusStopsRioHigueras() {
+        return busStopsRioHigueras;
+    }
+
+    public String[] getTimeTableRioHiguerasSyd() {
+        return timeTableRioHiguerasSyd;
+    }
+
+    private String[] timeTableRioHiguerasSyd = makeArray("1 2 1 2 1 2 1 2\n" +
+            "C:111 C:109 C:111 C:109 C:111 C:109 C:111 C:109\n" +
+            "05:00\t- \t05:25\t- \t05:30\t- \t05:50\t -\n" +
+            "06:00\t-\t06:25\t-\t06:30\t-\t06:50\t- \n" +
+            "07:00\t-\t07:20\t-\t07:30\t-\t07:50\t- \n" +
+            "7:50\t-\t8:10\t-\t8:15\t-\t8:40\t- \n" +
+            "8:50\t-\t9:10\t-\t9:15\t-\t9:40\t- \n" +
+            "9:50\t-\t10:10\t-\t10:15\t-\t10:40\t- \n" +
+            "10:50\t-\t11:10\t-\t11:15\t-\t11:40\t- \n" +
+            "12:00\t-\t12:20\t-\t12:25\t-\t12:50\t- \n" +
+            "13:00\t-\t13:20\t-\t13:25\t-\t13:45\t- \n" +
+            "13:45\t-\t14:05\t-\t14:10\t-\t14:35\t- \n" +
+            "14:35\t-\t14:55\t-\t15:00\t-\t15:25\t- \n" +
+            "15:30\t-\t15:50\t-\t16:55\t-\t16:20\t- \n" +
+            "17:00\t-\t17:20\t-\t17:25\t-\t17:45\t- \n" +
+            "18:00\t-\t18:20\t-\t18:25\t-\t18:50\t- \n" +
+            "19:10\t-\t19:30\t-\t19:35\t-\t20:00\t -\n" +
+            "20:05\t-\t20:25\t-\t20:30\t-\t20:55\t- \n" +
+            "21:05\t-\t21:30\t-\t21:40\t-\t22:00\t- \n" +
+            "22:10\t-\t22:35\t-\t22:45\t-\t23:05\t- \n" +
+            "23:15\t-\t23:40\t-\t23:50\t-\t00:05\t- \n" +
+            "00:30\t- \t00:50\t -\t01:00\t- \t01:15  -");
+
+    private String[] busStopsRioHigueras = {"Termi", "nal" ,"Base", "Aerea" ,"Las", "Higueras" , "Río", "Cuarto"};
+
+    private String[] timeTableRioHigueras = makeArray("1 2 1 2 1 2 1 2\n" +
+            "C:111 C:109 C:111 C:109 C:111 C:109 C:111 C:109\n" +
+            "05:00\t- \t05:25\t- \t05:30\t- \t05:50 -\t \n" +
+            "06:00\t-\t06:25\t-\t06:30\t-\t06:50 -\t \n" +
+            "07:00\t07:00\t07:20\t07:15\t07:30\t07:30\t07:50\t07:45\n" +
+            "08:05\t07:50\t08:30  -\t\t08:40\t08:20\t09:00\t08:35\n" +
+            "09:10\t-\t09:35\t-\t09:45\t-\t10:05\t- \n" +
+            "10:15\t-\t10:40\t-\t10:50\t-\t11:10\t- \n" +
+            "11:20\t-\t11:45\t-\t11:55\t-\t12:25\t11:50\n" +
+            "12:30\t12:00\t12:50\t12:25\t13:00\t12:35\t13:20\t12:55\n" +
+            "13:30\t13:05\t13:55\t13:30\t14:05\t13:40\t14:25\t13:55\n" +
+            "14:35\t14:00\t14:50\t14:25\t15:00\t14:30\t15:20\t14:50\n" +
+            "15:40\t15:00\t16:05\t-\t16:15\t15:30\t16:35\t15:55\n" +
+            "16:45\t16:05\t17:10\t16:30\t17:20\t16:35\t17:40\t16:55\n" +
+            "17:50\t17:05\t18:15\t-\t18:25\t17:35\t18:45 -\t \n" +
+            "18:55\t- \t19:20\t-\t19:30\t-\t19:50\t19:20\n" +
+            "20:00\t19:30\t20:25\t-\t20:35\t20:00\t20:55\t20:20\n" +
+            "21:05\t20:30\t21:30\t-\t21:40\t21:00\t22:00\t- \n" +
+            "22:10\t-\t22:35\t-\t22:45\t-\t23:05\t -\n" +
+            "23:15\t-\t23:40\t-\t23:50\t-\t00:10\t -\n" +
+            "00:30\t-\t00:50\t-\t01:00\t-\t01:15    -");
+
+
     public String[] getTimeTable1verdeSyD() {
         return timeTable1verdeSyD;
     }
@@ -1259,6 +1319,12 @@ public class Horarios {
     public String[] getTimeTableRioCuartoHolmbergDom() { return timeTableRioCuartoHolmbergDom; }
 
 
+    private int cantBondi1V =3 ; //findes ytambien
+    private int cantBondi1R =3 ; //findes tambien!
+    private int cantBondi5 =4 ;
+    private int cantBondi5Fin =2 ;
+    private int cantBondi5Ver =3 ;
+    private int cantBondi18=2 ;
 
     private int cantBondi6= 1;
     private int cantBondi6Esp= 1;
@@ -1351,4 +1417,27 @@ public class Horarios {
         return cantBondi13Fin;
     }
 
+    public int getCantBondi1V() {
+        return cantBondi1V;
+    }
+
+    public int getCantBondi1R() {
+        return cantBondi1R;
+    }
+
+    public int getCantBondi5() {
+        return cantBondi5;
+    }
+
+    public int getCantBondi5Fin() {
+        return cantBondi5Fin;
+    }
+
+    public int getCantBondi5Ver() {
+        return cantBondi5Ver;
+    }
+
+    public int getCantBondi18() {
+        return cantBondi18;
+    }
 }

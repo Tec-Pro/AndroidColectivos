@@ -12,4 +12,9 @@
         android:icon="@android:drawable/ic_menu_myplaces"
         android:orderInCategory="95"
         android:showAsAction="never"/>
+    <item android:title="Mostrar lugares "
+        android:id="@+id/mostrar_lugares"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:orderInCategory="95"
+        android:showAsAction="always|withText"/>
 </menu>

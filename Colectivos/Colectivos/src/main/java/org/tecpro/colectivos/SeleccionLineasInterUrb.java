@@ -79,8 +79,21 @@ public class SeleccionLineasInterUrb extends Activity {
             case 1: //1 Río Cuarto-higeras
                 switch (hijo){
                     case 0:
-
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
+                        IntentHorario.putExtra("header",horarios.getBusStopsRioHigueras());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTableRioHigueras());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
                         break;
+                    case 1:
+                        IntentHorario = new Intent(this,VistaHoriarios.class);
+                        IntentHorario.putExtra("header",horarios.getBusStopsRioHigueras());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTableRioHiguerasSyd());
+                        IntentHorario.putExtra("title",title);
+                        startActivity(IntentHorario);
+                        break;
+
+
                 }
                 break;
             case 2: //Río cuarto-Holmberg

@@ -6,7 +6,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+       >
 
       <!--  <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/> -->
@@ -53,10 +54,8 @@
              android:value="@integer/google_play_services_version" />
          <meta-data
              android:name="com.google.android.maps.v2.API_KEY"
-             android:value="AIzaSyAFsHZMjzkwqrYyNMr7MB1Q02QoOfIhPQM"/>
-         <meta-data
-             android:name="com.google.android.maps.v2.API_KEY"
-             android:value="AIzaSyBRVOJ7nEWnOPM_3r3LqghBf7k6EbDe4eA" />
+             android:value="AIzaSyDzrzzYDGwQDagYcV5PxcsmQ2JI-rS1wAc"/>
+
 
      </application>
 
