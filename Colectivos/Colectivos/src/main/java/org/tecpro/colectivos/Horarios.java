@@ -1105,6 +1105,13 @@ public class Horarios {
             "19:50","20:20","20:45","21:00",
             "21:15","21:45","22:05","22:20" };
 
+    private String[] timeTableRioVillaM={"Río Cuarto,Las Higueras,Chucul,Carnerillo,Gral: Cabrera,Gral: Deheza,Las Perdices,Dalmacio Velez,Luca,Arroyo Cabral,El Cruce,Villa María"};
+    private String[] headerRioVillaM={"5:20","9:00","12:05","16:30","20:00","5:30","9:15","12:25","16:50","20:20","5:40","9:25","12:40","17:05","20:35","6:05","9:40","12:55","17:20","20:50","6:20","9:55","13:10","17:35","21:05","6:35","10:10","13:25","17:50","21:20","6:50","10:25","13:40","18:05","21:35","7:05","10:40","13:55","18:20","21:50","7:20","10:55","14:05","18:30","22:00","7:30","11:05","14:20","18:45","22:15","7:40","11:15","14:30","19:00","22:30","7:55","11:30","14:45","19:15","22:45"};
+    private String[] timeTableVillaMRio={"Villa María,El Cruce,Arroyo Cabral,Luca,Dalmacio Velez,Las Perdices,Gral: Deheza,Gral: Cabrera,Carnerillo,Chucul,Las Higueras,Río Cuarto"};
+    private String[] headerVillaMRio={"5:00","6:30","12:05","14:00","19:45","5:15","6:55","12:30","14:25","20:10","5:25","7:05","12:40","14:35","20:20","5:35","7:15","12:50","14:45","20:30","5:45","7:25","13:00","14:55","20:40","6:00","7:35","13:10","15:05","20:50","6:15","7:55","13:30","15:25","21:05","6:30","8:10","13:45","15:40","21:20","6:45","8:25","14:00","15:55","21:35","7:00","8:40","14:15","16:10","21:50","7:10","9:00","14:35","16:30","22:10","7:30","9:15","14:50","16:45","22:25"};
+
+
+
     public String[] getTimeTable1verde(){
         return timeTable1verde;
     }
@@ -1318,6 +1325,13 @@ public class Horarios {
 
     public String[] getTimeTableRioCuartoHolmbergDom() { return timeTableRioCuartoHolmbergDom; }
 
+    public String[] getTimeTableVillaMRio() { return timeTableVillaMRio;}
+
+    public String[] getHeaderVillaMRio() { return headerVillaMRio;}
+
+    public String[] getHeaderRioVillaM() { return headerRioVillaM;}
+
+    public String[] getTimeTableRioVillaM() {return timeTableRioVillaM;}
 
     private int cantBondi1V =3 ; //findes ytambien
     private int cantBondi1R =3 ; //findes tambien!

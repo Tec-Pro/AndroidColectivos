@@ -3,7 +3,6 @@ package org.tecpro.colectivos;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,10 +15,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-
-import java.util.Objects;
-
-import javax.xml.datatype.Duration;
 
 /**
  * Created by nico on 09/04/14.
@@ -38,32 +33,41 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         extras = getIntent().getExtras();
         title= extras.getString("title");
         this.setTitle("Recorrido linea "+title);
-        mapa = ((SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapa)).getMap();
-        mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mapa.setMyLocationEnabled(true);
-        mapa.getUiSettings().setZoomControlsEnabled(true);
-        mapa.getUiSettings().setCompassEnabled(true);
-        if(mapa.getMyLocation()!=null) {
-            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 12));
+        int k = 0;
+        mapa = null;
+        while (k != 3 ||mapa == null) {
+            mapa = ((SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mapa)).getMap();
+            k++;
         }
-        else{
-            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(-33.12376, -64.349032), 12));
+        if (mapa != null) {
+            mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mapa.setMyLocationEnabled(true);
+            mapa.getUiSettings().setZoomControlsEnabled(true);
+            mapa.getUiSettings().setCompassEnabled(true);
+            if (mapa.getMyLocation() != null) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 12));
+            } else {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(-33.12376, -64.349032), 12));
+            }
+            PolylineOptions a = new PolylineOptions();
+            //linea 5!
+            double[] recorrido = extras.getDoubleArray("recorrido");
+            int i = 0;
+            while (i < recorrido.length - 1) {
+                a.add(coord(recorrido[i], recorrido[i + 1]));
+                i = i + 2;
+            }
+            a.color(Color.BLUE);
+            a.width(2);
+            mapa.addPolyline(a);
+            lugares = new Recorrido();
+        } else {
+            Toast.makeText(getApplicationContext(), "No se puedo cargar correctamente el mapa",
+                    Toast. LENGTH_SHORT).show();
         }
-        PolylineOptions a = new PolylineOptions();
-        //linea 5!
-        double[] recorrido = extras.getDoubleArray("recorrido");
-        int i = 0;
-        while (i < recorrido.length - 1) {
-            a.add(coord(recorrido[i], recorrido[i + 1]));
-            i = i + 2;
-        }
-        a.color(Color.BLUE);
-        a.width(2);
-        mapa.addPolyline(a);
-        lugares= new Recorrido();
 
     }
 

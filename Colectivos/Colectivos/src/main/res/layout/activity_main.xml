@@ -17,6 +17,20 @@
     tools:context=".MainActivity"
     style="@style/AppTheme">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="480px"
+        android:layout_height="100px">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="480px"
+            android:layout_height="100px"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-1344220021901214/4763116885"
+            android:layout_marginBottom="15dp" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,6 +77,15 @@
                 android:text="@string/recorridos"
                 android:onClick="lanzarSeleccionInterUrb" />
 
+            <Button android:id="@+id/mediaDistancia"
+
+                android:layout_height="wrap_content"
+
+                android:layout_width="match_parent"
+
+                android:text="Media Distancia"
+                android:onClick="lanzarSeleccionLineasMedDis" />
+
             <Button android:id="@+id/acercaDe"
 
                 android:layout_height="wrap_content"
@@ -91,19 +114,7 @@
 
 </ScrollView>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="480px"
-        android:layout_height="100px">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="480px"
-            android:layout_height="100px"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-1344220021901214/4763116885"
-            android:layout_marginBottom="15dp" />
-    </LinearLayout>
 
 
 </LinearLayout>

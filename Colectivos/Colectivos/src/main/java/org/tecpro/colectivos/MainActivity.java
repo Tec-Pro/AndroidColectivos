@@ -78,6 +78,12 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+
+    public void lanzarSeleccionLineasMedDias(View view){
+        Intent i = new Intent(this,SeleccionLineasMediaDist.class);
+        startActivity(i);
+    }
+
     public void pgWeb(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://www.facebook.com/TecProSoftware"));
