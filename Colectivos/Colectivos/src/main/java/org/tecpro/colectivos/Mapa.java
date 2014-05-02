@@ -32,10 +32,10 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         setContentView(R.layout.mapa);
         extras = getIntent().getExtras();
         title= extras.getString("title");
-        this.setTitle("Recorrido linea "+title);
+        this.setTitle("Linea "+title);
         int k = 0;
         mapa = null;
-        while (k != 3 ||mapa == null) {
+        while (k != 3 && mapa == null) {
             mapa = ((SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.mapa)).getMap();
             k++;

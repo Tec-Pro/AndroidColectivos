@@ -71,8 +71,8 @@ public class VistaHoriarios extends ActionBarActivity {
 // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device.
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
                 .build();
 
 
@@ -105,6 +105,7 @@ public class VistaHoriarios extends ActionBarActivity {
         setHeaders(busStops);
         if(busStops[0].equals("Termi")){
             setHeadersRioHigueras(busStops);
+
         }
         TableLayout tl_head1 = (TableLayout)findViewById(R.id.tl_head);
         TableLayout tl_child1 = (TableLayout)findViewById(R.id.tl_child);
@@ -212,7 +213,6 @@ public class VistaHoriarios extends ActionBarActivity {
                 else{
                     header.setGravity(Gravity.LEFT);
                 }
-                //header.setWidth(width/headers.length);
 
             }
             i++;

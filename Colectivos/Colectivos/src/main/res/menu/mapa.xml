@@ -15,6 +15,6 @@
     <item android:title="Mostrar lugares "
         android:id="@+id/mostrar_lugares"
         android:icon="@android:drawable/ic_dialog_map"
-        android:orderInCategory="95"
-        android:showAsAction="always|withText"/>
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom|withText"/>
 </menu>
