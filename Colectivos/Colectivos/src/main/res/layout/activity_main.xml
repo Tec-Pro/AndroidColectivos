@@ -7,16 +7,15 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-
-    android:gravity="top"
 
     tools:context=".MainActivity"
     style="@style/AppTheme"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:paddingTop="0dp">
+    android:paddingTop="0dp"
+    android:gravity="center|top">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -32,11 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
         android:layout_below="@+id/adView"
         android:layout_above="@+id/button"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_horizontal">
 
 
         <LinearLayout
@@ -45,11 +43,10 @@
             android:layout_height="fill_parent"
             android:id="@+id/LinearMain"
             android:layout_below="@+id/adView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal">
 
 
 
@@ -61,16 +58,17 @@
                 android:layout_width="match_parent"
 
                 android:text="@string/horarios"
-                android:onClick="lanzarSeleccionLineas" />
+                android:onClick="lanzarSeleccionLineas"
+                android:gravity="center" />
 
             <Button android:id="@+id/recorridos"
 
                 android:layout_height="wrap_content"
 
                 android:layout_width="match_parent"
-
                 android:text="@string/recorridos"
-                android:onClick="lanzarSeleccionInterUrb" />
+                android:onClick="lanzarSeleccionInterUrb"
+                android:gravity="center" />
 
             <Button android:id="@+id/mediaDistancia"
 
@@ -79,7 +77,8 @@
                 android:layout_width="match_parent"
 
                 android:text="Media Distancia"
-                android:onClick="lanzarSeleccionLineasMedDias" />
+                android:onClick="lanzarSeleccionLineasMedDias"
+                android:gravity="center" />
 
 
         </LinearLayout>
