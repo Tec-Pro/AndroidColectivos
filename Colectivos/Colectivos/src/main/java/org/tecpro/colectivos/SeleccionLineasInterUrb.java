@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,7 @@ public class SeleccionLineasInterUrb extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     private Horarios horarios;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,48 @@ public class SeleccionLineasInterUrb extends Activity {
         expListView.setAdapter(listAdapter);
         horarios = new Horarios();
 
+        adView=(AdView) findViewById(R.id.adViewLinea);
+
+        //adView = new AdView(this);
+        //adView.setAdSize(AdSize.BANNER);
+        //adView.setAdUnitId(AD_UNIT_ID);
+
+        // Buscar LinearLayout suponiendo que se le ha asignado
+        // el atributo android:id="@+id/mainLayout".
+
+        // Añadirle adView.
+        //layout.addView(adView);
+
+// Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device.
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
+                .build();
+
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+
+
+    }
+
+    @Override
+    public void onPause() {
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adView.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 
 

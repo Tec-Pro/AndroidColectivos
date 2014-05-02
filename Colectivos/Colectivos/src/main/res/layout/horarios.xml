@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/hsv_main"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+
+
 
     <LinearLayout
         android:id="@+id/ll_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-1344220021901214/4763116885"
+            android:layout_gravity="top"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false" />
         <TableLayout
             android:id="@+id/tl_head"
             android:layout_width="wrap_content"

@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.*;
 
@@ -28,7 +31,6 @@ public class MainActivity extends Activity {
 
         // Buscar LinearLayout suponiendo que se le ha asignado
         // el atributo android:id="@+id/mainLayout".
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayoutGrande);
 
         // Añadirle adView.
         //layout.addView(adView);
@@ -36,7 +38,10 @@ public class MainActivity extends Activity {
 // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device.
         AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
                 .build();
+
 
         // Start loading the ad in the background.
         adView.loadAd(adRequest);
@@ -63,7 +68,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
     }
 
-    public void lanzarAcercaDe(View view){
+    public void lanzarAcercaDe(){
         Intent i = new Intent(this, AcercaDe.class);
         startActivity(i);
     }
@@ -88,6 +93,28 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://www.facebook.com/TecProSoftware"));
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        int i = 0;
+        switch (id) {
+            case R.id.acerca_de:
+                lanzarAcercaDe();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

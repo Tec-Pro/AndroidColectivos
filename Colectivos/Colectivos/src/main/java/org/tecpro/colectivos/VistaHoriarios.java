@@ -14,6 +14,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class VistaHoriarios extends ActionBarActivity {
 
     private Bundle extras;
@@ -24,6 +27,8 @@ public class VistaHoriarios extends ActionBarActivity {
     int cantBondis;
     private int width;
     private boolean distingo= true;
+    private String[] timesMoldes;
+    private AdView adView;
 
 
     @Override
@@ -36,14 +41,63 @@ public class VistaHoriarios extends ActionBarActivity {
         busStops = extras.getStringArray("header");
 
         times = extras.getStringArray("timeTable");
+        timesMoldes=extras.getStringArray("timeTableMoldes");
         cantBondis = extras.getInt("cantBondis",1);
         title= extras.getString("title");
         infor= extras.getString("info");
         setTitle(title);
         Display display = getWindowManager().getDefaultDisplay();
         width = display.getWidth();
-        refreshGrid(times,busStops,cantBondis);
+        if(times!=null) {
+            refreshGrid(times, busStops, cantBondis);
+        }
+        else{
+            if(timesMoldes!=null){
+                refreshGridMoldes(timesMoldes,busStops);
+            }
+        }
+        adView=(AdView) findViewById(R.id.adViewHorario);
 
+        //adView = new AdView(this);
+        //adView.setAdSize(AdSize.BANNER);
+        //adView.setAdUnitId(AD_UNIT_ID);
+
+        // Buscar LinearLayout suponiendo que se le ha asignado
+        // el atributo android:id="@+id/mainLayout".
+
+        // Añadirle adView.
+        //layout.addView(adView);
+
+// Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device.
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
+                .build();
+
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+
+
+    }
+
+    @Override
+    public void onPause() {
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adView.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 
     public void refreshGrid(String[] timeTable, String[] busStops, int cantBondis){
@@ -165,6 +219,51 @@ public class VistaHoriarios extends ActionBarActivity {
         }
 
     }
+
+    private void refreshGridMoldes(String[] timeTable, String[] busStops){
+        setHeaders(busStops);
+        TableLayout tl_head1 = (TableLayout)findViewById(R.id.tl_head);
+        TableLayout tl_child1 = (TableLayout)findViewById(R.id.tl_child);
+        tl_child1.removeAllViews();
+        String headcol1="";
+        TableRow tr[]= new TableRow[2000];
+        TextView tv[] = new TextView[1000];
+        int k = 0;
+        int aux=0;
+        int i=0;
+        for(int j=0; j<timeTable.length/busStops.length;j++ ){
+            tr[j] = new TableRow(this);
+            k=j;
+            aux=0;
+            while(aux<busStops.length ) {
+                tv[i]=new TextView(this);
+                tv[i].setId(i);
+                tv[i].setText(timeTable[k]);
+                tv[i].setWidth(dpToPx(90));
+                tv[i].setHeight(dpToPx(30));
+                tv[i].setGravity(Gravity.CENTER);
+                if(headcol1.length() < tv[i].getText().length())
+                {
+                    headcol1=null;
+                    headcol1=tv[aux].getText().toString();
+                }
+                tr[j].addView(tv[i]);
+                i++;
+                aux=aux+1;
+                k=k+timeTable.length/busStops.length;
+
+            }
+            tl_child1.addView(tr[j]);
+        }
+
+
+        TableRow trhead= new TableRow(this);
+
+
+        tl_head1.addView(trhead);
+
+    }
+
 
 
     @Override

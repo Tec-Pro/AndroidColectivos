@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewLinea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-1344220021901214/4763116885"
+        android:layout_gravity="top"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false" />
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_height="match_parent"

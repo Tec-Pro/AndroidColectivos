@@ -7,7 +7,9 @@ import java.util.LinkedList;
 /**
  * Created by agustin on 11/04/14.
  */
-public class Horarios {
+public class Horarios{
+
+
 
     private String[] makeArray(String horarios){
         String l = horarios;
@@ -26,6 +28,14 @@ public class Horarios {
         return c;
     }
 
+    public String[] getTimeTableRioCuartoMoldes() {
+        return timeTableRioCuartoMoldes;
+    }
+
+    public String[][] getTimeTableMoldesRioCuarto() {
+        return timeTableMoldesRioCuarto;
+    }
+
     public String[] getTimeTableRioHigueras() {
         return timeTableRioHigueras;
     }
@@ -36,6 +46,64 @@ public class Horarios {
 
     public String[] getTimeTableRioHiguerasSyd() {
         return timeTableRioHiguerasSyd;
+    }
+
+    private String[] timeTableRioCuartoMoldes={"6:30", "10:00", "12:05", "17:50", "19:30", "21:00",
+                                                 "6:55", "10:25", "12:30", "18:15", "19:55", "21:25",
+                                                 "7:10", "10.40", "12:45", "xxxx", "20:10", "21:40",
+            "7:30", "11:00", "13:05", "18:45", "20:30", "22:00",
+            "7:45", "", "13:20", "19:00", "20:45", "xxxx",
+            "8:00", "", "13:35", "19:15", "21:00", "xxxx",
+            " ", "", "", "", "", "22:15"};
+
+    private String[] timeTableRioCuartoMoldesSab={"6:30", "12:05", "19:30", "6:55", "12:30", "19:55", "7:10", "12:45", "20:10", "7:30", "13:05", "20:30", "7:45", "13:20", "20:45", "8:00", "13:35", "21:00", " ", "", ""};
+
+    public String[] getTimeTableRioCuartoMoldesSab() {
+        return timeTableRioCuartoMoldesSab;
+    }
+
+    private String[] timeTableRioCuartoMoldesDom={"6:30", "12:05", "19:30", "23:00","6:55", "12:30", "19:55", "23:20","7:10", "12:45", "20:10", "23:35","7:30", "13:05", "20:30", "23:55","7:45", "13:20", "20:45", "0:10","8:00", "13:35", "21:00", "0:25", " ", "", "", " "};
+
+    public String[] getTimeTableRioCuartoMoldesDom() {
+        return timeTableRioCuartoMoldesDom;
+    }
+
+    private String[] timeTableMoldesRio={" ", "7:05", "", "", "", " ","6:05", "xxxx", "8:15", "", "14:00", "19:30","6:20", "xxxx", "8:30", "", "14:20", "19:45","6:35", "7:30", "8:45", "13:00", "14:04", "20:00","6:55", "xxxx", "9:05", "13:20", "15:00", "20:20","7:10", "7:50", "9:20", "13:35", "15:15", "20:35","7:50", "8:30", "9:45", "14:00", "15:40", "21:00" };
+
+    private String[] timeTableMoldesRioSab={" ", "", "", " ","6:50", "8:15", "14:00", "21:15","7:05", "8:30", "14:20", "21:30","7:30", "8:45", "14:04", "21:45","7:50", "9:05", "15:00", "22:05","8:05", "9:20", "15:15", "22:20","8:30", "9:45", "15:40", "22:45"};
+
+    private String[] timeTableMoldesRioDom={ "", "", " ","9:00", "17:30", "21:15","9:15", "17:45", "21:30","9:30", "18:00", "21:45","9:50", "18:20", "22:05","10.05", "18:35", "22:20","10:30", "19:00", "22:45"};
+
+    private String[][] timeTableMoldesRioCuarto={{" ", "7:05", "", "", "", " ", " ", "", "", " ", " ", "", "", " "},
+            {"6:05", "xxxx", "8:15", "", "14:00", "19:30", "6:50", "8:15", "14:00", "21:15", " ", "9:00", "17:30", "21:15"},
+            {"6:20", "xxxx", "8:30", "", "14:20", "19:45", "7:05", "8:30", "14:20", "21:30", " ", "9:15", "17:45", "21:30"},
+            {"6:35", "7:30", "8:45", "13:00", "14:04", "20:00", "7:30", "8:45", "14:04", "21:45", " ", "9:30", "18:00", "21:45"},
+            {"6:55", "xxxx", "9:05", "13:20", "15:00", "20:20", "7:50", "9:05", "15:00", "22:05", " ", "9:50", "18:20", "22:05"},
+            {"7:10", "7:50", "9:20", "13:35", "15:15", "20:35", "8:05", "9:20", "15:15", "22:20", " ", "10.05", "18:35", "22:20"},
+            {"7:50", "8:30", "9:45", "14:00", "15:40", "21:00", "8:30", "9:45", "15:40", "22:45", " ", "10:30", "19:00", "22:45"}};
+
+    private String[] busStopsRioCuartoMoldes ={"Río Cuarto","Holmberg","Las Vertientes","Sampacho","Bulnes","Cnel Moldes","Suco"};
+
+    private String[] busStopseMoldesRioCuarto ={"Suco","Cnel Moldes","Bulnes","Sampacho","Las Vertientes","Holmberg","Río Cuarto"};
+
+    public String[] getBusStopsRioCuartoMoldes() {
+        return busStopsRioCuartoMoldes;
+    }
+
+    public String[] getTimeTableMoldesRioSab() {
+        return timeTableMoldesRioSab;
+    }
+
+    public String[] getTimeTableMoldesRio() {
+        return timeTableMoldesRio;
+    }
+
+    public String[] getTimeTableMoldesRioDom() {
+        return timeTableMoldesRioDom;
+    }
+
+    public String[] getBusStopseMoldesRioCuarto() {
+        return busStopseMoldesRioCuarto;
     }
 
     private String[] timeTableRioHiguerasSyd = makeArray("1 2 1 2 1 2 1 2\n" +
@@ -1105,10 +1173,10 @@ public class Horarios {
             "19:50","20:20","20:45","21:00",
             "21:15","21:45","22:05","22:20" };
 
-    private String[] timeTableRioVillaM={"Río Cuarto,Las Higueras,Chucul,Carnerillo,Gral: Cabrera,Gral: Deheza,Las Perdices,Dalmacio Velez,Luca,Arroyo Cabral,El Cruce,Villa María"};
-    private String[] headerRioVillaM={"5:20","9:00","12:05","16:30","20:00","5:30","9:15","12:25","16:50","20:20","5:40","9:25","12:40","17:05","20:35","6:05","9:40","12:55","17:20","20:50","6:20","9:55","13:10","17:35","21:05","6:35","10:10","13:25","17:50","21:20","6:50","10:25","13:40","18:05","21:35","7:05","10:40","13:55","18:20","21:50","7:20","10:55","14:05","18:30","22:00","7:30","11:05","14:20","18:45","22:15","7:40","11:15","14:30","19:00","22:30","7:55","11:30","14:45","19:15","22:45"};
-    private String[] timeTableVillaMRio={"Villa María,El Cruce,Arroyo Cabral,Luca,Dalmacio Velez,Las Perdices,Gral: Deheza,Gral: Cabrera,Carnerillo,Chucul,Las Higueras,Río Cuarto"};
-    private String[] headerVillaMRio={"5:00","6:30","12:05","14:00","19:45","5:15","6:55","12:30","14:25","20:10","5:25","7:05","12:40","14:35","20:20","5:35","7:15","12:50","14:45","20:30","5:45","7:25","13:00","14:55","20:40","6:00","7:35","13:10","15:05","20:50","6:15","7:55","13:30","15:25","21:05","6:30","8:10","13:45","15:40","21:20","6:45","8:25","14:00","15:55","21:35","7:00","8:40","14:15","16:10","21:50","7:10","9:00","14:35","16:30","22:10","7:30","9:15","14:50","16:45","22:25"};
+    private String[] headerRioVillaM={"Río Cuarto","Las Higueras","Chucul","Carnerillo","Gral. Cabrera","Gral. Deheza","Las Perdices","Dalmacio Velez","Luca","Arroyo Cabral","El Cruce","Villa María"};
+    private String[] timeRioVillaM={"5:20","9:00","12:05","16:30","20:00","5:30","9:15","12:25","16:50","20:20","5:40","9:25","12:40","17:05","20:35","6:05","9:40","12:55","17:20","20:50","6:20","9:55","13:10","17:35","21:05","6:35","10:10","13:25","17:50","21:20","6:50","10:25","13:40","18:05","21:35","7:05","10:40","13:55","18:20","21:50","7:20","10:55","14:05","18:30","22:00","7:30","11:05","14:20","18:45","22:15","7:40","11:15","14:30","19:00","22:30","7:55","11:30","14:45","19:15","22:45"};
+    private String[] headerVillaMRio={"Villa María","El Cruce","Arroyo Cabral","Luca","Dalmacio Velez","Las Perdices","Gral. Deheza","Gral. Cabrera","Carnerillo","Chucul","Las Higueras","Río Cuarto"};
+    private String[] timeVillaMRio={"5:00","6:30","12:05","14:00","19:45","5:15","6:55","12:30","14:25","20:10","5:25","7:05","12:40","14:35","20:20","5:35","7:15","12:50","14:45","20:30","5:45","7:25","13:00","14:55","20:40","6:00","7:35","13:10","15:05","20:50","6:15","7:55","13:30","15:25","21:05","6:30","8:10","13:45","15:40","21:20","6:45","8:25","14:00","15:55","21:35","7:00","8:40","14:15","16:10","21:50","7:10","9:00","14:35","16:30","22:10","7:30","9:15","14:50","16:45","22:25"};
 
 
 
@@ -1325,13 +1393,18 @@ public class Horarios {
 
     public String[] getTimeTableRioCuartoHolmbergDom() { return timeTableRioCuartoHolmbergDom; }
 
-    public String[] getTimeTableVillaMRio() { return timeTableVillaMRio;}
 
     public String[] getHeaderVillaMRio() { return headerVillaMRio;}
 
     public String[] getHeaderRioVillaM() { return headerRioVillaM;}
 
-    public String[] getTimeTableRioVillaM() {return timeTableRioVillaM;}
+    public String[] getTimeRioVillaM() {
+        return timeRioVillaM;
+    }
+
+    public String[] getTimeVillaMRio() {
+        return timeVillaMRio;
+    }
 
     private int cantBondi1V =3 ; //findes ytambien
     private int cantBondi1R =3 ; //findes tambien!
