@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.tecpro.colectivos"
-    android:versionCode="2" android:versionName="1.0.1">
+    android:versionCode="4" android:versionName="1.1.1">
 
     <application
         android:allowBackup="true"
@@ -54,7 +54,7 @@
              android:value="@integer/google_play_services_version" />
          <meta-data
              android:name="com.google.android.maps.v2.API_KEY"
-             android:value="AIzaSyDzrzzYDGwQDagYcV5PxcsmQ2JI-rS1wAc"/>
+             android:value="AIzaSyBw30WWQQAiiQFT7EkzK3pSsDQ7WfjPn0I"/>
 
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>

@@ -2,6 +2,7 @@ package org.tecpro.colectivos;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by nico on 09/04/14.
  */
@@ -25,6 +29,12 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
     private boolean mostrandoLugares=false;
     private Recorrido lugares;
     private String title;
+    private Handler handler;
+    private Runnable runnable;
+    int auxMark=0;
+    MarkerOptions marker = new MarkerOptions();
+    boolean invertir=false;
+    Marker markAux;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,8 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         setContentView(R.layout.mapa);
         extras = getIntent().getExtras();
         title= extras.getString("title");
+
+
         this.setTitle("Linea "+title);
         int k = 0;
         mapa = null;
@@ -54,7 +66,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
             }
             PolylineOptions a = new PolylineOptions();
             //linea 5!
-            double[] recorrido = extras.getDoubleArray("recorrido");
+            final double[] recorrido = extras.getDoubleArray("recorrido");
             int i = 0;
             while (i < recorrido.length - 1) {
                 a.add(coord(recorrido[i], recorrido[i + 1]));
@@ -64,6 +76,26 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
             a.width(2);
             mapa.addPolyline(a);
             lugares = new Recorrido();
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.busmov));
+            marker.position(coord(recorrido[0], recorrido[1]));
+            markAux=mapa.addMarker(marker);
+            handler = new Handler();
+            handler.postDelayed(runnable, 120);
+            runnable = new Runnable() {
+                @Override
+                public void run() {
+
+                        markAux.setPosition(coord(recorrido[auxMark], recorrido[auxMark + 1]));
+                        auxMark++;
+                        if(auxMark+2==recorrido.length){
+                            auxMark=0;
+                        }
+
+
+                    handler.postDelayed(this, 120);
+                }
+            };
+            runnable.run();
         } else {
             Toast.makeText(getApplicationContext(), "No se puedo cargar correctamente el mapa",
                     Toast. LENGTH_SHORT).show();
@@ -134,6 +166,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                     item.setTitle("Mostrar lugares");
                     mostrandoLugares=!mostrandoLugares;
                     mapa.clear();
+                    markAux=mapa.addMarker(marker);
                     PolylineOptions a = new PolylineOptions();
                     double[] recorrido = extras.getDoubleArray("recorrido");
                     i = 0;
@@ -169,5 +202,23 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    @Override
+    public void onPause() {
+        handler.removeCallbacks(runnable);
+            super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        handler.postDelayed(runnable, 120);
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        handler.removeCallbacks(runnable);
+        super.onDestroy();
     }
 }

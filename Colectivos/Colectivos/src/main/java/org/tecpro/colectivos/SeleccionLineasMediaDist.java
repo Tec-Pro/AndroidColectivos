@@ -70,7 +70,7 @@ public class SeleccionLineasMediaDist extends Activity {
         // get test ads on a physical device.
         AdRequest adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                //.addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
+                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
                 .build();
 
 
@@ -117,6 +117,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getHeaderRioVillaM());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeRioVillaM());
                         IntentHorario.putExtra("title","Río IV-V. Maria");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                 }
@@ -128,6 +129,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getHeaderVillaMRio());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeVillaMRio());
                         IntentHorario.putExtra("title","V. Maria- Río IV");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                 }
@@ -140,6 +142,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopsRioCuartoMoldes());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableRioCuartoMoldes());
                         IntentHorario.putExtra("title","Río IV-Moldes Lun-Vier");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                             break;
                     case 1://sabado
@@ -147,6 +150,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopsRioCuartoMoldes());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableRioCuartoMoldesSab());
                         IntentHorario.putExtra("title","Río IV-Moldes Sab");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                     case 2://domingos
@@ -154,6 +158,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopsRioCuartoMoldes());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableRioCuartoMoldesDom());
                         IntentHorario.putExtra("title","Río IV-Moldes Dom y fer");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                 }
@@ -165,6 +170,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopseMoldesRioCuarto());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableMoldesRio());
                         IntentHorario.putExtra("title","Río IV-Moldes Lun-Vier");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                     case 1://sabado
@@ -172,6 +178,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopseMoldesRioCuarto());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableMoldesRioSab());
                         IntentHorario.putExtra("title","Río IV-Moldes Sab");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                     case 2://domingos
@@ -179,6 +186,7 @@ public class SeleccionLineasMediaDist extends Activity {
                         IntentHorario.putExtra("header",horarios.getBusStopseMoldesRioCuarto());
                         IntentHorario.putExtra("timeTableMoldes",horarios.getTimeTableMoldesRioDom());
                         IntentHorario.putExtra("title","Río IV-Moldes Dom y fer");
+                        IntentHorario.putExtra("cantBondis",1);
                         startActivity(IntentHorario);
                         break;
                 }
