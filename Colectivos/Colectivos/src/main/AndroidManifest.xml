@@ -29,9 +29,17 @@
              android:label="Recorrido"
              />
 
+        <activity android:name="org.tecpro.colectivos.MapaDondeVoy"
+            android:label="¿Cual me tomo?"
+            />
          <activity android:name="org.tecpro.colectivos.SeleccionLineas"
              android:label="Urbano"
              />
+        <activity
+            android:name="org.tecpro.colectivos.Preferencias"
+            android:label="Preferencias"
+            >
+        </activity>
         <activity android:name="org.tecpro.colectivos.ViewInfo"
             android:label="Información adicional"
             android:theme="@style/Theme.AppCompat.Light.DialogWhenLarge"
@@ -42,6 +50,9 @@
          <activity android:name="org.tecpro.colectivos.SeleccionLineasMediaDist"
              android:label="Media Dístancia"
              />
+        <activity android:name="org.tecpro.colectivos.LineaResult"
+            android:label="Resultados"
+            />
 
          <activity android:name="org.tecpro.colectivos.VistaHoriarios"
              android:label="Horario"

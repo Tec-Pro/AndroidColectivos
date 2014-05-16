@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.tecpro.colectivos.MapaDondeVoy" >
+    
+    <item android:id="@+id/config"
+        android:title="Preferencias"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom|withText" />
+</menu>

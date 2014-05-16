@@ -79,6 +79,15 @@
                 android:text="Media Distancia"
                 android:onClick="lanzarSeleccionLineasMedDias"
                 android:gravity="center" />
+            <Button android:id="@+id/donde_voy"
+
+                android:layout_height="wrap_content"
+
+                android:layout_width="match_parent"
+
+                android:text="¿Cual me tomo?"
+                android:onClick="lanzarDondeVoy"
+                android:gravity="center" />
 
 
         </LinearLayout>

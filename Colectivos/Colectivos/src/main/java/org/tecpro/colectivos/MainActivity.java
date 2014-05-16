@@ -58,8 +58,8 @@ public class MainActivity extends Activity {
 
     @Override
     public void onResume() {
-        super.onResume();
         adView.resume();
+        super.onResume();
     }
 
     @Override
@@ -89,6 +89,10 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+    public void lanzarDondeVoy(View view){
+        Intent i = new Intent(this,MapaDondeVoy.class);
+        startActivity(i);
+    }
     public void pgWeb(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://www.facebook.com/TecProSoftware"));

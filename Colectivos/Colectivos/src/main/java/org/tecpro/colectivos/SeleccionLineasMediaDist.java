@@ -88,8 +88,8 @@ public class SeleccionLineasMediaDist extends Activity {
 
     @Override
     public void onResume() {
-        super.onResume();
         adView.resume();
+        super.onResume();
     }
 
     @Override

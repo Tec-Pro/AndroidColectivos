@@ -1,22 +1,37 @@
 package org.tecpro.colectivos;
 
+import android.animation.PropertyValuesHolder;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,12 +47,14 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
     private Handler handler;
     private Runnable runnable;
     int auxMark=0;
-    MarkerOptions marker = new MarkerOptions();
-    boolean invertir=false;
-    Marker markAux;
+    double[] recorrido;
+    LinkedList<Marker> markRe;
+    int pos=0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        GoogleMapOptions s= new GoogleMapOptions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa);
         extras = getIntent().getExtras();
@@ -66,7 +83,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
             }
             PolylineOptions a = new PolylineOptions();
             //linea 5!
-            final double[] recorrido = extras.getDoubleArray("recorrido");
+            recorrido = extras.getDoubleArray("recorrido");
             int i = 0;
             while (i < recorrido.length - 1) {
                 a.add(coord(recorrido[i], recorrido[i + 1]));
@@ -76,32 +93,58 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
             a.width(2);
             mapa.addPolyline(a);
             lugares = new Recorrido();
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.busmov));
-            marker.position(coord(recorrido[0], recorrido[1]));
-            markAux=mapa.addMarker(marker);
+
+
+            markRe= obtenerMarcadores();
+            markRe.get(0).setVisible(true);
             handler = new Handler();
-            handler.postDelayed(runnable, 120);
+            handler.postDelayed(runnable,0);
             runnable = new Runnable() {
                 @Override
                 public void run() {
 
-                        markAux.setPosition(coord(recorrido[auxMark], recorrido[auxMark + 1]));
-                        auxMark++;
-                        if(auxMark+2==recorrido.length){
-                            auxMark=0;
-                        }
+                    markRe.get(auxMark).setVisible(false);
+                    auxMark++;
+                    markRe.get(auxMark).setVisible(true);
+                    if((markRe.size()-1)==(auxMark)){
+                        markRe.get(auxMark).setVisible(false);
+                        auxMark=0;
+                        markRe.get(auxMark).setVisible(true);
+                    }
 
 
-                    handler.postDelayed(this, 120);
+                    handler.postDelayed(this, 30);
                 }
             };
             runnable.run();
+
         } else {
             Toast.makeText(getApplicationContext(), "No se puedo cargar correctamente el mapa",
                     Toast. LENGTH_SHORT).show();
         }
+        }
 
+
+
+
+private LinkedList<Marker> obtenerMarcadores(){
+        LinkedList<Marker> lst=new LinkedList<Marker>();
+        int i=0;
+         while (i < recorrido.length - 1) {
+        lst.addLast(mapa.addMarker(new MarkerOptions().position(coord(recorrido[i], recorrido[i + 1])).visible(false)));
+        i = i+2;
     }
+    return lst;
+    }
+
+
+
+
+
+
+
+
+
 
 
     public LatLng coord(double longitude, double latitude) {
@@ -166,7 +209,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                     item.setTitle("Mostrar lugares");
                     mostrandoLugares=!mostrandoLugares;
                     mapa.clear();
-                    markAux=mapa.addMarker(marker);
+                    markRe= obtenerMarcadores();
                     PolylineOptions a = new PolylineOptions();
                     double[] recorrido = extras.getDoubleArray("recorrido");
                     i = 0;
@@ -212,7 +255,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
 
     @Override
     public void onResume() {
-        handler.postDelayed(runnable, 120);
+        handler.postDelayed(runnable, 0);
         super.onResume();
     }
 

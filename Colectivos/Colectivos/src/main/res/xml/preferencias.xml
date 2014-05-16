@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <SeekBarPreference
+        android:id="@+id/distancia"
+        android:key="distancia"
+        android:title="Máximo a caminar:"
+        android:max="10"
+        android:defaultValue="3"
+         />
+
+</PreferenceScreen>

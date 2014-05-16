@@ -89,8 +89,8 @@ public class SeleccionLineasInterUrb extends Activity {
 
     @Override
     public void onResume() {
-        super.onResume();
         adView.resume();
+        super.onResume();
     }
 
     @Override

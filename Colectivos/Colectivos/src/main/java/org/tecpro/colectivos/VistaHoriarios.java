@@ -90,8 +90,8 @@ public class VistaHoriarios extends ActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
         adView.resume();
+        super.onResume();
     }
 
     @Override
@@ -288,7 +288,9 @@ public class VistaHoriarios extends ActionBarActivity {
         }
         if(id==R.id.distingir){
             distingo= !distingo;
-            refreshGrid(times,busStops,cantBondis);
+            if(times!=null) {
+                refreshGrid(times, busStops, cantBondis);
+            }
 
         }
         return super.onOptionsItemSelected(item);
