@@ -89,6 +89,16 @@
                 android:onClick="lanzarDondeVoy"
                 android:gravity="center" />
 
+            <Button android:id="@+id/misHorario"
+
+                android:layout_height="wrap_content"
+
+                android:layout_width="match_parent"
+
+                android:text="Mis Horarios"
+                android:onClick="lanzarMisHorarios"
+                android:gravity="center" />
+
 
         </LinearLayout>
     </ScrollView>

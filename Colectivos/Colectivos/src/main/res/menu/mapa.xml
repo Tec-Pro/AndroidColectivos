@@ -2,19 +2,24 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Mostrar Paradas"
-        android:id="@+id/accion_mostrar_parada"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:orderInCategory="95"
-        android:showAsAction="never"/>
-    <item android:title="Ocultar Paradas"
-        android:id="@+id/accion_ocultar_parada"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:orderInCategory="95"
-        android:showAsAction="never"/>
+
     <item android:title="Mostrar lugares "
         android:id="@+id/mostrar_lugares"
         android:icon="@android:drawable/ic_dialog_map"
         android:orderInCategory="1"
         android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/action_bar_start_animation"
+        android:showAsAction="ifRoom"
+        android:title="iniciar recorrido"/>
+
+
+    <item android:id="@+id/action_bar_stop_animation"
+        android:showAsAction="ifRoom"
+        android:title="Detener recorrido"/>
+
+    <item android:id="@+id/action_bar_toggle_style"
+        android:showAsAction="ifRoom"
+        android:title="Cambiar vista"/>
+
+
 </menu>

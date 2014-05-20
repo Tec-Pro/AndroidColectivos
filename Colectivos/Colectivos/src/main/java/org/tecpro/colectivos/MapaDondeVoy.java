@@ -1,17 +1,33 @@
 package org.tecpro.colectivos;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewCompat;
 import android.util.Pair;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,18 +45,14 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Created by nico on 09/04/14.
  */
 public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerDragListener {
     private GoogleMap mapa;
-    private Handler handler;
-    private Runnable runnable;
-    int auxMark=0;
-    Marker markAux;
     Circle circleDesde;
     Circle circleHasta;
     int radio=300;
@@ -48,25 +60,29 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     double[] mejorRecorrido;
     ArrayList<String> lineasQueLlegan= new ArrayList<String>();
     Polyline rutaDibujada;
-    LinkedList<Marker> markRe;
 
 
+    MarkerOptions markDesde;
+    MarkerOptions markHasta;
+    Marker desde;
+    Marker hasta;
+    CircleOptions circleDesdeOp;
+    CircleOptions circleHastaOp;
+    private AnimatingMarkersFragment mapFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        GoogleMapOptions s= new GoogleMapOptions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa_donde_voy);
+        mapFragment = (AnimatingMarkersFragment) getSupportFragmentManager().findFragmentById(R.id.mapa);
+        mapa = mapFragment.getMap();
 
 
-        int k = 0;
-        mapa = null;
-        while (k != 3 && mapa == null) {
-            mapa = ((SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.mapa)).getMap();
-            k++;
-        }
+        markDesde = new MarkerOptions().title("Desde").draggable(true).position(new LatLng(-33.11576, -64.340132)).icon(BitmapDescriptorFactory.fromResource(R.drawable.desdee));
+        markHasta = new MarkerOptions().title("Hasta").draggable(true).position(new LatLng(-33.12376, -64.349032)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hasta));
+
+
         if (mapa != null) {
             mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mapa.setMyLocationEnabled(true);
@@ -74,32 +90,28 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             mapa.getUiSettings().setCompassEnabled(true);
             if (mapa.getMyLocation() != null) {
                 mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 12));
+                        new LatLng(mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 13));
             } else {
                 mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(-33.12376, -64.349032), 12));
+                        new LatLng(-33.12376, -64.349032), 13));
             }
 
-            MarkerOptions markDesde= new MarkerOptions().title("Desde").draggable(true).position(new LatLng(-33.11576, -64.340132)).icon(BitmapDescriptorFactory.fromResource(R.drawable.desdee));
-            MarkerOptions markHasta= new MarkerOptions().title("Hasta").draggable(true).position(new LatLng(-33.12376, -64.349032)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hasta));
 
-            Marker desde= mapa.addMarker(markDesde);
-            Marker hasta=mapa.addMarker(markHasta);
-            CircleOptions circleDesdeOp = new CircleOptions().center(desde.getPosition()).radius(radio).fillColor(Color.parseColor("#80F45555")).strokeWidth(0);
-            CircleOptions circleHastaOp = new CircleOptions().center(hasta.getPosition()).radius(radio).fillColor(Color.parseColor("#807CE667")).strokeWidth(0);
-            circleDesde=mapa.addCircle(circleDesdeOp);
-            circleHasta=mapa.addCircle(circleHastaOp);
+            desde = mapa.addMarker(markDesde);
+            hasta = mapa.addMarker(markHasta);
+            circleDesdeOp = new CircleOptions().center(desde.getPosition()).radius(radio).fillColor(Color.parseColor("#80F45555")).strokeWidth(0);
+            circleHastaOp = new CircleOptions().center(hasta.getPosition()).radius(radio).fillColor(Color.parseColor("#807CE667")).strokeWidth(0);
+            circleDesde = mapa.addCircle(circleDesdeOp);
+            circleHasta = mapa.addCircle(circleHastaOp);
             mapa.setOnMarkerDragListener(this);
-            markAux=mapa.addMarker(new MarkerOptions().visible(false).position(new LatLng(-33.11576, -64.340132)));
-
-
-
-
         } else {
             Toast.makeText(getApplicationContext(), "No se puedo cargar correctamente el mapa",
-                    Toast. LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT).show();
         }
-        }
+    }
+
+
+
 
 
 
@@ -133,6 +145,16 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             case R.id.config:
                 lanzarPreferencias(null);
                 break;
+            case R.id.action_bar_start_animation:
+                mapFragment.animator.stopAnimation();
+                mapFragment.animator.startAnimation(false);
+                break;
+            case R.id.action_bar_stop_animation:
+                mapFragment.animator.stopAnimation();
+                break;
+            case R.id.action_bar_toggle_style:
+                mapFragment.toggleStyle();
+                break;
 
 
 
@@ -144,7 +166,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     public void lanzarPreferencias(View view){
         Intent i = new Intent(this, Preferencias.class);
         i.putExtra("cuadras",radio/100);
-        startActivityForResult(i,1);
+        startActivityForResult(i,2);
 
         
 
@@ -154,30 +176,29 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
     @Override
     public void onPause() {
-        if(handler!=null && runnable!=null){
-            handler.removeCallbacks(runnable);
-        }
+
+
             super.onPause();
     }
 
     @Override
     public void onResume() {
-        if(handler!=null && runnable!=null){
-            handler.postDelayed(runnable, 0);
-        }
+
+
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         radio= 100*(pref.getInt("distancia",1));
-        circleHasta.setRadius(radio);
-        circleDesde.setRadius(radio);
-        System.out.println(radio);
+        if(mapa!=null) {
+            circleHasta.setRadius(radio);
+            circleDesde.setRadius(radio);
+        }
         super.onResume();
+
     }
 
     @Override
     public void onDestroy() {
-        if(handler!=null && runnable!=null){
-            handler.removeCallbacks(runnable);
-        }        super.onDestroy();
+
+               super.onDestroy();
     }
 
 
@@ -201,14 +222,12 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==1){
-            if(rutaDibujada!=null)
-                rutaDibujada.remove();
-            if(markRe!=null) {
-                for (Marker m : markRe) {
-                    m.remove();
-                }
-            }
+
+
             if(data!=null) {
+                if(rutaDibujada!=null)
+                    rutaDibujada.remove();
+                mapFragment.animator.stopAnimation();
                 String lineaSelect = data.getStringExtra("lineaSelect");
                 System.out.println("debo mostrar" + lineaSelect);
                 mejorRecorrido=retornarLinea(lineaSelect);
@@ -216,43 +235,24 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
                 elegida.setText(lineaSelect);
                 PolylineOptions a= new PolylineOptions();
                 int i=0;
-
+                mapFragment.eliminarRuta();
                 while (i < mejorRecorrido.length - 1) {
                     a.add(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
+                    mapFragment.addMarkerToMap(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
                     i = i + 2;
+
                 }
                 a.color(Color.BLUE);
                 a.width(2);
                 rutaDibujada=mapa.addPolyline(a);
 
-                markRe= obtenerMarcadores();
-
-                handler = new Handler();
-                handler.removeCallbacks(runnable);
-                handler.postDelayed(runnable,0);
-                auxMark=0;
-                runnable = new Runnable() {
-                    @Override
-                    public void run() {
-
-                        markRe.get(auxMark).setVisible(false);
-                        auxMark++;
-                        markRe.get(auxMark).setVisible(true);
-                        if((markRe.size()-1)==(auxMark)){
-                            markRe.get(auxMark).setVisible(false);
-                            auxMark=0;
-                            markRe.get(auxMark).setVisible(true);
-                        }
 
 
-                        handler.postDelayed(this, 30);
-                    }
-                };
-                runnable.run();
 
 
             }
         }
+
 
     }
 
@@ -264,7 +264,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             public void run() {
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -285,6 +285,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         Recorrido4 r4= new Recorrido4();
         Recorrido5 r5= new Recorrido5();
         //desde!
+        mapFragment.eliminarRuta();
         int linea1v= perteneceAlRadio(r2.getRecorrido1Verde(),circleDesde.getCenter(),radio);
         int linea1r= perteneceAlRadio(r2.getRecorrido1Rojo(),circleDesde.getCenter(),radio);
         int linea2v= perteneceAlRadio(r2.getRecorrido2Verde(),circleDesde.getCenter(),radio);
@@ -529,18 +530,16 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             }
         if(rutaDibujada!=null)
             rutaDibujada.remove();
-        if(markRe!=null) {
-            for (Marker m : markRe) {
-                m.remove();
-            }
-        }
+
+
 
         int i = 0;
-        if(rutaDibujada!=null)
-            rutaDibujada.remove();
+
         if(mejorRecorrido!=null) {
             while (i < mejorRecorrido.length - 1) {
                 a.add(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
+                mapFragment.addMarkerToMap(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
+
                 i = i + 2;
             }
             a.color(Color.BLUE);
@@ -548,38 +547,6 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             rutaDibujada = mapa.addPolyline(a);
             TextView elegida = (TextView) findViewById(R.id.linea_eleg);
             elegida.setText("linea " + mejor.first);
-            if (markRe != null) {
-                for (Marker m : markRe) {
-                    m.remove();
-                }
-            }
-            auxMark=0;
-            markRe = obtenerMarcadores();
-            markRe.get(0).setVisible(true);
-            handler = new Handler();
-            handler.removeCallbacks(runnable);
-
-            handler.postDelayed(runnable, 0);
-            runnable = new Runnable() {
-                @Override
-                public void run() {
-
-
-                    markRe.get(auxMark).setVisible(false);
-                    auxMark++;
-                    markRe.get(auxMark).setVisible(true);
-                    if ((markRe.size() - 1) == (auxMark)) {
-                        markRe.get(auxMark).setVisible(false);
-                        auxMark = 0;
-                        markRe.get(auxMark).setVisible(true);
-                    }
-
-
-                    handler.postDelayed(this, 30);
-                }
-            };
-            runnable.run();
-
         }
     }
 
@@ -596,16 +563,6 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     @Override
     public void onMarkerDrag(Marker marker) {
 
-    }
-
-    private LinkedList<Marker> obtenerMarcadores(){
-        LinkedList<Marker> lst=new LinkedList<Marker>();
-        int i=0;
-        while (i < mejorRecorrido.length - 1) {
-            lst.addLast(mapa.addMarker(new MarkerOptions().position(coord(mejorRecorrido[i], mejorRecorrido[i + 1])).visible(false)));
-            i = i+2;
-        }
-        return lst;
     }
 
 
@@ -721,7 +678,6 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         else
             return null;
     }
-
 
 
 }

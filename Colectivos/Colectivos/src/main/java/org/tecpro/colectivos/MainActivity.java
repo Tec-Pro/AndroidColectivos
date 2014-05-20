@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DataBaseHelper db = new DataBaseHelper(this);
         adView=(AdView) findViewById(R.id.adView);
 
         //adView = new AdView(this);
@@ -86,6 +87,11 @@ public class MainActivity extends Activity {
 
     public void lanzarSeleccionLineasMedDias(View view){
         Intent i = new Intent(this,SeleccionLineasMediaDist.class);
+        startActivity(i);
+    }
+
+    public void lanzarMisHorarios(View view){
+        Intent i = new Intent(this,MisHorarios.class);
         startActivity(i);
     }
 

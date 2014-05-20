@@ -60,6 +60,24 @@
          <activity android:name="org.tecpro.colectivos.AcercaDe"
              android:label="Acerca De"
              />
+
+
+        <activity android:name="org.tecpro.colectivos.MisHorarios"
+            android:label="Mis Horarios"
+            />
+        <activity android:name="org.tecpro.colectivos.EdicionAgregarHorario"
+            android:windowSoftInputMode="adjustPan"
+            android:label="Editar Horario"
+            />
+        <activity android:name="org.tecpro.colectivos.AgregarHorario"
+            android:label="Agregar Horario"
+            android:windowSoftInputMode="adjustPan"
+            />
+
+        <activity android:name="org.tecpro.colectivos.HorariosAgregados"
+            android:label="Horario"
+            />
+
          <meta-data
              android:name="com.google.android.gms.version"
              android:value="@integer/google_play_services_version" />
