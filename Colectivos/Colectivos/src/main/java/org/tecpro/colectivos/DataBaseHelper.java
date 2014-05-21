@@ -93,7 +93,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void modificar(String lugar,String linea, String horario,String dia, int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.update("mis_horarios",generarContentValues(lugar,linea,horario,dia),"_id =?"+String.valueOf(id),null);
+        db.update("mis_horarios",generarContentValues(lugar,linea,horario,dia),"_id =?", new String[]{String.valueOf(id)});
         db.close();
     }
 

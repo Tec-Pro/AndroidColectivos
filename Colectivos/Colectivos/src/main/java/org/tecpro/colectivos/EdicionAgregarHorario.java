@@ -99,10 +99,11 @@ public class EdicionAgregarHorario extends Activity {
             String time = tp.getCurrentHour().toString() + ":" + minutos;
             DataBaseHelper dbh = new DataBaseHelper(this);
             Cursor c = dbh.getIdEditar(Lineas.get(spLineas.getSelectedItemPosition()),lugar,DiasSpinner.get(spDia.getSelectedItemPosition()),time);
-            if ( c.getCount() == 1 ) {
+            if ( c.getCount() == 0 ) {
                 dbh.modificar(lugar, Lineas.get(spLineas.getSelectedItemPosition()), time, DiasSpinner.get(spDia.getSelectedItemPosition()), idAEditar);
                 Intent i = new Intent(this, HorariosAgregados.class);
                 i.putExtra("linea",Lineas.get(spLineas.getSelectedItemPosition()));
+                finish();
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "Infromacion repetida",Toast.LENGTH_SHORT).show();

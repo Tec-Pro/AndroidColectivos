@@ -21,4 +21,8 @@
         android:showAsAction="ifRoom"
         android:title="Cambiar vista"/>
 
+    <item android:id="@+id/action_bar_directions"
+        android:showAsAction="ifRoom"
+        android:title="Buscar por dirección"/>
+
 </menu>

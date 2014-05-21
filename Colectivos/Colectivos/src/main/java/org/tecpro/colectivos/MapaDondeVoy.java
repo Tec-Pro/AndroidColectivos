@@ -1,40 +1,26 @@
 package org.tecpro.colectivos;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
+
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.Build;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
 import android.util.Pair;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -44,9 +30,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by nico on 09/04/14.
@@ -61,6 +47,8 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     ArrayList<String> lineasQueLlegan= new ArrayList<String>();
     Polyline rutaDibujada;
 
+    GeocoderTask geo;
+
 
     MarkerOptions markDesde;
     MarkerOptions markHasta;
@@ -69,6 +57,8 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     CircleOptions circleDesdeOp;
     CircleOptions circleHastaOp;
     private AnimatingMarkersFragment mapFragment;
+    LatLng latLng;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,11 +69,9 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         mapa = mapFragment.getMap();
 
 
-        markDesde = new MarkerOptions().title("Desde").draggable(true).position(new LatLng(-33.11576, -64.340132)).icon(BitmapDescriptorFactory.fromResource(R.drawable.desdee));
-        markHasta = new MarkerOptions().title("Hasta").draggable(true).position(new LatLng(-33.12376, -64.349032)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hasta));
-
-
         if (mapa != null) {
+            markDesde = new MarkerOptions().title("Desde").draggable(true).position(new LatLng(-33.11576, -64.340132)).icon(BitmapDescriptorFactory.fromResource(R.drawable.desdee));
+            markHasta = new MarkerOptions().title("Hasta").draggable(true).position(new LatLng(-33.12376, -64.349032)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hasta));
             mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mapa.setMyLocationEnabled(true);
             mapa.getUiSettings().setZoomControlsEnabled(true);
@@ -155,7 +143,9 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             case R.id.action_bar_toggle_style:
                 mapFragment.toggleStyle();
                 break;
-
+            case R.id.action_bar_directions:
+                startActivityForResult(new Intent(this, DirectionsInputActivity.class),3);
+                break;
 
 
         }
@@ -186,7 +176,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        radio= 100*(pref.getInt("distancia",1));
+        radio= 100*(Integer.valueOf(pref.getString("distancia","3")));
         if(mapa!=null) {
             circleHasta.setRadius(radio);
             circleDesde.setRadius(radio);
@@ -250,6 +240,21 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
 
 
+            }
+        }
+
+        if(requestCode==3){
+            if(data!=null){
+                if(data.getStringExtra("desde")!=null && !data.getStringExtra("desde").equals("")){
+                    geo=new GeocoderTask();
+                            geo.cualMuevo(true);
+                    geo.execute(data.getStringExtra("desde")+" Rio Cuarto Argentina");
+                }
+                if(data.getStringExtra("hasta")!=null && !data.getStringExtra("hasta").equals("")){
+                    geo=new GeocoderTask();
+                    geo.cualMuevo(false);
+                    geo.execute(data.getStringExtra("hasta")+" Rio Cuarto Argentina");
+                }
             }
         }
 
@@ -679,5 +684,91 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             return null;
     }
 
+    // An AsyncTask class for accessing the GeoCoding Web Service
+    private class GeocoderTask extends AsyncTask<String, Void, List<Address>> {
 
+        boolean desdeTrue;
+        public void cualMuevo(boolean desde){
+            desdeTrue=desde;
+        }
+
+
+        private ProgressDialog pdia;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pdia = new ProgressDialog(MapaDondeVoy.this);
+
+            pdia.setTitle("Por favor, espere.");
+            pdia.setMessage("Localizando la dirección solicitada ");
+            pdia.show();
+        }
+
+        @Override
+        protected List<Address> doInBackground(String... locationName) {
+            // Creating an instance of Geocoder class
+            Geocoder geocoder = new Geocoder(getBaseContext());
+            List<Address> addresses = null;
+
+            try {
+                // Getting a maximum of 3 Address that matches the input text
+                addresses = geocoder.getFromLocationName(locationName[0], 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return addresses;
+        }
+
+
+        @Override
+        protected void onPostExecute(List<Address> addresses) {
+            String completar = "";
+            if (desdeTrue) {
+                completar = "de origen";
+            } else {
+                completar = "de destino";
+            }
+            pdia.dismiss();
+            if (addresses == null) {
+                Toast.makeText(getBaseContext(), "No se ha encontrado la dirección " + completar + " Revise su conexión a internet", Toast.LENGTH_SHORT).show();
+
+            } else {
+                if (addresses.size() == 0) {
+                    Toast.makeText(getBaseContext(), "No se ha encontrado la dirección " + completar, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Clears all the existing markers on the map
+
+
+                    // Adding Markers on Google Map for each matching address
+                    for (int i = 0; i < addresses.size(); i++) {
+
+                        Address address = (Address) addresses.get(i);
+
+                        // Creating an instance of GeoPoint, to display in Google Map
+                        latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+                        String addressText = String.format("%s, %s",
+                                address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
+                                address.getCountryName());
+
+                        if (desdeTrue) {
+                            System.out.println("desde mover");
+                            circleDesde.setCenter(latLng);
+                            desde.setPosition(latLng);
+                        } else {
+                            System.out.println("hasta mover");
+                            circleHasta.setCenter(latLng);
+                            hasta.setPosition(latLng);
+                        }
+
+
+                        // Locate the first location
+                        if (i == 0)
+                            mapa.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                    }
+                }
+            }
+        }
+    }
 }

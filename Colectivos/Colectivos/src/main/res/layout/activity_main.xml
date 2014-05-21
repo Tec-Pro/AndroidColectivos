@@ -85,7 +85,7 @@
 
                 android:layout_width="match_parent"
 
-                android:text="¿Cual me tomo?"
+                android:text="¿Cuál me tomo?"
                 android:onClick="lanzarDondeVoy"
                 android:gravity="center" />
 

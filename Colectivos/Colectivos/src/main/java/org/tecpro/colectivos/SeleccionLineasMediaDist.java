@@ -70,7 +70,7 @@ public class SeleccionLineasMediaDist extends Activity {
         // get test ads on a physical device.
         AdRequest adRequest = new AdRequest.Builder()
                 //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
+                //.addTestDevice("A906482D0B3C5F47980E446DD6F1CF85")
                 .build();
 
 

@@ -86,7 +86,8 @@ public class AnimatingMarkersFragment extends SupportMapFragment {
 		
 		View root = super.onCreateView(inflater, container, savedInstanceState);
 		googleMap = getMap();
-		googleMap.setMyLocationEnabled(true);
+		if(googleMap!=null)
+            googleMap.setMyLocationEnabled(true);
 		//googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 		
 	/*	googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cuadras">
+        <item name="1">Una cuadra</item>
+        <item name="2">dos cuadras</item>
+        <item name="3">Tres cuadras</item>
+        <item name="4">Cuatro cuadras</item>
+        <item name="5">Cinco cuadras</item>
+        <item name="6">Seis cuadras</item>
+        <item name="7">Siete cuadras</item>
+        <item name="8">Ocho cuadras</item>
+        <item name="9">Nueve cuadras</item>
+        <item name="10">Diez cuadras</item>
+    </string-array>
+    <string-array name="cuadrasValores">
+        <item name="1">1</item>
+        <item name="2">2</item>
+        <item name="3">3</item>
+        <item name="4">4</item>
+        <item name="5">5</item>
+        <item name="6">6</item>
+        <item name="7">7</item>
+        <item name="8">8</item>
+        <item name="9">9</item>
+        <item name="10">10</item>
+    </string-array>
+
+</resources>

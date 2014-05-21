@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.tecpro.colectivos"
-    android:versionCode="4" android:versionName="1.1.1">
+    android:versionCode="7" android:versionName="2.0.2">
 
     <application
         android:allowBackup="true"
@@ -67,11 +67,16 @@
             />
         <activity android:name="org.tecpro.colectivos.EdicionAgregarHorario"
             android:windowSoftInputMode="adjustPan"
+            android:noHistory="true"
             android:label="Editar Horario"
             />
         <activity android:name="org.tecpro.colectivos.AgregarHorario"
             android:label="Agregar Horario"
             android:windowSoftInputMode="adjustPan"
+            android:noHistory="true"
+            />
+        <activity android:name="org.tecpro.colectivos.DirectionsInputActivity"
+            android:label="Buscar direcciones"
             />
 
         <activity android:name="org.tecpro.colectivos.HorariosAgregados"
@@ -83,7 +88,7 @@
              android:value="@integer/google_play_services_version" />
          <meta-data
              android:name="com.google.android.maps.v2.API_KEY"
-             android:value="AIzaSyBw30WWQQAiiQFT7EkzK3pSsDQ7WfjPn0I"/>
+             android:value="AIzaSyDzrzzYDGwQDagYcV5PxcsmQ2JI-rS1wAc"/>
 
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,7 +40,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa);
         mapFragment = (AnimatingMarkersFragment) getSupportFragmentManager().findFragmentById(R.id.mapa);
-        mapa= mapFragment.getMap();
+        mapa = mapFragment.getMap();
         extras = getIntent().getExtras();
         title= extras.getString("title");
 
@@ -180,6 +181,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
                 }
                 break;
             case R.id.action_bar_start_animation:
+                mapFragment.animator.stopAnimation();
                     mapFragment.animator.startAnimation(false);
                 break;
             case R.id.action_bar_stop_animation:

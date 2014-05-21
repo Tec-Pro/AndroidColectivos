@@ -87,6 +87,7 @@ public class AgregarHorario extends Activity {
             if (c.getCount() == 0) {
                 dbh.insertar("mis_horarios", lugar, Lineas.get(spLineas.getSelectedItemPosition()), time, DiasSpinner.get(spDia.getSelectedItemPosition()));
                 Intent i = new Intent(this, MisHorarios.class);
+                finish();
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "Infromacion repetida",Toast.LENGTH_SHORT).show();
