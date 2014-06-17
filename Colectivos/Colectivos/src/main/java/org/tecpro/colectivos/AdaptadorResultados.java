@@ -6,6 +6,7 @@ package org.tecpro.colectivos;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class AdaptadorResultados extends BaseAdapter {
@@ -23,9 +25,9 @@ public class AdaptadorResultados extends BaseAdapter {
 
 
     private Context context;
-    private List<String> items;
+    private LinkedList<Pair<String,String>>  items;
 
-    public AdaptadorResultados(Context context, List<String> items) {
+    public AdaptadorResultados(Context context, LinkedList<Pair<String,String>> items) {
         this.context = context;
         this.items = items;
     }
@@ -59,9 +61,11 @@ public class AdaptadorResultados extends BaseAdapter {
 
         // Set data into the view.
         TextView tvTitle = (TextView) rowView.findViewById(R.id.nombre_linea);
-        String item = items.get(position);
+        TextView tvdist = (TextView) rowView.findViewById(R.id.dist);
+        Pair<String,String> item = items.get(position);
 
-        tvTitle.setText(item);
+        tvTitle.setText(item.first);
+        tvdist.setText(item.second+" km");
         if(tvTitle.getText().toString().contains(" VERDE")){
             tvTitle.setTextColor(Color.rgb(2, 150, 27));
         }else {

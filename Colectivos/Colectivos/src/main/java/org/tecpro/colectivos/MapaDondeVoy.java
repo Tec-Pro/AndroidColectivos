@@ -4,6 +4,7 @@ package org.tecpro.colectivos;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -31,7 +33,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -43,7 +47,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     Circle circleHasta;
     int radio=300;
     Pair<String,Double> mejor=new Pair<String, Double>("ninguno",99999999.0);
-    double[] mejorRecorrido;
+    Double[] mejorRecorrido;
     ArrayList<String> lineasQueLlegan= new ArrayList<String>();
     Polyline rutaDibujada;
 
@@ -284,249 +288,32 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
 
     private void buscarAux(){
-        Recorrido r= new Recorrido();
-        Recorrido2 r2= new Recorrido2();
-        Recorrido3 r3= new Recorrido3();
-        Recorrido4 r4= new Recorrido4();
-        Recorrido5 r5= new Recorrido5();
+
+        RecorridoEs r= new RecorridoEs();
         //desde!
         mapFragment.eliminarRuta();
-        int linea1v= perteneceAlRadio(r2.getRecorrido1Verde(),circleDesde.getCenter(),radio);
-        int linea1r= perteneceAlRadio(r2.getRecorrido1Rojo(),circleDesde.getCenter(),radio);
-        int linea2v= perteneceAlRadio(r2.getRecorrido2Verde(),circleDesde.getCenter(),radio);
-        int linea2r= perteneceAlRadio(r2.getRecorrido2Rojo(),circleDesde.getCenter(),radio);
-        int linea3= perteneceAlRadio(r2.getRecorrido3(),circleDesde.getCenter(),radio);
-        int linea4= perteneceAlRadio(r4.getRecorrido4(),circleDesde.getCenter(),radio);
-        int linea5= perteneceAlRadio(r4.getRecorrido5(),circleDesde.getCenter(),radio);
-        int linea6= perteneceAlRadio(r4.getRecorrido6(),circleDesde.getCenter(),radio);
-        int linea7= perteneceAlRadio(r4.getRecorrido7(),circleDesde.getCenter(),radio);
-        int linea8v= perteneceAlRadio(r5.getRecorrido8Verde(),circleDesde.getCenter(),radio);
-        int linea8r= perteneceAlRadio(r5.getRecorrido8Rojo(),circleDesde.getCenter(),radio);
-        int linea9v= perteneceAlRadio(r3.getRecorrido9Verde(),circleDesde.getCenter(),radio);
-        int linea9r= perteneceAlRadio(r4.getRecorrido9Rojo(),circleDesde.getCenter(),radio);
-        int linea10= perteneceAlRadio(r3.getRecorrido10(),circleDesde.getCenter(),radio);
-        int linea11= perteneceAlRadio(r3.getRecorrido11(),circleDesde.getCenter(),radio);
-        int linea12= perteneceAlRadio(r3.getRecorrido12(),circleDesde.getCenter(),radio);
-        int linea13= perteneceAlRadio(r3.getRecorrido13(),circleDesde.getCenter(),radio);
-        int linea14= perteneceAlRadio(r5.getRecorrido14(),circleDesde.getCenter(),radio);
-        int linea15= perteneceAlRadio(r.getRecorrido15(),circleDesde.getCenter(),radio);
-        int linea16= perteneceAlRadio(r.getRecorrido16(),circleDesde.getCenter(),radio);
-        int linea17= perteneceAlRadio(r.getRecorrido17(),circleDesde.getCenter(),radio);
-        int linea18= perteneceAlRadio(r.getRecorrido18(),circleDesde.getCenter(),radio);
+
+        Pair<String,Double[]>[] recorridosYNombres= r.recorridosYNombres();
         mejor=new Pair<String, Double>("ninguno",99999999.0);
         PolylineOptions a = new PolylineOptions();
         lineasQueLlegan= new ArrayList<String>();
-        if(linea1v !=-1) {
-            Pair<Double,Integer> distlinea1v = perteneceAlRadioLlegada(r2.getRecorrido1Verde(), circleHasta.getCenter(), radio, linea1v);
-            if(distlinea1v.first!=-1){
-                System.out.println("Me lleva el 1v");
-                retornoMinimo("1v",distlinea1v.first);
-                lineasQueLlegan.add("LINEA 1 VERDE");
-            }
+        int j=0;
+        while(j<recorridosYNombres.length){
+            Pair<String,Double[]> lin= recorridosYNombres[j];
+            double dist=perteneceAlRadio(lin.second ,circleDesde.getCenter(),radio,circleHasta.getCenter());
+            if(dist!=-1){
+                retornoMinimo(lin.first,dist,lin.second);
+                lineasQueLlegan.add(lin.first);
+                DecimalFormat twoDForm = new DecimalFormat("#.00");
+                lineasQueLlegan.add(twoDForm.format(dist / 1000));
 
+            }
+            j++;
         }
-        if(linea1r !=-1) {
-            Pair<Double,Integer> distlinea1r = perteneceAlRadioLlegada(r2.getRecorrido1Rojo(), circleHasta.getCenter(), radio, linea1r);
-            if(distlinea1r.first!=-1){
-                System.out.println("Me lleva el 1r");
-                retornoMinimo("1r",distlinea1r.first);
-                lineasQueLlegan.add("LINEA 1 ROJO");
-            } }
-        if(linea2v !=-1) {
-            Pair<Double,Integer> distlinea2v= perteneceAlRadioLlegada(r2.getRecorrido2Verde(),circleHasta.getCenter(),radio,linea2v);
-            if(distlinea2v.first!=-1){
-                System.out.println("Me lleva el 2v");
-                retornoMinimo("2v",distlinea2v.first);
-                lineasQueLlegan.add("LINEA 2 VERDE");
-            }
-        }if(linea2r !=-1) {
-            Pair<Double,Integer> distlinea2r= perteneceAlRadioLlegada(r2.getRecorrido2Rojo(),circleHasta.getCenter(),radio,linea2r);
-            if(distlinea2r.first!=-1){
-                System.out.println("Me lleva el 2r");
-                retornoMinimo("2r",distlinea2r.first);
-                lineasQueLlegan.add("LINEA 2 ROJO");
-            }
-        }
-        if(linea3 !=-1) {
-            Pair<Double,Integer> distlinea3= perteneceAlRadioLlegada(r2.getRecorrido3(),circleHasta.getCenter(),radio,linea3);
-            if(distlinea3.first!=-1){
-                System.out.println("Me lleva el 3");
-                retornoMinimo("3",distlinea3.first);
-                lineasQueLlegan.add("LINEA 3");
-            }
-        }
-        if(linea4 !=-1) {
-            Pair<Double,Integer> distlinea4= perteneceAlRadioLlegada(r4.getRecorrido4(),circleHasta.getCenter(),radio,linea4);
-            if(distlinea4.first!=-1){
-                System.out.println("Me lleva el 4");
-                retornoMinimo("4",distlinea4.first);
-                lineasQueLlegan.add("LINEA 4");
-            }}
-        if(linea5 !=-1) {
-            Pair<Double,Integer> distlinea5= perteneceAlRadioLlegada(r4.getRecorrido5(),circleHasta.getCenter(),radio,linea5);
-            if(distlinea5.first!=-1){
-                System.out.println("Me lleva el 5");
-                retornoMinimo("5",distlinea5.first);
-                lineasQueLlegan.add("LINEA 5");
-            }}
 
-        if(linea6 !=-1) {
-            Pair<Double,Integer> distlinea6= perteneceAlRadioLlegada(r4.getRecorrido6(),circleHasta.getCenter(),radio,linea6);
-            if(distlinea6.first!=-1){
-                System.out.println("Me lleva el 6");
-                retornoMinimo("6",distlinea6.first);
-                lineasQueLlegan.add("LINEA 6");
-            }}
-        if(linea7 !=-1) {
-            Pair<Double,Integer> distlinea7= perteneceAlRadioLlegada(r4.getRecorrido7(),circleHasta.getCenter(),radio,linea7);
-            if(distlinea7.first!=-1){
-                System.out.println("Me lleva el 7");
-                retornoMinimo("7",distlinea7.first);
-                lineasQueLlegan.add("LINEA 7");
-            }}
-        if(linea8v !=-1) {
-            Pair<Double,Integer> distlinea8v= perteneceAlRadioLlegada(r5.getRecorrido8Verde(),circleHasta.getCenter(),radio,linea8v);
-            if(distlinea8v.first!=-1){
-                System.out.println("Me lleva el 8v");
-                retornoMinimo("8v",distlinea8v.first);
-                lineasQueLlegan.add("LINEA 8 VERDE");
-            }}
-        if(linea8r !=-1) {
-            Pair<Double,Integer> distlinea8r= perteneceAlRadioLlegada(r5.getRecorrido8Rojo(),circleHasta.getCenter(),radio,linea8r);
-            if(distlinea8r.first!=-1){
-                System.out.println("Me lleva el 8r");
-                retornoMinimo("8r",distlinea8r.first);
-                lineasQueLlegan.add("LINEA 8 ROJO");
-            }}
 
-        if(linea9v !=-1) {
-            Pair<Double,Integer> distlinea9v= perteneceAlRadioLlegada(r3.getRecorrido9Verde(),circleHasta.getCenter(),radio,linea9v);
-            if(distlinea9v.first!=-1){
-                System.out.println("Me lleva el 9v");
-                retornoMinimo("9v",distlinea9v.first);
-                lineasQueLlegan.add("LINEA 9 VERDE");
-            }}
-        if(linea9r !=-1) {
-            Pair<Double,Integer> distlinea9r= perteneceAlRadioLlegada(r4.getRecorrido9Rojo(),circleHasta.getCenter(),radio,linea9r);
-            if(distlinea9r.first!=-1){
-                System.out.println("Me lleva el 9r");
-                retornoMinimo("9r",distlinea9r.first);
-                lineasQueLlegan.add("LINEA 9 ROJO");
-            }}
-        if(linea10 !=-1) {
-            Pair<Double,Integer> distlinea10= perteneceAlRadioLlegada(r3.getRecorrido10(),circleHasta.getCenter(),radio,linea10);
-            if(distlinea10.first!=-1){
-                System.out.println("Me lleva el 10");
-                retornoMinimo("10",distlinea10.first);
-                lineasQueLlegan.add("LINEA 10");
-            }}
-        if(linea11 !=-1) {
-            Pair<Double,Integer> distlinea11= perteneceAlRadioLlegada(r3.getRecorrido11(),circleHasta.getCenter(),radio,linea11);
-            if(distlinea11.first!=-1){
-                System.out.println("Me lleva el 11");
-                retornoMinimo("11",distlinea11.first);
-                lineasQueLlegan.add("LINEA 11");
-            }}
-        if(linea12 !=-1) {
-            Pair<Double,Integer> distlinea12= perteneceAlRadioLlegada(r3.getRecorrido12(),circleHasta.getCenter(),radio,linea12);
-            if(distlinea12.first!=-1){
-                System.out.println("Me lleva el 12");
-                retornoMinimo("12",distlinea12.first);
-                lineasQueLlegan.add("LINEA 12");
-            }}
-        if(linea13 !=-1) {
-            Pair<Double,Integer> distlinea13= perteneceAlRadioLlegada(r3.getRecorrido13(),circleHasta.getCenter(),radio,linea13);
-            if(distlinea13.first!=-1){
-                System.out.println("Me lleva el 13");
-                retornoMinimo("13",distlinea13.first);
-                lineasQueLlegan.add("LINEA 13");
-            }}
-        if(linea14 !=-1) {
-            Pair<Double,Integer> distlinea14= perteneceAlRadioLlegada(r5.getRecorrido14(),circleHasta.getCenter(),radio,linea14);
-            if(distlinea14.first!=-1){
-                System.out.println("Me lleva el 14");
-                retornoMinimo("14",distlinea14.first);
-                lineasQueLlegan.add("LINEA 14");
-            }}
 
-        if(linea15 !=-1) {
-            Pair<Double,Integer> distlinea15= perteneceAlRadioLlegada(r.getRecorrido15(),circleHasta.getCenter(),radio,linea15);
-            if(distlinea15.first!=-1){
-                System.out.println("Me lleva el 15");
-                retornoMinimo("15", distlinea15.first);
-                lineasQueLlegan.add("LINEA 15");
-            }}
 
-        if(linea16 !=-1) {
-            Pair<Double,Integer> distlinea16= perteneceAlRadioLlegada(r.getRecorrido16(),circleHasta.getCenter(),radio,linea16);
-            if(distlinea16.first!=-1){
-                System.out.println("Me lleva el 16");
-                retornoMinimo("16",distlinea16.first);
-                lineasQueLlegan.add("LINEA 16");
-            }}
-        if(linea17 !=-1) {
-            Pair<Double,Integer> distlinea17= perteneceAlRadioLlegada(r.getRecorrido17(),circleHasta.getCenter(),radio,linea17);
-            if(distlinea17.first!=-1){
-                System.out.println("Me lleva el 17");
-                retornoMinimo("17",distlinea17.first);
-                lineasQueLlegan.add("LINEA 17");
-            }}
-        if(linea18 !=-1) {
-            Pair<Double,Integer> distlinea18= perteneceAlRadioLlegada(r.getRecorrido18(),circleHasta.getCenter(),radio,linea18);
-            if(distlinea18.first!=-1){
-                System.out.println("Me lleva el 18");
-                retornoMinimo("18",distlinea18.first);
-                lineasQueLlegan.add("LINEA 18");
-            }}
-
-            if(mejor.first.equals("1v")) {
-                System.out.println("el mejor es el" + mejor.first);
-                mejorRecorrido=r2.getRecorrido1Verde();
-            }
-            if(mejor.first.equals("1r")){
-                System.out.println("el mejor es el"+ mejor.first);
-                mejorRecorrido=r2.getRecorrido1Rojo();
-            }
-            if(mejor.first.equals("2v"))
-                mejorRecorrido=r2.getRecorrido2Verde();
-            if(mejor.first.equals("2r"))
-                mejorRecorrido=r2.getRecorrido2Rojo();
-            if(mejor.first.equals("3"))
-                mejorRecorrido=r2.getRecorrido3();
-            if(mejor.first.equals("4"))
-                mejorRecorrido=r4.getRecorrido4();
-            if(mejor.first.equals("5"))
-                mejorRecorrido=r4.getRecorrido5();
-            if(mejor.first.equals("6"))
-                mejorRecorrido=r4.getRecorrido6();
-            if(mejor.first.equals("7"))
-                mejorRecorrido=r4.getRecorrido7();
-            if(mejor.first.equals("8v"))
-                mejorRecorrido=r5.getRecorrido8Verde();
-            if(mejor.first.equals("8r"))
-                mejorRecorrido=r5.getRecorrido8Rojo();
-            if(mejor.first.equals("9v"))
-                mejorRecorrido=r3.getRecorrido9Verde();
-            if(mejor.first.equals("9r"))
-                mejorRecorrido=r4.getRecorrido9Rojo();
-            if(mejor.first.equals("10"))
-                mejorRecorrido=r3.getRecorrido10();
-            if(mejor.first.equals("11"))
-                mejorRecorrido=r3.getRecorrido11();
-            if(mejor.first.equals("12"))
-                mejorRecorrido=r3.getRecorrido12();
-            if(mejor.first.equals("13"))
-                mejorRecorrido=r3.getRecorrido13();
-            if(mejor.first.equals("14"))
-                mejorRecorrido=r5.getRecorrido14();
-            if(mejor.first.equals("15"))
-                mejorRecorrido=r.getRecorrido15();
-            if(mejor.first.equals("16"))
-                mejorRecorrido=r.getRecorrido16();
-            if(mejor.first.equals("17"))
-                mejorRecorrido=r.getRecorrido17();
-            if(mejor.first.equals("18"))
-                mejorRecorrido=r.getRecorrido18();
             if(mejor.first.equals("ninguno")) {
                 System.out.println("el mejor es el" + mejor.first);
                 TextView elegida = (TextView) findViewById(R.id.linea_eleg);
@@ -568,12 +355,14 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     @Override
     public void onMarkerDrag(Marker marker) {
 
+
     }
 
 
-    private void retornoMinimo(String linea, Double dist){
+    private void retornoMinimo(String linea, Double dist,Double[] reco){
         if(dist< mejor.second){
             mejor= new Pair<String, Double>(linea,dist);
+            mejorRecorrido=reco;
         }
     }
 
@@ -598,88 +387,103 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     }
 
 
-    private int perteneceAlRadio (double[] reco, LatLng point,int radio){
+    private double perteneceAlRadio (Double[] reco, LatLng point,int radio,LatLng pointHasta){
         GeoPunto geo= new GeoPunto();
-        int ret= -1;
-        LatLng latlong;
+        double radioD=(0.0010736987954231836*radio)/100;
         int i = 0;
-        while (i < reco.length - 1 ) {
-            latlong=coord(reco[i], reco[i + 1]);
-            if(geo.distancia(point.longitude,point.latitude,latlong.longitude,latlong.latitude)<radio){
-                return i;
+        double distancia=0 ;
+        int aux=0;
+        int aux2=0;
+        double distAux=0;
+        double mejorHastaMomento=99999999999.99;
+        while (i < reco.length - 3 ) {
+            if(intersect(reco[i], reco[i + 1],reco[i+2], reco[i + 3],point.longitude,point.latitude,radioD)){
+                LatLng puntoMedio= puntoMedio(Xaux1, Yaux1, Xaux2, Yaux2);
+                distancia= distancia +geo.distancia(puntoMedio.longitude,puntoMedio.latitude, reco[i + 2], reco[i + 3]);
+                aux=i;
+                i=i+2;
+
+                while(i < reco.length - 3 ){
+                    distancia= distancia +geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
+                    if(intersect(reco[i], reco[i + 1],reco[i+2], reco[i + 3],pointHasta.longitude,pointHasta.latitude,radioD)){
+                        LatLng puntoMedioHa= puntoMedio(Xaux1, Yaux1, Xaux2, Yaux2);
+                        distancia= distancia -geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
+                        distancia= distancia +geo.distancia( reco[i], reco[i + 1],puntoMedioHa.longitude,puntoMedioHa.latitude);
+                            if(distancia<=mejorHastaMomento) {
+                                mejorHastaMomento = distancia;
+                            }
+                    }
+                    i=i+2;
+                    
+                }
+
+                i=aux;
             }
+
+            distancia=0;
             i = i + 2;
+            System.out.println(i);
         }
-        return ret;
+        if(mejorHastaMomento==99999999999.99)
+            return -1;
+        else{
+          return  mejorHastaMomento;
+        }
     }
 
-    private Pair<Double,Integer> perteneceAlRadioLlegada (double[] reco, LatLng point,int radio, int desde){
-        GeoPunto geo= new GeoPunto();
-        double distancia= 0;
-        LatLng latlong;
-        int i = desde;
-        while (i < reco.length - 1 ) {
-            latlong=coord(reco[i], reco[i + 1]);
-            distancia= distancia +geo.distancia(point.longitude,point.latitude,latlong.longitude,latlong.latitude);
-            if(geo.distancia(point.longitude,point.latitude,latlong.longitude,latlong.latitude)<radio){
-                return new Pair<Double, Integer>(distancia,i);
-            }
-            i = i + 2;
-        }
-        return new Pair<Double, Integer>(-1.0, -1);
-    }
+
+
+
+
 
     //me canse de escribir mucho
-    private double[] retornarLinea(String num){
-        Recorrido r= new Recorrido();
-        Recorrido2 r2= new Recorrido2();
-        Recorrido3 r3= new Recorrido3();
-        Recorrido4 r4= new Recorrido4();
-        Recorrido5 r5= new Recorrido5();
+    private Double[] retornarLinea(String num){
+        RecorridoEs r= new RecorridoEs();
+
         if(num.equals("LINEA 1 VERDE"))
-            return r2.getRecorrido1Verde();
+            return r.recorrido1Verde;
         if(num.equals("LINEA 1 ROJO"))
-            return r2.getRecorrido1Rojo();
+            return r.recorrido1Rojo;
         if(num.equals("LINEA 2 VERDE"))
-            return r2.getRecorrido2Verde();
+            return r.recorrido2Verde;
         if(num.equals("LINEA 2 ROJO"))
-            return r2.getRecorrido2Rojo();
+            return r.recorrido2Rojo;
         if(num.equals("LINEA 3"))
-            return r2.getRecorrido3();
+            return r.recorrido3;
         if(num.equals("LINEA 4"))
-            return r4.getRecorrido4();
+            return r.recorrido4;
         if(num.equals("LINEA 5"))
-            return r4.getRecorrido5();
+            return r.recorrido5;
         if(num.equals("LINEA 6"))
-            return  r4.getRecorrido6();
+            return  r.recorrido6;
         if(num.equals("LINEA 7"))
-            return r4.getRecorrido7();
+            return r.recorrido7;
         if(num.equals("LINEA 8 VERDE"))
-            return r5.getRecorrido8Verde();
+            return r.recorrido8Verde;
         if(num.equals("LINEA 8 ROJO"))
-            return r5.getRecorrido8Rojo();
+            return r.recorrido8Rojo;
         if(num.equals("LINEA 9 VERDE"))
-            return r3.getRecorrido9Verde();
+            return r.recorrido9Verde;
         if(num.equals("LINEA 9 ROJO"))
-            return r4.getRecorrido9Rojo();
+            return r.recorrido9Rojo;
         if(num.equals("LINEA 10"))
-            return r3.getRecorrido10();
+            return r.recorrido10;
         if(num.equals("LINEA 11"))
-            return r3.getRecorrido11();
+            return r.recorrido11;
         if(num.equals("LINEA 12"))
-            return r3.getRecorrido12();
+            return r.recorrido12;
         if(num.equals("LINEA 13"))
-            return r3.getRecorrido13();
+            return r.recorrido13;
         if(num.equals("LINEA 14"))
-            return r5.getRecorrido14();
+            return r.recorrido14;
         if(num.equals("LINEA 15"))
-            return r.getRecorrido15();
+            return r.recorrido15;
         if(num.equals("LINEA 16"))
-            return r.getRecorrido16();
+            return r.recorrido16;
         if(num.equals("LINEA 17"))
-            return r.getRecorrido17();
+            return r.recorrido17;
         if(num.equals("LINEA 18"))
-            return r.getRecorrido18();
+            return r.recorrido18;
         else
             return null;
     }
@@ -771,4 +575,67 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             }
         }
     }
+
+
+
+
+    private double Xaux1;
+    private double Yaux1;
+    private double Xaux2;
+    private double Yaux2;
+
+    public  boolean aplicarFormula(double a, double b, double c) {
+        double x1 = (-b + Math.sqrt((b * b) - 4 * a * c)) / (2 * a);
+        double x2 = (-b - Math.sqrt((b * b) - 4 * a * c)) / (2 * a);
+        Xaux1=x1;
+        Xaux2=x2;
+        //System.out.println("El valor de x1 es: " + x1);
+        //System.out.println("El valor de x2 es: " + x2);
+        return(!Double.isNaN(x1)||!Double.isNaN(x2));
+    }
+
+    public boolean intersect(double xp, double yp, double xq, double yq, double xC, double yC, double rad){
+        double  X=xC; //centro
+        double Y= yC; //centro
+        double radio= rad;
+        double Xp= xp ;
+        double Yp= yp;
+
+        double Xq= xq;
+        double Yq= yq;
+
+        double m = (Yq-Yp)/(Xq-Xp);
+        //System.out.println("m:"+m);
+        double c= Yq-m*Xq;
+        //System.out.println("c:"+c);
+
+        double a= m*m;
+        //System.out.println("m²:"+a);
+
+        double b= 2*m*(c-Y);
+        //System.out.println("b:"+b);
+        double cPol= (c-Y)*(c-Y);
+        //System.out.println("c:"+cPol);
+        cPol= cPol-(radio*radio)+(X*X);
+        a=a+1;
+        //System.out.println("a:"+a);
+        b= b- 2*X;
+        //System.out.println("b:"+b);
+        //System.out.println("c:"+cPol);
+        boolean ret=aplicarFormula(a, b, cPol);
+         Yaux1=m*Xaux1+c;
+         Yaux2=m*Xaux2+c;
+        //System.out.println("y1= " +Yaux1);
+        //System.out.println("y2= " +Yaux2);
+        double limInf= Math.min(xp,xq);
+        double limSup= Math.max(xp,xq);
+        return (((limInf<=Xaux1&&Xaux1<=limSup)||(limInf<=Xaux2&&Xaux2<=limSup))&&ret);
+    }
+
+    private LatLng puntoMedio( double pLongitud, double pLatitud, double p2Longitud, double p2Latitud){
+        double medioLong=(pLongitud+p2Longitud)/2;
+        double medioLat= (pLatitud+p2Latitud)/2;
+        return new LatLng(medioLat,medioLong);
+    }
+
 }

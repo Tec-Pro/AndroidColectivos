@@ -230,7 +230,7 @@ public class AnimatingMarkersFragment extends SupportMapFragment {
 	
 	public class Animator implements Runnable {
 		
-		private static final int ANIMATE_SPEEED = 30;
+		private static final int ANIMATE_SPEEED = 600;
 		private static final int ANIMATE_SPEEED_TURN = 1;
 		private static final int BEARING_OFFSET = 20;
 

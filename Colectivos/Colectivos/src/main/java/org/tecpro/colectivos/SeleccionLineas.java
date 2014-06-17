@@ -23,14 +23,11 @@ public class SeleccionLineas extends Activity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-    private Recorrido recorrido;
+    private RecorridoEs recorrido;
     private Horarios horarios;
     private Info info;
     private AdView adView;
-    private Recorrido2 recorrido2; //desde el 1 al 9v
-    private Recorrido3 Recorrido3;
-    private Recorrido4 recorrido4;
-    private Recorrido5 recorrido5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +56,9 @@ public class SeleccionLineas extends Activity {
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        recorrido= new Recorrido();
+        recorrido= new RecorridoEs();
         horarios = new Horarios();
-        recorrido2= new Recorrido2();
-        Recorrido3 = new Recorrido3();
-        recorrido4= new Recorrido4();
-        recorrido5= new Recorrido5();
+
         info= new Info();
 
         adView=(AdView) findViewById(R.id.adViewLinea);
@@ -155,7 +149,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 3://recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido2.getRecorrido1Verde());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido1Verde());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -191,7 +185,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 3: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido2.getRecorrido1Rojo());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido1Rojo());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -225,7 +219,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 3://recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido2.getRecorrido2Verde());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido2Verde());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -251,7 +245,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido2.getRecorrido2Rojo());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido2Rojo());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -277,7 +271,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido2.getRecorrido3());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido3());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -295,7 +289,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido4.getRecorrido4());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido4());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -342,7 +336,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 4: //recorrido
                         Intent i = new Intent(this,Mapa.class);
-                        i.putExtra("recorrido",recorrido4.getRecorrido5());
+                        i.putExtra("recorrido",recorrido.getRecorrido5());
                         i.putExtra("title",title);
                         startActivity(i);
                         break;
@@ -370,7 +364,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido4.getRecorrido6());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido6());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -398,7 +392,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido4.getRecorrido7());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido7());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -426,7 +420,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido5.getRecorrido8Verde());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido8Verde());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -463,7 +457,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 3: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido5.getRecorrido8Rojo());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido8Rojo());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -482,7 +476,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido", Recorrido3.getRecorrido9Verde());
+                        IntentMapa.putExtra("recorrido", recorrido.getRecorrido9Verde());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -501,7 +495,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido4.getRecorrido9Rojo());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido9Rojo());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -520,7 +514,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1://reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido", Recorrido3.getRecorrido10());
+                        IntentMapa.putExtra("recorrido", recorrido.getRecorrido10());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -539,7 +533,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1: //reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido", Recorrido3.getRecorrido11());
+                        IntentMapa.putExtra("recorrido", recorrido.getRecorrido11());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -574,7 +568,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 3: //recorrido
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido", Recorrido3.getRecorrido12());
+                        IntentMapa.putExtra("recorrido", recorrido.getRecorrido12());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -602,7 +596,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 2://reco
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido", Recorrido3.getRecorrido13());
+                        IntentMapa.putExtra("recorrido", recorrido.getRecorrido13());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;
@@ -620,7 +614,7 @@ public class SeleccionLineas extends Activity {
                         break;
                     case 1: //reco:
                         IntentMapa = new Intent(this,Mapa.class);
-                        IntentMapa.putExtra("recorrido",recorrido5.getRecorrido14());
+                        IntentMapa.putExtra("recorrido",recorrido.getRecorrido14());
                         IntentMapa.putExtra("title",nomLinea);
                         startActivity(IntentMapa);
                         break;

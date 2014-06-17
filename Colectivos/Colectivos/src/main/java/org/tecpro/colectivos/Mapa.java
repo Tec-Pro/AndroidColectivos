@@ -29,7 +29,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
     private GoogleMap mapa;
     private Bundle extras;
     private boolean mostrandoLugares=false;
-    private Recorrido lugares;
+    private RecorridoEs lugares;
     private String title;
     double[] recorrido;
     private AnimatingMarkersFragment mapFragment;
@@ -75,7 +75,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnInfoWindowClic
             a.color(Color.BLUE);
             a.width(2);
             mapa.addPolyline(a);
-            lugares = new Recorrido();
+            lugares = new RecorridoEs();
 
 
 
