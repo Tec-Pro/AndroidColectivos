@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Camera;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Pair;
@@ -42,38 +44,33 @@ import java.util.List;
  * Created by nico on 09/04/14.
  */
 public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerDragListener {
-    private GoogleMap mapa;
-    Circle circleDesde;
-    Circle circleHasta;
-    int radio=300;
-    Pair<String,Double> mejor=new Pair<String, Double>("ninguno",99999999.0);
-    Double[] mejorRecorrido;
-    ArrayList<String> lineasQueLlegan= new ArrayList<String>();
-    Polyline rutaDibujada;
-
+    private GoogleMap mapa; //Mapa de google
+    Circle circleDesde; //circulo desde
+    Circle circleHasta; //circulo hasta
+    int radio=300; //radio medido en metros, inicial 300, depende de perferencias
+    Pair<String,Double> mejor=new Pair<String, Double>("ninguno",99999999.0); //mejor linea y distancia INDIVIDUAL!
+    Double[] mejorRecorrido; //mejor recorrido, individuaaaal!
+    ArrayList<String> lineasQueLlegan= new ArrayList<String>(); //String de linas que llegan con distancia, [0] va el nombre, en pos que sigue la distancia en km
+    Polyline rutaDibujada; //ruta dibujada, para individual
     GeocoderTask geo;
-
-
-    MarkerOptions markDesde;
-    MarkerOptions markHasta;
+    MarkerOptions markDesde; //Marcador desde Options
+    MarkerOptions markHasta; //marcador hasta Options
     Marker desde;
     Marker hasta;
     CircleOptions circleDesdeOp;
     CircleOptions circleHastaOp;
-    private AnimatingMarkersFragment mapFragment;
+    private AnimatingMarkersFragment mapFragment; //Fragment del mapa
     LatLng latLng;
-
+    Polyline rutaDibujada2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa_donde_voy);
-        mapFragment = (AnimatingMarkersFragment) getSupportFragmentManager().findFragmentById(R.id.mapa);
-        mapa = mapFragment.getMap();
-
-
-        if (mapa != null) {
+        mapFragment = (AnimatingMarkersFragment) getSupportFragmentManager().findFragmentById(R.id.mapa); //inicio el Fragment que contiene el mapa
+        mapa = mapFragment.getMap(); //obtengo mapa del fragment
+        if (mapa != null) { //Si el mapa es disntito de null quiere decir que se cargó mortal, pongo los marcadores Desde Hasta, seteo mapas y movidas
             markDesde = new MarkerOptions().title("Desde").draggable(true).position(new LatLng(-33.11576, -64.340132)).icon(BitmapDescriptorFactory.fromResource(R.drawable.desdee));
             markHasta = new MarkerOptions().title("Hasta").draggable(true).position(new LatLng(-33.12376, -64.349032)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hasta));
             mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -87,8 +84,6 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
                 mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
                         new LatLng(-33.12376, -64.349032), 13));
             }
-
-
             desde = mapa.addMarker(markDesde);
             hasta = mapa.addMarker(markHasta);
             circleDesdeOp = new CircleOptions().center(desde.getPosition()).radius(radio).fillColor(Color.parseColor("#80F45555")).strokeWidth(0);
@@ -102,11 +97,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         }
     }
 
-
-
-
-
-
+    //convierto las coordenadas, google más la da invertidas.
     public LatLng coord(double longitude, double latitude) {
         return new LatLng(latitude, longitude);
     }
@@ -134,24 +125,22 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         int i=0;
         switch (id){
 
-            case R.id.config:
+            case R.id.config: //lanzar preferencias
                 lanzarPreferencias(null);
                 break;
-            case R.id.action_bar_start_animation:
-                mapFragment.animator.stopAnimation();
-                mapFragment.animator.startAnimation(false);
+            case R.id.action_bar_start_animation: //iniciar animacion,
+                mapFragment.animator.stopAnimation(); //freno una si existía
+                mapFragment.animator.startAnimation(false); //inicio la nueva
                 break;
-            case R.id.action_bar_stop_animation:
+            case R.id.action_bar_stop_animation: //freno animación
                 mapFragment.animator.stopAnimation();
                 break;
-            case R.id.action_bar_toggle_style:
+            case R.id.action_bar_toggle_style: //cambiar estilo de mapa, satelital o el dibujado
                 mapFragment.toggleStyle();
                 break;
-            case R.id.action_bar_directions:
+            case R.id.action_bar_directions: //buscar por direccion
                 startActivityForResult(new Intent(this, DirectionsInputActivity.class),3);
                 break;
-
-
         }
         return super.onOptionsItemSelected(item);
 
@@ -161,24 +150,17 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         Intent i = new Intent(this, Preferencias.class);
         i.putExtra("cuadras",radio/100);
         startActivityForResult(i,2);
-
-        
-
     }
 
 
 
     @Override
     public void onPause() {
-
-
             super.onPause();
     }
 
     @Override
     public void onResume() {
-
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         radio= 100*(Integer.valueOf(pref.getString("distancia","3")));
         if(mapa!=null) {
@@ -186,25 +168,23 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
             circleDesde.setRadius(radio);
         }
         super.onResume();
-
     }
 
     @Override
     public void onDestroy() {
-
-               super.onDestroy();
+        super.onDestroy();
     }
 
 
     public void resultados(View view){
         if(lineasQueLlegan.size()>0) {
-            Intent i = new Intent(this, LineaResult.class);
-            i.putExtra("lineas", lineasQueLlegan);
-            startActivityForResult(i, 1);
+            Intent i = new Intent(this, LineaResult.class); //inicio la vista que tiene los resultados de las lineas
+            i.putExtra("lineas", lineasQueLlegan); // le paso las lineas que llegan
+            startActivityForResult(i, 1); // y espero por la linea seleccionada por el pibe
         }
         else{
-            Toast.makeText(getApplicationContext(), "No existen lineas para esas coordenadas",
-                    Toast. LENGTH_SHORT).show();        }
+            Toast.makeText(getApplicationContext(), "No existen lineas para esas coordenadas",Toast. LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -212,42 +192,74 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-
-
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==1){
-
-
-            if(data!=null) {
-                if(rutaDibujada!=null)
-                    rutaDibujada.remove();
-                mapFragment.animator.stopAnimation();
+            if(data!=null) { // si se retornó info
+                if(rutaDibujada!=null) // si hay una ruta ya dibujada, la limpio
+                 rutaDibujada.remove();
+                if(rutaDibujada2!=null) // si hay una ruta ya dibujada, la limpio
+                    rutaDibujada2.remove();
+                mapFragment.animator.stopAnimation(); //freno animación si hay
                 String lineaSelect = data.getStringExtra("lineaSelect");
                 System.out.println("debo mostrar" + lineaSelect);
-                mejorRecorrido=retornarLinea(lineaSelect);
-                TextView elegida= (TextView) findViewById(R.id.linea_eleg);
-                elegida.setText(lineaSelect);
-                PolylineOptions a= new PolylineOptions();
-                int i=0;
-                mapFragment.eliminarRuta();
-                while (i < mejorRecorrido.length - 1) {
-                    a.add(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
-                    mapFragment.addMarkerToMap(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
-                    i = i + 2;
+                if(!lineaSelect.contains("-")){ // es linea combinada
+                    mejorRecorrido=retornarLinea(lineaSelect); //retorno las lineas
+                    TextView elegida= (TextView) findViewById(R.id.linea_eleg);
+                    elegida.setText(lineaSelect);
+                    PolylineOptions a= new PolylineOptions();
+                    int i=0;
+                    mapFragment.eliminarRuta();
+                    while (i < mejorRecorrido.length - 1) {
+                        a.add(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
+                        mapFragment.addMarkerToMap(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
+                        i = i + 2;
 
-                }
-                a.color(Color.BLUE);
-                a.width(2);
-                rutaDibujada=mapa.addPolyline(a);
+                    }
+                    a.color(Color.BLUE);
+                    a.width(4);
+                    rutaDibujada=mapa.addPolyline(a);
 
+                }else{
 
+                    mapFragment.eliminarRuta();
+                    PolylineOptions a = new PolylineOptions();
+                    String[] lineas= lineaSelect.split("-");
+                    Double[] lineaDesde= retornarLinea(lineas[0]);
+                    Double[] lineaHasta= retornarLinea(lineas[1]);
+                    int i=0;
+                    while (i < lineaDesde.length - 1) {
+                        a.add(coord(lineaDesde[i], lineaDesde[i + 1]));
+                        mapFragment.addMarkerToMap(coord(lineaDesde[i], lineaDesde[i + 1]));
+                        i = i + 2;
+                    }
+                        a.color(Color.BLUE);
+                        a.width(4);
+                        rutaDibujada = mapa.addPolyline(a);
+                        PolylineOptions b = new PolylineOptions();
+                        i=0;
+                        while (i < lineaHasta.length - 1) {
+                            b.add(coord(lineaHasta[i], lineaHasta[i + 1]));
+                            mapFragment.addMarkerToMap(coord(lineaHasta[i], lineaHasta[i + 1]));
 
-
-
+                            i = i + 2;
+                        }
+                    b.color(Color.GREEN);
+                    b.width(4);
+                    rutaDibujada2 = mapa.addPolyline(b);
+                    LinkedList<LatLng> lista= new LinkedList<LatLng>();
+                    lista=seCombinan(lineaDesde,lineaHasta,lineaHasta.length-3,radio);
+                    i=0;
+                    while(i<lista.size()){
+                        System.out.println("agrego mar");
+                        mapa.addCircle(new CircleOptions().center(lista.get(i)).radius(radio).visible(true)).setVisible(true);
+                        i++;
+                    }
+            }
+                TextView elegida = (TextView) findViewById(R.id.linea_eleg);
+                elegida.setText("linea/s " + lineaSelect);
             }
         }
-
-        if(requestCode==3){
+        if(requestCode==3){ //opción elegida para buscar por direccion
             if(data!=null){
                 if(data.getStringExtra("desde")!=null && !data.getStringExtra("desde").equals("")){
                     geo=new GeocoderTask();
@@ -266,36 +278,67 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
     }
 
     public void buscar(View view){
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(MapaDondeVoy.this, "Por favor, espere", "Realizando búsqueda", true);
+        buscarAux();
+        if((mejor.first.equals("ninguno"))){
+            combinandoLineas();
+        }
+    /*    if(mejor.first.equals("ninguno")) {
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(MapaDondeVoy.this, "Por favor, espere", "Buscando combinaciones posibles de lineas", true);
         ringProgressDialog.setCancelable(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 try {
+
                     Thread.sleep(1500);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 ringProgressDialog.dismiss();
             }
         }).start();
-        buscarAux();
+
+            combinarLineas();
+        }*/
+
 
 
 
     }
 
+    public void combinandoLineas(){
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(MapaDondeVoy.this, "Por favor, espere", "Buscando combinaciones posibles de lineas", true);
+        ringProgressDialog.setCancelable(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    Thread.sleep(1500);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ringProgressDialog.dismiss();
+            }
+        }).start();
+
+
+        combinarLineas();
+    }
+
 
     private void buscarAux(){
 
-        RecorridoEs r= new RecorridoEs();
-        //desde!
-        mapFragment.eliminarRuta();
-
-        Pair<String,Double[]>[] recorridosYNombres= r.recorridosYNombres();
-        mejor=new Pair<String, Double>("ninguno",99999999.0);
-        PolylineOptions a = new PolylineOptions();
+        RecorridoEs r= new RecorridoEs(); //obtengo todos los recorridos
+        mapFragment.eliminarRuta(); //limpio el mapita
+        Pair<String,Double[]>[] recorridosYNombres= r.recorridosYNombres(); //nombre y recorridos!
+        mejor=new Pair<String, Double>("ninguno",99999999.0); // el mejor no existe
+        PolylineOptions a = new PolylineOptions(); //ruta
         lineasQueLlegan= new ArrayList<String>();
         int j=0;
         while(j<recorridosYNombres.length){
@@ -306,39 +349,36 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
                 lineasQueLlegan.add(lin.first);
                 DecimalFormat twoDForm = new DecimalFormat("#.00");
                 lineasQueLlegan.add(twoDForm.format(dist / 1000));
-
             }
             j++;
         }
-
-
-
-
             if(mejor.first.equals("ninguno")) {
                 System.out.println("el mejor es el" + mejor.first);
                 TextView elegida = (TextView) findViewById(R.id.linea_eleg);
-                elegida.setText("No existen lineas para estas coordenadas");
+                elegida.setText("No existen lineas directas para estas coordenadas");
                 mejorRecorrido=null;
+
             }
         if(rutaDibujada!=null)
             rutaDibujada.remove();
-
-
-
+        if(rutaDibujada2!=null)
+            rutaDibujada2.remove();
         int i = 0;
-
         if(mejorRecorrido!=null) {
             while (i < mejorRecorrido.length - 1) {
                 a.add(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
                 mapFragment.addMarkerToMap(coord(mejorRecorrido[i], mejorRecorrido[i + 1]));
-
                 i = i + 2;
             }
             a.color(Color.BLUE);
-            a.width(2);
+            a.width(4);
             rutaDibujada = mapa.addPolyline(a);
             TextView elegida = (TextView) findViewById(R.id.linea_eleg);
             elegida.setText("linea " + mejor.first);
+        }
+        if(mejor.first.equals("ninguno")) {
+            //combinandoLineas();
+
         }
     }
 
@@ -386,6 +426,99 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         }
     }
 
+    private void combinarLineas(){
+        RecorridoEs r= new RecorridoEs();
+        Pair<String,Double[]>[] recorridosYNombres= r.recorridosYNombres();
+        LinkedList<Pair<Pair<String,Double[]>,Integer>>  desde= contienePunto( recorridosYNombres, circleDesde.getCenter(),radio);
+        LinkedList<Pair<Pair<String,Double[]>,Integer>> hasta= contienePunto( recorridosYNombres, circleHasta.getCenter(),radio);
+        lineasQueLlegan= new ArrayList<String>();
+        LinkedList<Pair<Pair<Pair<String, Double[]>, Pair<String, Double[]>>,LinkedList<LatLng>>> lineasElegidas= new LinkedList<Pair<Pair<Pair<String, Double[]>, Pair<String, Double[]>>,LinkedList<LatLng>>>();
+        int i=0;
+        int j=0;
+        LinkedList<LatLng> lista= new LinkedList<LatLng>();
+        while(i<desde.size()){
+            j=0;
+            while(j<hasta.size()){
+               lista=seCombinan(desde.get(i).first.second,hasta.get(j).first.second,hasta.get(j).second,radio);
+                if(lista.size()>0){
+                    lineasQueLlegan.add(desde.get(i).first.first +"-"+ hasta.get(j).first.first);
+                    DecimalFormat twoDForm = new DecimalFormat("#.00");
+                    lineasQueLlegan.add("¿?");
+                    lineasElegidas.add(new Pair<Pair<Pair<String, Double[]>, Pair<String, Double[]>>,LinkedList<LatLng>>(new Pair(desde.get(i).first,hasta.get(j).first),lista));
+                    int h=0;
+
+                }
+                j++;
+            }
+            i++;
+        }
+        PolylineOptions a = new PolylineOptions();
+        if(lineasQueLlegan.size()>0){
+            Double[] lineaDesde= lineasElegidas.get(0).first.first.second;
+            Double[] lineaHasta= lineasElegidas.get(0).first.second.second;
+            LinkedList<LatLng> puntosIntersect= lineasElegidas.get(0).second;
+            i=0;
+            while (i < lineaDesde.length - 1) {
+                a.add(coord(lineaDesde[i], lineaDesde[i + 1]));
+                mapFragment.addMarkerToMap(coord(lineaDesde[i], lineaDesde[i + 1]));
+                i = i + 2;
+            }
+            a.color(Color.BLUE);
+            a.width(4);
+            rutaDibujada = mapa.addPolyline(a);
+            PolylineOptions b = new PolylineOptions();
+            i=0;
+            while (i < lineaHasta.length - 1) {
+                b.add(coord(lineaHasta[i], lineaHasta[i + 1]));
+                mapFragment.addMarkerToMap(coord(lineaHasta[i], lineaHasta[i + 1]));
+                i = i + 2;
+            }
+            b.color(Color.GREEN);
+            b.width(4);
+            rutaDibujada2=mapa.addPolyline(b);
+            i=0;
+       while(i<puntosIntersect.size()){
+           mapa.addCircle(new CircleOptions().center(puntosIntersect.get(i)).radius(radio).visible(true).strokeWidth(0).fillColor(Color.WHITE));
+           i++;
+       }
+        TextView elegida = (TextView) findViewById(R.id.linea_eleg);
+        elegida.setText("lineas " + lineasQueLlegan.get(0));
+        }
+        else{
+            TextView elegida = (TextView) findViewById(R.id.linea_eleg);
+            elegida.setText("No existen lineas directas ni combinaciones para estas coordenadas");
+        }
+    }
+
+
+    private LinkedList<Pair<Pair<String,Double[]>,Integer>> contienePunto(Pair<String,Double[]>[] recoYNombre, LatLng point,int radio){
+        LinkedList<Pair<Pair<String,Double[]>,Integer>> retorno= new LinkedList<Pair<Pair<String,Double[]>,Integer>> ();
+        int j=0;
+        int i=0;
+        int auxJanterior=0;
+        double radioD=(0.0010736987954231836*radio)/100;
+        while(j<recoYNombre.length){
+            Pair<String,Double[]> lin= recoYNombre[j];
+            Double[] reco= lin.second;
+            i=0;
+            auxJanterior=j;
+            while (i<lin.second.length-3){
+                if(intersect(reco[i], reco[i + 1],reco[i+2], reco[i + 3],point.longitude,point.latitude,radioD)){
+
+                    retorno.add(new Pair(lin,i));
+                    i=lin.second.length;
+
+
+                }
+                i=i+2;
+            }
+
+            j++;
+        }
+
+
+        return retorno;
+    }
 
     private double perteneceAlRadio (Double[] reco, LatLng point,int radio,LatLng pointHasta){
         GeoPunto geo= new GeoPunto();
@@ -399,22 +532,39 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         while (i < reco.length - 3 ) {
             if(intersect(reco[i], reco[i + 1],reco[i+2], reco[i + 3],point.longitude,point.latitude,radioD)){
                 LatLng puntoMedio= puntoMedio(Xaux1, Yaux1, Xaux2, Yaux2);
-                distancia= distancia +geo.distancia(puntoMedio.longitude,puntoMedio.latitude, reco[i + 2], reco[i + 3]);
+               // distancia= distancia +geo.distancia(puntoMedio.longitude,puntoMedio.latitude, reco[i + 2], reco[i + 3]);
                 aux=i;
-                i=i+2;
+                boolean primerPasada= true;
 
-                while(i < reco.length - 3 ){
-                    distancia= distancia +geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
+                while(i!=aux ||primerPasada){
+
+
                     if(intersect(reco[i], reco[i + 1],reco[i+2], reco[i + 3],pointHasta.longitude,pointHasta.latitude,radioD)){
                         LatLng puntoMedioHa= puntoMedio(Xaux1, Yaux1, Xaux2, Yaux2);
-                        distancia= distancia -geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
-                        distancia= distancia +geo.distancia( reco[i], reco[i + 1],puntoMedioHa.longitude,puntoMedioHa.latitude);
+                        if(primerPasada){
+                            distancia= geo.distancia(puntoMedio.longitude,puntoMedio.latitude,puntoMedioHa.longitude,puntoMedioHa.latitude);
+                        }
+                        else{
+                            distancia= distancia +geo.distancia( reco[i], reco[i + 1],puntoMedioHa.longitude,puntoMedioHa.latitude);
+                        }
+                        //distancia= distancia -geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
+                       // distancia= distancia +geo.distancia( reco[i], reco[i + 1],puntoMedioHa.longitude,puntoMedioHa.latitude);
                             if(distancia<=mejorHastaMomento) {
                                 mejorHastaMomento = distancia;
                             }
                     }
+                    else{
+                        if(primerPasada)
+                            distancia= distancia +geo.distancia(puntoMedio.longitude,puntoMedio.latitude, reco[i + 2], reco[i + 3]);
+                        else
+                            distancia= distancia +geo.distancia(reco[i], reco[i + 1], reco[i + 2], reco[i + 3]);
+                    }
+
                     i=i+2;
-                    
+                    if(!(i<reco.length - 3)){
+                        i=0;
+                    }
+                    primerPasada=false;
                 }
 
                 i=aux;
@@ -422,7 +572,7 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
 
             distancia=0;
             i = i + 2;
-            System.out.println(i);
+
         }
         if(mejorHastaMomento==99999999999.99)
             return -1;
@@ -637,5 +787,196 @@ public class MapaDondeVoy extends FragmentActivity implements GoogleMap.OnInfoWi
         double medioLat= (pLatitud+p2Latitud)/2;
         return new LatLng(medioLat,medioLong);
     }
+
+
+
+
+
+    public double modulo2(org.tecpro.colectivos.Pair<Double,Double> puntoA ,org.tecpro.colectivos.Pair<Double,Double>  puntoB) {
+        return (puntoB.x -puntoA.x)*(puntoB.x-puntoA.x)+(puntoB.y-puntoA.y)*(puntoB.y-puntoA.y);
+    }
+
+    // Distancia punto a punto en 2 dimensiones
+    public double distancia(org.tecpro.colectivos.Pair<Double,Double> puntoA, org.tecpro.colectivos.Pair<Double,Double> puntoB) {
+        return Math.sqrt(modulo2(puntoA, puntoB));
+    }
+
+    // Distancia del segmento al punto C
+    public double distanciaPunto(org.tecpro.colectivos.Pair<Double,Double> A, org.tecpro.colectivos.Pair<Double,Double> B,org.tecpro.colectivos.Pair<Double,Double> C){
+        // Punto en el segmento al cual se calculará la distancia
+        // iniciamos en uno de los extremos
+        org.tecpro.colectivos.Pair<Double,Double> P = A;
+
+        // Para prevenir una división por cero se calcula primero el demoninador de
+        // la división. (Se puede dar si A y B son el mismo punto).
+        // Podría substituirse por [self modulo2:A a:B]
+        double denominador = (B.x-A.x)*(B.x-A.x)+(B.y-A.y)*(B.y-A.y);
+        if(denominador !=0){
+            // Se calcula el parámetro, que indica la posición del punto P en la recta
+            // del segmento
+            double u = ((C.x-A.x)*(B.x-A.x)+(C.y-A.y)*(B.y-A.y))/denominador;
+            // Si u esta en el intervalo [0,1], el punto P pertenece al segmento
+            if(u > 0.0 && u < 1.0) {
+                P.x = A.x + u*(B.x-A.x);
+                P.y = A.y + u*(B.y-A.y);
+            }
+            // Si P no pertenece al segmento se toma uno de los extremos para calcular
+            // la distancia. Si u < 0 el extremo es A. Si u >=1 el extremos es B.
+            else{
+                if( u>= 1.0)
+                    P=B;
+            }
+        }
+        // Se devuelve la distancia entre el punto C y el punto P calculado.
+        return distancia(P, C);
+    }
+
+    public Pair<Double,LatLng> distanciaMinima(double x1, double y1, double x2, double y2, double rx1, double ry1, double rx2, double ry2) {
+  //      Line2D.Double recta = new Line2D.Double(x1, y1, x2, y2);
+  //      Line2D.Double recta2 = new Line2D.Double(rx1, ry1, rx2, ry2);
+        org.tecpro.colectivos.Pair<Double,Double> a= new org.tecpro.colectivos.Pair<Double, Double>(x1, y1);
+        org.tecpro.colectivos.Pair<Double,Double> b= new org.tecpro.colectivos.Pair<Double, Double>(x2, y2);
+        org.tecpro.colectivos.Pair<Double,Double> c= new org.tecpro.colectivos.Pair<Double, Double>(rx1, ry1);
+        org.tecpro.colectivos.Pair<Double,Double> d= new org.tecpro.colectivos.Pair<Double, Double>(rx2, ry2);
+
+        if (intersects(a, b, c, d)) {
+            return new Pair(0.0,new LatLng(intersecty,intersectx));
+        }
+        else{
+
+            double distABc= distanciaPunto(a, b, c);
+            double distABd=distanciaPunto(a, b, d);
+            double distCDa=distanciaPunto(c, d, a);
+            double distCDb=distanciaPunto(c, d, b);
+            double aux1= Math.min(distABc,distABd);
+            double aux2= Math.min(distCDa,distCDb);
+            double minimo = Math.min(aux1, aux2);
+            if(minimo==distABc){
+                return new Pair(minimo,new LatLng(c.y,c.x));
+            }
+            if(minimo==distABd){
+                return new Pair(minimo,new LatLng(d.y,d.x));
+
+            }
+            if(minimo==distCDa){
+
+            return new Pair(minimo,new LatLng(a.y,a.x));
+            }
+            if(minimo==distCDb){
+
+            return new Pair(minimo,new LatLng(b.y,b.x));}
+
+        }
+return null;
+
+
+    }
+
+    public LinkedList<LatLng> seCombinan(Double[] desde, Double[] hasta, int indiceHasta, int radio){
+        int i=0;
+        int j=0;
+        double radioD=(0.0010736987954231836*radio)/100;
+        LatLng anterior= null;
+        LinkedList<LatLng>ret= new LinkedList<LatLng>();
+        while(i<desde.length-3){
+            j=0;
+            while(j<indiceHasta){
+                Pair<Double,LatLng> distanciaMin= distanciaMinima(desde[i], desde[i+1],desde[i+2], desde[i+3],desde[i], hasta[j+1],hasta[j+2], hasta[j+3]);
+                if(distanciaMin.first<=radioD){
+                    if(anterior!=null){
+                        if(radioD<distancia(new org.tecpro.colectivos.Pair<Double, Double>(anterior.longitude,anterior.latitude),new org.tecpro.colectivos.Pair<Double, Double>(distanciaMin.second.longitude,distanciaMin.second.latitude))){
+                            ret.add(distanciaMin.second);
+                        }
+                    }
+                   anterior= distanciaMin.second;
+
+                }
+                j=j+2;
+            }
+            i=i+2;
+        }
+        return ret;
+    }
+
+    private boolean intersects(org.tecpro.colectivos.Pair<Double,Double> start1,
+                               org.tecpro.colectivos.Pair<Double,Double> end1,org.tecpro.colectivos.Pair<Double,Double> start2, org.tecpro.colectivos.Pair<Double,Double> end2) {
+
+        // First find Ax+By=C values for the two lines
+        double A1 = end1.y - start1.y;
+        double B1 = start1.x - end1.x;
+        double C1 = A1 * start1.x + B1 * start1.y;
+
+        double A2 = end2.y - start2.y;
+        double B2 = start2.x - end2.x;
+        double C2 = A2 * start2.x + B2 * start2.y;
+
+        double det = (A1 * B2) - (A2 * B1);
+        intersectx= Double.MAX_VALUE;
+        intersecty= Double.MAX_VALUE;
+        if (det == 0) {
+            // Lines are either parallel, are collinear (the exact same
+            // segment), or are overlapping partially, but not fully
+            // To see what the case is, check if the endpoints of one line
+            // correctly satisfy the equation of the other (meaning the two
+            // lines have the same y-intercept).
+            // If no endpoints on 2nd line can be found on 1st, they are
+            // parallel.
+            // If any can be found, they are either the same segment,
+            // overlapping, or two segments of the same line, separated by some
+            // distance.
+            // Remember that we know they share a slope, so there are no other
+            // possibilities
+
+            // Check if the segments lie on the same line
+            // (No need to check both points)
+            if ((A1 * start2.x) + (B1 * start2.y) == C1) {
+                // They are on the same line, check if they are in the same
+                // space
+                // We only need to check one axis - the other will follow
+                if ((Math.min(start1.x, end1.x) < start2.x)
+                        && (Math.max(start1.x, end1.x) > start2.x))
+                    return true;
+
+                // One end point is ok, now check the other
+                if ((Math.min(start1.x, end1.x) < end2.x)
+                        && (Math.max(start1.x, end1.x) > end2.x))
+                    return true;
+
+                // They are on the same line, but there is distance between them
+                return false;
+            }
+
+            // They are simply parallel
+            return false;
+        } else {
+            // Lines DO intersect somewhere, but do the line segments intersect?
+            double x = (B2 * C1 - B1 * C2) / det;
+            double y = (A1 * C2 - A2 * C1) / det;
+
+            // Make sure that the intersection is within the bounding box of
+            // both segments
+            if ((x > Math.min(start1.x, end1.x) && x < Math.max(start1.x,
+                    end1.x))
+                    && (y > Math.min(start1.y, end1.y) && y < Math.max(
+                    start1.y, end1.y))) {
+                // We are within the bounding box of the first line segment,
+                // so now check second line segment
+                if ((x > Math.min(start2.x, end2.x) && x < Math.max(start2.x,
+                        end2.x))
+                        && (y > Math.min(start2.y, end2.y) && y < Math.max(
+                        start2.y, end2.y))) {
+                    // The line segments do intersect
+                    intersectx=x;
+                    intersecty=y;
+                    return true;
+                }
+            }
+
+            // The lines do intersect, but the line segments do not
+            return false;
+        }
+    }
+    private double intersectx;
+    private double intersecty;
 
 }

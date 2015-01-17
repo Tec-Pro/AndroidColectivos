@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by nico on 20/05/14.
@@ -31,5 +32,7 @@ public class DirectionsInputActivity extends Activity {
             // finish The activity
             finish();
         }
+
+
 
 }

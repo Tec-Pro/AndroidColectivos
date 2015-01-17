@@ -3,6 +3,7 @@ package org.tecpro.colectivos;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by nico on 25/04/14.
@@ -18,5 +19,7 @@ public class ViewInfo extends Activity {
         TextView inf= (TextView) findViewById(R.id.infoText);
         inf.setText(extras.getString("info"));
     }
+
+
 
 }

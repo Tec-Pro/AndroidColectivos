@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by jacinto on 4/10/14.
@@ -20,4 +21,6 @@ public class AcercaDe extends Activity{
                 Uri.parse("https://www.facebook.com/TecProSoftware"));
         startActivity(intent);
     }
+
+
 }

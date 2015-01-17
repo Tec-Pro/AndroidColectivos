@@ -117,4 +117,6 @@ public class EdicionAgregarHorario extends Activity {
         this.stopManagingCursor(this.c);
     }
 
+
+
 }

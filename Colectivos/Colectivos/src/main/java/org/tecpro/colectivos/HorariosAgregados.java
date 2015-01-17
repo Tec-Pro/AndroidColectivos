@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -200,6 +201,8 @@ public class HorariosAgregados extends ListActivity {
             adView.destroy();
             super.onDestroy();
         }
+
+
 
 
 }
