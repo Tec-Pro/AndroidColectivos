@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Versión 2.0.8"
+                android:text="Versión 2.0.9"
                 android:id="@+id/version"
                 android:layout_gravity="bottom"
                 android:gravity="center" />
@@ -104,7 +104,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Copyright ©2013-2014 Tec-Pro"
+                android:text="OpenSource 2013-2015 Tec-Pro"
                 android:id="@+id/tecProNombre"
                 android:layout_gravity="bottom"
                 android:gravity="center" />
