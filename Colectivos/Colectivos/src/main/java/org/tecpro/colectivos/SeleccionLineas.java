@@ -474,7 +474,15 @@ public class SeleccionLineas extends Activity {
                         IntentHorario.putExtra("info",info.getInfo9V());
                         startActivity(IntentHorario);
                         break;
-                    case 1: //reco
+		    case 1: IntentHorario = new Intent(this,VistaHoriarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader9VSDF());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable9VSDF());
+                        IntentHorario.putExtra("title",title);
+                        IntentHorario.putExtra("cantBondis",horarios.getCantBondi9V());
+                        IntentHorario.putExtra("info",info.getInfo9V());
+                        startActivity(IntentHorario);
+			 break;
+                    case 2: //reco
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido", recorrido.getRecorrido9Verde());
                         IntentMapa.putExtra("title",nomLinea);
@@ -493,7 +501,15 @@ public class SeleccionLineas extends Activity {
                         IntentHorario.putExtra("info",info.getInfo9R());
                         startActivity(IntentHorario);
                         break;
-                    case 1: //reco
+ 		    case 1: IntentHorario = new Intent(this,VistaHoriarios.class);
+                        IntentHorario.putExtra("header",horarios.getHeader9RSDF());
+                        IntentHorario.putExtra("timeTable",horarios.getTimeTable9RSDF());
+                        IntentHorario.putExtra("title",title);
+                        IntentHorario.putExtra("cantBondis",horarios.getCantBondi9R());
+                        IntentHorario.putExtra("info",info.getInfo9R());
+                        startActivity(IntentHorario);
+ 			break;
+                    case 2: //reco
                         IntentMapa = new Intent(this,Mapa.class);
                         IntentMapa.putExtra("recorrido",recorrido.getRecorrido9Rojo());
                         IntentMapa.putExtra("title",nomLinea);
@@ -812,11 +828,13 @@ public class SeleccionLineas extends Activity {
         linea8Rojo.add("   Recorrido");
 
         List<String> linea9Verde = new ArrayList<String>();
-        linea9Verde.add("   Lunes a domingo");
+        linea9Verde.add("   Lunes a viernes");
+	linea9Verde.add("   Sábados, Domingos y feriados");
         linea9Verde.add("   Recorrido");
 
         List<String> linea9Rojo = new ArrayList<String>();
-        linea9Rojo.add("   Lunes a domingo");
+        linea9Rojo.add("   Lunes a viernes");
+	linea9Rojo.add("   Sábados, Domingos y feriados");
         linea9Rojo.add("   Recorrido");
 
         List<String> linea10 = new ArrayList<String>();
