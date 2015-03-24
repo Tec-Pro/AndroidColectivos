@@ -1,8 +1,6 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 	android:versionName
@@ -13,6 +11,8 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 application
 ADDED from AndroidManifest.xml:6:5
 MERGED from com.android.support:appcompat-v7:19.1.0:19:5
@@ -26,10 +26,10 @@ MERGED from com.android.support:appcompat-v7:19.1.0:19:5
 		ADDED from AndroidManifest.xml:10:9
 meta-data#com.google.android.gms.version
 ADDED from AndroidManifest.xml:13:8
-	android:name
-		ADDED from AndroidManifest.xml:13:19
 	android:value
 		ADDED from AndroidManifest.xml:14:13
+	android:name
+		ADDED from AndroidManifest.xml:13:19
 activity#org.tecpro.colectivos.MainActivity
 ADDED from AndroidManifest.xml:16:9
 	android:label
@@ -116,22 +116,22 @@ ADDED from AndroidManifest.xml:65:9
 		ADDED from AndroidManifest.xml:65:19
 activity#org.tecpro.colectivos.EdicionAgregarHorario
 ADDED from AndroidManifest.xml:68:9
-	android:windowSoftInputMode
-		ADDED from AndroidManifest.xml:69:13
-	android:noHistory
-		ADDED from AndroidManifest.xml:70:13
 	android:label
 		ADDED from AndroidManifest.xml:71:13
+	android:noHistory
+		ADDED from AndroidManifest.xml:70:13
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:69:13
 	android:name
 		ADDED from AndroidManifest.xml:68:19
 activity#org.tecpro.colectivos.AgregarHorario
 ADDED from AndroidManifest.xml:73:9
-	android:windowSoftInputMode
-		ADDED from AndroidManifest.xml:75:13
-	android:noHistory
-		ADDED from AndroidManifest.xml:76:13
 	android:label
 		ADDED from AndroidManifest.xml:74:13
+	android:noHistory
+		ADDED from AndroidManifest.xml:76:13
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:75:13
 	android:name
 		ADDED from AndroidManifest.xml:73:19
 activity#org.tecpro.colectivos.DirectionsInputActivity
@@ -148,10 +148,10 @@ ADDED from AndroidManifest.xml:82:9
 		ADDED from AndroidManifest.xml:82:19
 meta-data#com.google.android.maps.v2.API_KEY
 ADDED from AndroidManifest.xml:89:10
-	android:name
-		ADDED from AndroidManifest.xml:90:14
 	android:value
 		ADDED from AndroidManifest.xml:91:14
+	android:name
+		ADDED from AndroidManifest.xml:90:14
 activity#com.google.android.gms.ads.AdActivity
 ADDED from AndroidManifest.xml:93:9
 	android:configChanges
@@ -194,10 +194,10 @@ ADDED from AndroidManifest.xml:117:6
 		ADDED from AndroidManifest.xml:117:23
 uses-feature#0x00020000
 ADDED from AndroidManifest.xml:119:6
-	android:required
-		ADDED from AndroidManifest.xml:121:10
 	android:glEsVersion
 		ADDED from AndroidManifest.xml:120:10
+	android:required
+		ADDED from AndroidManifest.xml:121:10
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:19.1.0:18:5
