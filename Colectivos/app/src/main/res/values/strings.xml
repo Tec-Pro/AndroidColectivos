@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Colectivos Río Cuarto</string>
+    <string name="title_activity_maps">¿Cual me tomo?</string>
+    <string name="contactate">Contactate</string>
+    <string name="resultados">Lineas encontradas</string>
+    <string name="recorrido">Recorrido</string>
+    <string name="dondeEsta">¿Donde está?</string>
+    <string name="configuracionCoches">Configuración coches</string>
+
+    <string-array name="tipo_linea">
+        <item>Lineas urbanas</item>
+        <item>Lineas interurbanas</item>
+    </string-array>
+
+    <string-array name="cuadras">
+        <item>Caminar hasta 1 cuadra</item>
+        <item>Caminar hasta 2 cuadras</item>
+        <item>Caminar hasta 3 cuadra</item>
+        <item>Caminar hasta 5 cuadra</item>
+        <item>Caminar hasta 7 cuadra</item>
+        <item>Caminar hasta 10 cuadra</item>
+    </string-array>
+
+    <string-array name="tipo_consulta">
+        <item>DNI</item>
+        <item>ID TARJETA</item>
+    </string-array>
+
+</resources>

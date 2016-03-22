@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:id="@+id/navigation"
+    android:weightSum="1"
+    android:background="@color/colorMenu">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center|right"
+        android:layout_weight="0.8"
+        android:baselineAligned="false">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hola!"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"
+        android:typeface="serif"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gracias por utilizar nuestra aplicación"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="13dp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Estemos en contacto! Escríbenos por dudas, comentarios o inquietudes."
+        android:id="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_asunto"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:hint="Asunto"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#ffffff"
+        android:textColorHint="#b7b7b7"
+        android:textColor="@color/colorMenu"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/txt_msg"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.40"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:hint="Mensaje"
+        android:textColorHint="#b7b7b7"
+        android:textColor="@color/colorMenu"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="left"
+        android:paddingTop="2dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ENVIAR"
+        android:id="@+id/btn_send"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:onClick="clickSend" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center|right"
+        android:layout_weight="0.2"
+        android:baselineAligned="false"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_powered_by"
+            android:onClick="pgWeb"
+            android:clickable="true"
+            android:layout_weight="0.5"
+            android:layout_gravity="left|bottom"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=" "
+            android:id="@+id/textView6"
+            android:layout_gravity="bottom" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView2"
+            android:src="@drawable/ic_contact"
+            android:layout_gravity="bottom|right"
+            android:clickable="true"
+            android:onClick="pgWeb"
+            android:layout_weight="0.5"
+            android:scaleType="fitEnd"
+            android:layout_marginRight="6dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

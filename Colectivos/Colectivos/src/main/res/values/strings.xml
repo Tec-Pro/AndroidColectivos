@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">Colectivos Río Cuarto</string>
-    <string name="acercaDe">Acerca de</string>
-    <string name="horarios">Urbano</string>
-    <string name="recorridos">Interurbano</string>
-</resources>
-

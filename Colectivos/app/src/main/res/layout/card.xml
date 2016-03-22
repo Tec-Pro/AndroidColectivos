@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linea 13"
+            android:id="@+id/txt_linea"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="24dp"
+            android:textSize="18dp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rojo"
+            android:id="@+id/txt_color"
+            android:layout_marginTop="24dp"
+            android:textSize="18dp"
+            android:textColor="#ef0707"
+            android:layout_marginLeft="4dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_heart"
+                android:src="@drawable/ic_corazon"
+                android:layout_marginRight="24dp"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Horarios"
+            android:id="@+id/txt_see_timetable"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:textColor="@color/style_click"
+            android:clickable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Recorrido"
+            android:id="@+id/txt_see_route"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:textColor="@color/style_click"
+            android:clickable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Donde está?"
+            android:id="@+id/txt_where_is_it"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/style_click"
+            android:clickable="true" />
+    </LinearLayout>
+
+</LinearLayout>
