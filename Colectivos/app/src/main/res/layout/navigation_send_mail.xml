@@ -7,13 +7,74 @@
     android:id="@+id/navigation"
     android:weightSum="1"
     android:background="@color/colorMenu">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¡Hola!"
+            android:id="@+id/textView7"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="13dp"
+            android:typeface="serif"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gracias por utilizar nuestra aplicación"
+            android:id="@+id/textView9"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textSize="13dp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colectivos Río IV,  es un proyecto totalmente voluntario, sin costo para vos ni ganancias para nosotros. \n\nNo pertenecemos a la empresa SATCRC y los datos que te mostramos fueron extraídos desde su página oficial. Por lo tanto, si tenés consultas y quejas sobre horarios y/o recorridos, envialas a la SATCRC."
+            android:id="@+id/textView11"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="La funcionalidad &quot;tarjeta&quot; no está disponible ahora debido a que la página oficial no brinda más la información requerida. \n\n Ayúdanos: Si al ingresar en la funcionalidad &quot;¿Dónde está?&quot; no ves el coche en el mapa, envíanos un mensaje al Facebook con: \nN° de coche: 119 (figura en el boleto)\nLínea: 13\n  Nosotros Lo agregamos a la brevedad."
+            android:id="@+id/textView13"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center|right"
         android:layout_weight="0.8"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:visibility="gone">
 
     <TextView
         android:layout_width="match_parent"

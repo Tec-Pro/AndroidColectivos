@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -115,7 +117,7 @@ public class VerHorarioActivity extends AppCompatActivity {
     public void refreshGrid(String[] timeTable, String[] busStops, int cantBondis){
 
         setHeaders(busStops);
-        if(busStops[0].equals("Termi")){
+        if(busStops[0].equals("Term")){
             setHeadersRioHigueras(busStops);
 
         }
@@ -135,7 +137,6 @@ public class VerHorarioActivity extends AppCompatActivity {
 
             tr[i] = new TableRow(this);
 
-            if(true) {
                 if (aux > cantBondis) {
                     aux = 1;
                 }
@@ -151,11 +152,13 @@ public class VerHorarioActivity extends AppCompatActivity {
                 if (aux == 4) {
                     tr[i].setBackgroundColor(Color.rgb(193, 217, 241));
                 }
-                aux++;
+            if(aux == 5) {
+                tr[i].setBackgroundColor(Color.rgb(199,235,242));
             }
-            else{
-                tr[i].setBackgroundColor(Color.TRANSPARENT);
+            if (aux == 6) {
+                tr[i].setBackgroundColor(Color.rgb(160,214,180));
             }
+            aux++;
 
 
             for( int j=0; j<busStops.length; j++)
@@ -212,19 +215,19 @@ public class VerHorarioActivity extends AppCompatActivity {
                 header.setVisibility(View.GONE);
             }
             else{
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(
+                        LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
                 header.setVisibility(View.VISIBLE);
                 header.setText(headers[i]);
-                if(i==0 || i==1 || i==4 || i==5){
-                    header.setBackgroundColor(Color.WHITE);
-                }
-                else{
-                    header.setBackgroundColor(Color.GRAY);
-                }
                 if(i%2 == 0){
                     header.setGravity(Gravity.RIGHT);
+                    lp.setMargins(2,2,0,2);
+                    header.setLayoutParams(lp);
                 }
                 else{
                     header.setGravity(Gravity.LEFT);
+                    lp.setMargins(0,2,2,2);
+                    header.setLayoutParams(lp);
                 }
 
             }
@@ -262,12 +265,14 @@ public class VerHorarioActivity extends AppCompatActivity {
                         cantBondis =horarios.getCantBondi1R();
                         break;
                     case 1:
-                        busStops =horarios.getBusStops1rojoE();
+                        busStops =horarios.getBusStops1rojo();
                         times =horarios.getTimeTable1rojoE();
+                        cantBondis =1;
                         break;
                     case 2:
                         busStops =horarios.getBusStops1rojoSyD();
                         times =horarios.getTimeTable1rojoSyD();
+                        cantBondis =horarios.getCantBondi1R();
                         break;
                 };
                 break;
@@ -280,12 +285,14 @@ public class VerHorarioActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        busStops =horarios.getBusStops1verdeE();
+                        busStops =horarios.getBusStops1verde();
                         times =horarios.getTimeTable1verdeE();
+                        cantBondis = 1;
                         break;
                     case 2:
                         busStops =horarios.getBusStops1verdeSyD();
                         times =horarios.getTimeTable1verdeSyD();
+                        cantBondis = horarios.getCantBondi1V();
                         break;
                 };
                 break;
@@ -294,10 +301,13 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops =horarios.getBusStops2rojo();
                         times =horarios.getTimeTable2rojo();
+                        cantBondis = horarios.getCantBondi2R();
+
                         break;
                     case 1:
                         busStops =horarios.getBusStops2rojo();
                         times =horarios.getTimeTable2rojoSyD();
+                        cantBondis = horarios.getCantBondi2RFin();
                         break;
                 };
                 break;
@@ -306,14 +316,17 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops =horarios.getBusStops2verde();
                         times =horarios.getTimeTable2verde();
+                        cantBondis = horarios.getCantBondi2V();
                         break;
                     case 1:
-                        busStops =horarios.getBusStops2verdeE();
-                        times =horarios.getTimeTable2verdeE();
+                        busStops =horarios.getBusStops2verdeEspecial();
+                        times =horarios.getTimeTable2verdeEspecial();
+                        cantBondis = horarios.getCantBondi2VE();
                         break;
                     case 2:
-                        busStops =horarios.getBusStops2verdeSyD();
+                        busStops =horarios.getBusStops2verde();
                         times =horarios.getTimeTable2verdeSyD();
+                        cantBondis = horarios.getCantBondi2VFin();
                         break;
                 };
                 break;
@@ -322,10 +335,12 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops =horarios.getBusStops3();
                         times =horarios.getTimeTable3();
+                        cantBondis = horarios.getCantBondi3();
                         break;
                     case 1:
-                        busStops =horarios.getBusStops3();
-                        times =horarios.getTimeTable3();
+                        busStops =horarios.getBusStops3E();
+                        times =horarios.getTimeTable3E();
+                        cantBondis =1;
                         break;
                 };
                 break;
@@ -334,6 +349,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops4();
                         times = horarios.getTimeTable4();
+                        cantBondis = horarios.getCantBondi4();
                         break;
                 }
                 break;
@@ -347,6 +363,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 1:
                         busStops =horarios.getBusStops5E();
                         times =horarios.getTimeTable5E();
+                        cantBondis =1;
                         break;
                     case 2:
                         busStops =horarios.getBusStops5SyD();
@@ -355,7 +372,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                         break;
                     case 3:
                         busStops =horarios.getBusStops5SyD();
-                        times =horarios.getTimeTable5V();
+                        times =horarios.getTimeTable5Verano();
                         cantBondis =horarios.getCantBondi5Ver();
                         break;
                 };
@@ -369,9 +386,9 @@ public class VerHorarioActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        busStops = horarios.getBusStops6Esp();
-                        times = horarios.getTimeTable6Esp();
-                        cantBondis =horarios.getCantBondi6Esp();
+                        busStops = horarios.getBusStops6E();
+                        times = horarios.getTimeTable6E();
+                        cantBondis =horarios.getCantBondi6E();
                         break;
                 }
                 break;
@@ -380,72 +397,64 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops7();
                         times = horarios.getTimeTable7();
-                        cantBondis =horarios.getCantBondi7();
+                        cantBondis =1;
                         break;
                     case 1:
-                        busStops = horarios.getBusStops7Fin();
-                        times = horarios.getTimeTable7Fin();
-                        cantBondis =horarios.getCantBondi7();
+                        busStops = horarios.getBusStops7();
+                        times = horarios.getTimeTable7SyD();
+                        cantBondis =1;
                         break;
                 }
                 break;
             case "Linea 8 Rojo":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStops8R();
-                        times = horarios.getTimeTable8R();
-                        cantBondis =horarios.getCantBondi8R();
+                        busStops = horarios.getBusStops8rojo();
+                        times = horarios.getTimeTable8rojo();
+                        cantBondis =1;
 
                         break;
                     case 1:
-                        busStops = horarios.getBusStops8RSab();
-                        times = horarios.getTimeTable8RSab();
-                        cantBondis =horarios.getCantBondi8RSab();
+                        busStops = horarios.getBusStops8rojo();
+                        times = horarios.getTimeTable8rojoS();
+                        cantBondis =1;
                         break;
                     case 2:
-                        busStops = horarios.getBusStops8RDom();
-                        times = horarios.getTimeTable8RDom();
-                        cantBondis =horarios.getCantBondi8RDom();
+                        busStops = horarios.getBusStops8rojo();
+                        times = horarios.getTimeTable8rojoD();
+                        cantBondis =1;
                         break;
                 }
                 break;
             case "Linea 8 Verde":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStops8V();
-                        times = horarios.getTimeTable8V();
-                        cantBondis =horarios.getCantBondi8V();
+                        busStops = horarios.getBusStops8verde();
+                        times = horarios.getTimeTable8verde();
+                        cantBondis =1;
                         break;
                     case 1:
-                        busStops = horarios.getBusStops8VSab();
-                        times = horarios.getTimeTable8VSab();
-                        cantBondis =horarios.getCantBondi8VFin();
+                        busStops = horarios.getBusStops8verde();
+                        times = horarios.getTimeTable8verdeSyD();
+                        cantBondis =1;
                         break;
                 }
                 break;
             case "Linea 9 Rojo":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStops9R();
-                        times = horarios.getTimeTable9R();
-                        cantBondis =horarios.getCantBondi9R();
-                        break;
-                    case 1:
-                        busStops = horarios.getBusStops9RSDF();
-                        times = horarios.getTimeTable9RSDF();
+                        busStops = horarios.getBusStops9rojo();
+                        times = horarios.getTimeTable9rojo();
+                        cantBondis =1;
                         break;
                 }
                 break;
             case "Linea 9 Verde":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStops9V();
-                        times = horarios.getTimeTable9V();
-                        cantBondis =horarios.getCantBondi9V();
-                        break;
-                    case 1:
-                        busStops = horarios.getBusStops9VSDF();
-                        times = horarios.getTimeTable9VSDF();
+                        busStops = horarios.getBusStops9verde();
+                        times = horarios.getTimeTable9verde();
+                        cantBondis =1;
                         break;
                 }
                 break;
@@ -454,7 +463,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops10();
                         times = horarios.getTimeTable10();
-                        cantBondis =horarios.getCantBondi10();
+                        cantBondis =1;
                         break;
                 }
                 break;
@@ -463,7 +472,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops11();
                         times = horarios.getTimeTable11();
-                        cantBondis =horarios.getCantBondi11();
+                        cantBondis =1;
                         break;
                 }
                 break;
@@ -472,18 +481,18 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops12();
                         times = horarios.getTimeTable12();
-                        cantBondis =horarios.getCantBondi12();
+                        cantBondis =1;
 
                         break;
                     case 1:
                         busStops = horarios.getBusStops12();
-                        times = horarios.getTimeTable12Sab();
-                        cantBondis =horarios.getCantBondi12Sab();
+                        times = horarios.getTimeTable12Sabado();
+                        cantBondis =1;
                         break;
                     case 2:
                         busStops = horarios.getBusStops12();
-                        times = horarios.getTimeTable12Dom();
-                        cantBondis =horarios.getCantBondi12Dom();
+                        times = horarios.getTimeTable12Domingo();
+                        cantBondis =1;
                         break;
                 }
                 break;
@@ -495,8 +504,8 @@ public class VerHorarioActivity extends AppCompatActivity {
                         cantBondis =horarios.getCantBondi13();
                         break;
                     case 1:
-                        busStops = horarios.getBusStops13Fin();
-                        times = horarios.getTimeTable13Fin();
+                        busStops = horarios.getBusStops13Finde();
+                        times = horarios.getTimeTable13Finde();
                         cantBondis =horarios.getCantBondi13Fin();
                         break;
                 }
@@ -504,8 +513,14 @@ public class VerHorarioActivity extends AppCompatActivity {
             case "Linea 14":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStops14();
-                        times = horarios.getTimeTable14();
+                        busStops = horarios.getBusStops14Maniana();
+                        times = horarios.getTimeTable14Maniana();
+                        cantBondis = 1;
+                        break;
+                    case 1:
+                        busStops = horarios.getBusStops14Tarde();
+                        times = horarios.getTimeTable14Tarde();
+                        cantBondis = 1;
                         break;
                 }
                 break;
@@ -514,6 +529,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops15();
                         times = horarios.getTimeTable15();
+                        cantBondis = 1;
                         break;
                 }
                 break;
@@ -522,6 +538,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops16();
                         times = horarios.getTimeTable16();
+                        cantBondis = 1;
                         break;
                 }
                 break;
@@ -530,6 +547,7 @@ public class VerHorarioActivity extends AppCompatActivity {
                     case 0:
                         busStops = horarios.getBusStops17();
                         times = horarios.getTimeTable17();
+                        cantBondis = 1;
                         break;
                 }
                 break;
@@ -543,21 +561,22 @@ public class VerHorarioActivity extends AppCompatActivity {
                         break;
                     case 1:
                         busStops = horarios.getBusStops18();
-                        times = horarios.getTimeTable18Esp();
-                        cantBondis =horarios.getCantBondi18();
+                        times = horarios.getTimeTable18Especial();
+                        cantBondis = 1;
                         break;
                     case 2:
                         busStops = horarios.getBusStops18();
-                        times = horarios.getTimeTable18Fin();
-                        cantBondis =horarios.getCantBondi18();
+                        times = horarios.getTimeTable18Finde();
+                        cantBondis =1;
                         break;
                 }
                 break;
-            case "LINEA A: UNRC- Las Higueras":
+            case "Linea A":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStopsUnrcHig();
-                        times = horarios.getTimeTableUnrcHig();
+                        busStops = horarios.getBusStopsA();
+                        times = horarios.getTimeTableA();
+                        cantBondis = 1;
                         break;
                 }
                 break;
@@ -576,15 +595,15 @@ public class VerHorarioActivity extends AppCompatActivity {
             case "Río Cuarto - Homlberg":
                 switch (dia) {
                     case 0:
-                        busStops = horarios.getBusStopsRioCuartoHolmberg();
+                        busStops = horarios.getHeaderRioCuartoHolmberg();
                         times = horarios.getTimeTableRioCuartoHolmberg();
                         break;
                     case 1:
-                        busStops = horarios.getBusStopsRioCuartoHolmberg();
+                        busStops = horarios.getHeaderRioCuartoHolmberg();
                         times = horarios.getTimeTableRioCuartoHolmbergSab();
                         break;
                     case 2:
-                        busStops = horarios.getBusStopsRioCuartoHolmberg();
+                        busStops = horarios.getHeaderRioCuartoHolmberg();
                         times = horarios.getTimeTableRioCuartoHolmbergDom();
                         break;
                 }
@@ -597,4 +616,6 @@ public class VerHorarioActivity extends AppCompatActivity {
         float density = getApplicationContext().getResources().getDisplayMetrics().density;
         return Math.round((float)dp * density);
     }
+
+
 }

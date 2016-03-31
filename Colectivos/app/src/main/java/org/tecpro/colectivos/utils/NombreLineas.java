@@ -53,7 +53,7 @@ public class NombreLineas {
                 return 21;
             case "Linea 18":
                 return 22;
-            case"LINEA A: UNRC- Las Higueras":
+            case"Linea A":
                 return 23;
             case "Río Cuarto - Las Higueras":
                 return 24;
@@ -92,7 +92,7 @@ public class NombreLineas {
 
     private static ArrayList<String> getLineasInterurbanas(){
         ArrayList<String> lineas = new ArrayList<>();
-        lineas.add("LINEA A: UNRC- Las Higueras");
+        lineas.add("Linea A");
         lineas.add("Río Cuarto - Las Higueras");
         lineas.add("Río Cuarto - Homlberg");
         return lineas;
@@ -114,7 +114,6 @@ public class NombreLineas {
                 break;
             case "Linea 2 Rojo":
                 ret.add("Lunes a Viernes");
-                ret.add("Especiales");
                 ret.add("Sábados, Domingos y feriados");
                 break;
             case "Linea 2 Verde":
@@ -154,12 +153,10 @@ public class NombreLineas {
                 ret.add("Sábados");
                 break;
             case "Linea 9 Rojo":
-                ret.add("Lunes a Viernes");
-                ret.add("Sábados, Domingos y feriados");
+                ret.add("Lunes a Domingo");
                 break;
             case "Linea 9 Verde":
-                ret.add("Lunes a Viernes");
-                ret.add("Sábados, Domingos y feriados");
+                ret.add("Lunes a Domingo");
                 break;
             case "Linea 10":
                 ret.add("Lunes a Domingo");
@@ -177,6 +174,7 @@ public class NombreLineas {
                 ret.add("Sábados, Domingos y feriados");
                 break;
             case "Linea 14":
+                ret.add("Lunes a Domingo (primera vuelta)");
                 ret.add("Lunes a Domingo");
                 break;
             case "Linea 15":
@@ -193,7 +191,7 @@ public class NombreLineas {
                 ret.add("Especiales");
                 ret.add("Sábados, Domingos y feriados");
                 break;
-            case"LINEA A: UNRC- Las Higueras":
+            case"Linea A":
                 ret.add("Lunes a Domingo");
                 break;
             case "Río Cuarto - Las Higueras":

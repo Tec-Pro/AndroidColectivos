@@ -5,7 +5,9 @@ package org.tecpro.colectivos.mapa;
  */
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -13,6 +15,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Pair;
@@ -65,6 +68,8 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
     //private DataBaseHelper manager;
     //ArrayList<Integer> coches = new ArrayList<>();
     private AdView adView;
+    private ArrayList<Integer> coches;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +169,7 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
             coordenadas = new ArrayList<>();
 
 
-            handler.postDelayed(r, 0);
+            new AsyncCallCoches().execute(linea);
             PolylineOptions a = new PolylineOptions();
             recorrido = getRecorridoByName(linea);
                 a.addAll(recorrido);
@@ -217,6 +222,7 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
         @Override
         protected void onPostExecute(ArrayList<ModelBondi> result) {
             coordenadas = result;
+            txtLastUpdate.setVisibility(View.VISIBLE);
             if(!result.isEmpty()) {
                 mMap.clear();
                 PolylineOptions a = new PolylineOptions();
@@ -224,14 +230,14 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
                 a.color(Color.BLUE);
                 a.width(5);
                 mMap.addPolyline(a);
-                txtLastUpdate.setVisibility(View.VISIBLE);
                 txtLastUpdate.setText("Última actualización: "+getActualTime());
             }else{
                 txtLastUpdate.setText("Sin coches encontrados: "+getActualTime());
 
             }
             for(ModelBondi bondi: result) {
-                setUpMap(bondi.getLatLng(), String.valueOf(bondi.getCoche()));
+                if(coches.contains(bondi.getCoche()))
+                    setUpMap(bondi.getLatLng(), String.valueOf(bondi.getCoche()));
             }
 
             handler.postDelayed(r, 3000);
@@ -240,7 +246,42 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
     }
 
 
+    private class AsyncCallCoches extends AsyncTask<String, Void,ArrayList<Integer>> {
 
+        public AsyncCallCoches (){
+        }
+
+        @Override
+        protected  ArrayList<Integer> doInBackground(String... params) {
+
+            //"Linea 1 Rojo","7","24","206"
+            try {
+                return ConsultasGPS.getCoches(params[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<Integer>();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        @Override
+        protected void onPostExecute(ArrayList<Integer> result) {
+            coches = result;
+            if(!result.isEmpty()) {
+                handler.postDelayed(r, 0);
+            }
+            else{
+                showAlert();
+            }
+
+        }
+    }
 
 
     @Override
@@ -264,5 +305,38 @@ public class MapaDondeEsta extends AppCompatActivity implements OnMapReadyCallba
         DateFormat dfLocal = new SimpleDateFormat("HH:mm:ss");
 
         return dfLocal.format(dtFechaActual);
+    }
+
+
+    public void showAlert(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title
+        alertDialogBuilder.setTitle("Aviso");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(("No se encuentran números de coches registrados, si deseás colaborar con un coche para esta linea, debés enviar a través de Facebook el número de coche interno que figura en el boleto como COCHE seguido de la línea a la que corresponde, nosotros lo agregaremos a la brevedad."))
+                .setCancelable(false)
+                .setPositiveButton("Entendido", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        dialog.cancel();
+                        finishActivity();
+                    }
+                });
+
+
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+    private void finishActivity(){
+        this.finish();
     }
 }

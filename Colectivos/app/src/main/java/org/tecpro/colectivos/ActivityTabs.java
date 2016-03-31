@@ -36,9 +36,6 @@ import java.util.List;
 import org.tecpro.colectivos.lineas.LineasFragment;
 import org.tecpro.colectivos.mapa.MapsActivity;
 import org.tecpro.colectivos.saldo.SaldoFragment;
-import org.tecpro.colectivos.utils.ConsultasGPS;
-import org.xmlpull.v1.XmlPullParserException;
-
 
 /**
  * Created by nico on 13/03/16.
@@ -52,6 +49,7 @@ public class ActivityTabs extends AppCompatActivity implements ViewPager.OnPageC
 
     private LineasFragment lineasFragment;
     private LineasFragment favsFragment;
+    private SaldoFragment saldoFragment;
     //menu lateral
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -161,7 +159,8 @@ public class ActivityTabs extends AppCompatActivity implements ViewPager.OnPageC
         favsFragment = new LineasFragment();
         favsFragment.setIsForFavorites(true);
         adapter.addFragment(favsFragment, "FAVORITOS");
-        adapter.addFragment(new SaldoFragment(), "TARJETA");
+        saldoFragment = new SaldoFragment();
+        adapter.addFragment(saldoFragment, "TARJETA");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
     }
@@ -197,6 +196,7 @@ public class ActivityTabs extends AppCompatActivity implements ViewPager.OnPageC
                 tabs.getTabAt(2).setIcon(R.drawable.ic_card_white);
                 searchItem.setVisible(false);
                 btnHowArrive.setVisibility(View.GONE);
+                saldoFragment.getlastCode();
                 break;
         }
     }

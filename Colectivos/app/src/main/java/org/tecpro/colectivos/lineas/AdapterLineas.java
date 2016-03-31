@@ -88,7 +88,7 @@ public class AdapterLineas extends RecyclerView.Adapter<AdapterLineas.LineaViewH
             viewHolder.txtRoute.setOnClickListener(listener);
             viewHolder.txtTimeTable.setOnClickListener(listener);
         }
-        if (linea.contains("Cuarto") || linea.contains("UNRC")){
+        if (linea.contains("Cuarto") || linea.contains("UNRC") || linea.contains("Linea A")){
             viewHolder.txtWhereIsIt.setVisibility(View.GONE);
         viewHolder.txtRoute.setVisibility(View.GONE);
         }else{

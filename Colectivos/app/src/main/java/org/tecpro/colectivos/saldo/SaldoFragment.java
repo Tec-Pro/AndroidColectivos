@@ -45,6 +45,7 @@ public class SaldoFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.saldo_fragment, container, false);
         setReferences();
+        getlastCode();
         return view;
     }
 
@@ -67,6 +68,11 @@ public class SaldoFragment extends Fragment {
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences prefs = view.getContext().getSharedPreferences("preferencias", view.getContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("codigo", txtDni.getText().toString());
+                editor.putInt("type", spinner.getSelectedItemPosition());
+                editor.commit();
                 layoutInformation.setVisibility(View.GONE);
                 layoutProgress.setVisibility(View.VISIBLE);
                 layoutNoData.setVisibility(View.GONE);
@@ -252,5 +258,19 @@ public class SaldoFragment extends Fragment {
 
         // show it
         alertDialog.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    public void getlastCode(){
+        SharedPreferences prefs = view.getContext().getSharedPreferences("preferencias", view.getContext().MODE_PRIVATE);
+        String code= prefs.getString("codigo","");
+        int type = prefs.getInt("type",0);
+        spinner.setSelection(type);
+        txtDni.setText(code);
     }
 }
